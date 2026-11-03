@@ -18,7 +18,7 @@ LAMPORTS = 1_000_000_000
 
 
 def _parse_key(text):
-    text = text.strip()
+    text = text.strip().lstrip("﻿").strip().strip('"')  # Notepad may add a BOM or quotes
     if text.startswith("["):
         return Keypair.from_bytes(bytes(json.loads(text)))
     return Keypair.from_base58_string(text)

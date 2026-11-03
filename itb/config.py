@@ -1,6 +1,22 @@
 """Settings from the environment (.env via docker compose). Nothing secret lives here."""
 import os
+import pathlib
 from dataclasses import dataclass, field
+
+
+def _load_dotenv(path=".env"):
+    """Outside Docker, read KEY=VALUE lines from .env (compose does this itself). Real env vars win."""
+    p = pathlib.Path(path)
+    if not p.exists():
+        return
+    for line in p.read_text(encoding="utf-8-sig").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip('"'))
+
+
+_load_dotenv()
 
 
 def _env(name, default=None):
