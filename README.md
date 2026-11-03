@@ -9,6 +9,13 @@ into it, and then read the block. Inside a burst the transactions are identical 
 tested. The price and the send order are shuffled independently of each other, so the block can tell us which of
 the two the leader followed.
 
+**Result (3 November 2026, 16 validators, 8 clients, 554 bursts, 4 432 transactions, 0.035 SOL).** No validator
+ordered our transactions strictly by fee across a block. On the validators that take transactions through a BAM or
+Harmonic front end, our transactions that sat close together in the block were ordered by fee (0.74–0.95 of pairs),
+while those far apart were ordered by arrival. On the validators that take transactions on their own TPU (JitoLabs,
+Rakurai, Agave, and one of the two Firedancer nodes), fee made no visible difference and arrival order decided. The
+other Firedancer node sorted close transactions by fee in 116 of 116 pairs.
+
 Results and dates of every measurement are in [REPORT.md](REPORT.md). The generated tables are in
 [reports/summary.md](reports/summary.md). Raw data is in [data/](data).
 
@@ -30,6 +37,7 @@ docker compose run --rm itb run --live --reps 6    # the experiment, stops at th
 docker compose run --rm itb sweep --live           # return the sub-wallet funds to the main wallet
 docker compose run --rm itb analyze                # reports/summary.md, pairs.csv, landing.csv, rules.csv
 docker compose run --rm itb verify                 # re-fetch blocks from RPC and check recorded positions
+docker compose run --rm itb recollect              # finish collection if a run was interrupted
 ```
 
 Without Docker: `pip install -r requirements.txt`, then `python -m itb <command>`.

@@ -1,0 +1,16 @@
+client,validator,version,bursts,probes,landed,in_window,one_block_bursts,slot_offsets
+Agave,5Us18hLZPXJTS4QVuGSsUw137Dyd2tgBaem24Xsf5nBS,4.3.2,6,48,48,28,0,+1:2 +2:9 +3:17 +4:11 +5:4 +6:1 +7:1 +8:1 +9:2
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,4.3.2,9,72,71,28,0,+1:1 +2:19 +3:8 +4:12 +5:9 +6:3 +7:4 +8:4 +9:3 +10:3 +12:1 +14:3 +17:1
+AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,4.4.0,12,96,96,31,0,+1:1 +2:16 +3:14 +4:31 +5:17 +6:6 +8:6 +9:3 +13:1 +17:1
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,4.4.0,24,192,191,104,1,+1:16 +2:55 +3:33 +4:22 +5:12 +6:12 +7:11 +8:7 +9:3 +10:5 +11:5 +12:4 +13:1 +14:1 +15:2 +16:1 +20:1
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,26.10.5,12,96,96,69,1,+1:19 +2:33 +3:14 +4:5 +5:5 +6:3 +7:6 +8:3 +9:2 +10:2 +12:1 +16:1 +19:1 +37:1
+Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,26.10.5,24,192,192,144,3,+0:5 +1:83 +2:40 +3:16 +4:15 +5:7 +6:4 +7:9 +8:1 +9:1 +10:5 +11:2 +13:2 +14:2
+Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,26.10.5,24,192,192,141,1,+1:64 +2:45 +3:32 +4:14 +5:10 +6:14 +7:8 +8:1 +9:1 +11:1 +16:1 +18:1
+HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,4.3.2,7,56,56,43,2,+1:10 +2:21 +3:12 +4:3 +5:8 +7:2
+HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,4.4.0,24,192,192,124,1,+1:14 +2:73 +3:37 +4:14 +5:14 +6:7 +7:8 +8:13 +9:1 +10:2 +11:2 +12:4 +14:1 +16:1 +19:1
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,26.10.5,22,176,176,98,1,+1:8 +2:35 +3:55 +4:33 +5:10 +6:16 +7:4 +8:2 +9:5 +10:4 +11:1 +13:1 +20:2
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,26.10.5,24,192,192,124,2,+1:25 +2:73 +3:26 +4:31 +5:9 +6:8 +7:5 +8:9 +9:3 +10:1 +11:1 +12:1
+JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,4.4.0,24,192,192,114,5,+1:4 +2:76 +3:34 +4:29 +5:11 +6:6 +7:6 +8:4 +9:2 +10:2 +11:1 +12:2 +13:4 +14:3 +15:4 +16:1 +18:2 +26:1
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,4.4.0,24,192,192,93,0,+1:3 +2:42 +3:41 +4:18 +5:20 +6:13 +7:8 +8:11 +9:9 +10:7 +11:3 +12:8 +13:4 +14:2 +15:1 +16:1 +19:1
+Rakurai,E3mDbFMr8yZcCAZx5wPUFCRmLX31u8Nnj4jPoPc54h3F,4.4.0,8,64,64,46,1,+1:26 +2:19 +3:1 +5:2 +6:2 +7:6 +8:1 +11:4 +15:1 +16:2
+Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,4.4.0,7,56,56,41,1,+1:15 +2:19 +3:7 +4:6 +6:3 +7:2 +8:2 +9:1 +15:1

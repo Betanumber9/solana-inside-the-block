@@ -1,0 +1,10 @@
+{"t":1793730830.7634437,"kind":"target","client":"JitoLabs","version":"4.4.0","identity":"HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU","stake_sol":16704339,"windows_left":2422}
+{"t":1793730830.765256,"kind":"target","client":"JitoLabs","version":"4.4.0","identity":"E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL","stake_sol":10431126,"windows_left":1624}
+{"t":1793730830.987435,"kind":"calibrate","err":null,"units":4939,"limit":6000,"fee_max":23000}
+{"t":1793730840.4313037,"kind":"burst","n":1,"series":"ladder_shared","client":"JitoLabs","leader":"HEL1USMZ","start":465001096,"seen":465001096,"est_fee":66664,"spent":0,"errors":0}
+{"t":1793730840.6482484,"kind":"skip_window","leader":"E1r4Psq8","start":465001108,"too_soon_s":5.8}
+{"t":1793730851.2967985,"kind":"collected","burst":1,"landed":0,"of":8,"slots":"-","skipped":0,"leader_ok":true}
+{"t":1793730867.8221934,"kind":"burst","n":2,"series":"ladder_shared","client":"JitoLabs","leader":"E1r4Psq8","start":465001224,"seen":465001224,"est_fee":66664,"spent":0,"errors":0}
+{"t":1793730867.825003,"kind":"complete","bursts":2}
+{"t":1793730867.8273482,"kind":"waiting_collectors","n":1}
+{"t":1793730879.2152355,"kind":"collected","burst":2,"landed":0,"of":8,"slots":"-","skipped":0,"leader_ok":true}

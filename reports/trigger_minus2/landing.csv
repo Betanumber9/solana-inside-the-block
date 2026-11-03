@@ -1,0 +1,17 @@
+client,validator,version,bursts,probes,landed,in_window,one_block_bursts,slot_offsets
+Agave,5Us18hLZPXJTS4QVuGSsUw137Dyd2tgBaem24Xsf5nBS,4.3.2,7,56,56,38,0,+0:10 +1:6 +2:13 +3:9 +4:5 +5:8 +6:4 +7:1
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,4.3.2,11,88,88,86,3,-1:1 +0:40 +1:27 +2:14 +3:5 +5:1
+AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,4.4.0,24,192,184,148,3,+0:49 +1:66 +2:25 +3:8 +4:8 +5:18 +6:7 +7:2 +8:1
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,4.4.0,24,192,192,156,3,+0:25 +1:69 +2:33 +3:29 +4:5 +5:4 +6:10 +7:5 +8:2 +9:2 +11:2 +12:2 +14:4
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,26.10.5,24,192,192,160,5,+0:47 +1:61 +2:45 +3:7 +4:3 +5:8 +6:18 +7:2 +8:1
+FireBAM,LA1NEzryoih6CQW3gwQqJQffK2mKgnXcjSQZSRpM3wc,26.10.5,3,24,24,24,1,+0:12 +1:5 +2:3 +3:4
+Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,26.10.5,24,192,184,154,8,-1:3 +0:78 +1:49 +2:17 +3:9 +4:18 +5:1 +7:1 +11:6 +12:2
+Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,26.10.5,24,192,192,182,4,+0:80 +1:49 +2:40 +3:13 +4:3 +5:2 +6:3 +7:1 +15:1
+HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,4.3.2,24,192,192,175,3,-1:2 +0:36 +1:78 +2:42 +3:19 +4:2 +5:1 +6:3 +14:1 +190:7 +191:1
+HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,4.4.0,24,192,192,165,2,+0:39 +1:57 +2:62 +3:6 +4:8 +5:8 +6:8 +7:3 +8:1
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,26.10.5,24,192,192,125,4,-1:8 +0:27 +1:53 +2:26 +3:19 +4:20 +5:10 +6:3 +7:8 +8:1 +10:1 +34:3 +35:1 +36:4 +41:8
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,26.10.5,24,192,192,163,2,+0:60 +1:49 +2:37 +3:17 +4:9 +5:7 +6:3 +8:1 +9:1 +96:7 +101:1
+JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,4.4.0,24,192,192,145,3,+0:53 +1:50 +2:26 +3:16 +4:11 +5:2 +6:4 +7:7 +8:2 +9:1 +10:5 +11:5 +12:2 +17:5 +18:3
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,4.4.0,24,192,192,163,2,+0:7 +1:67 +2:53 +3:36 +4:11 +5:5 +6:1 +7:4 +10:1 +11:7
+Rakurai,E3mDbFMr8yZcCAZx5wPUFCRmLX31u8Nnj4jPoPc54h3F,4.4.0,7,56,56,56,3,+0:21 +1:28 +2:6 +3:1
+Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,4.4.0,11,88,88,76,3,+0:42 +1:27 +2:2 +3:5 +4:11 +5:1

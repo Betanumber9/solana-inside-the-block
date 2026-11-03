@@ -219,6 +219,12 @@ class Experiment:
             self.w.event("late", burst=bno, at=self.clock.slot, trigger=trigger)
         await self.clock.wait_until(trigger, timeout=90)
         seen_slot, seen_lag = self.clock.slot, time.time() - self.clock.seen_at
+        if seen_slot > trigger + self.a.max_late_slots:
+            # e.g. the network dropped while waiting: firing now would hit some other leader's block
+            self.w.event("abandoned_late", burst=bno, seen=seen_slot, trigger=trigger)
+            if self.live:
+                self.budget.settle(key, 0)
+            return
         if self.a.trigger_delay_ms:
             await asyncio.sleep(self.a.trigger_delay_ms / 1000)
         sent = []

@@ -187,7 +187,7 @@ def main(cfg, a):
                             (x["client"], "*", "*"), (x["client"], "*", where), ("*", "*", where),
                             (x["client"], "*", trig), ("*", "*", x["series"]), ("*", "*", "*"),
                             (x["client"], "*", near), ("*", "*", near), (x["client"], "*", dist), ("*", "*", dist),
-                            (x["client"], x["leader"], near)):
+                            (x["client"], x["leader"], near), (x["client"], x["leader"], "*")):
                     g = groups[key]
                     if first["price"] != second["price"]:
                         c = g["fee"][(run, burst)]

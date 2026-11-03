@@ -1,0 +1,97 @@
+{
+ "run_id": "20261103T183346Z_dry",
+ "live": false,
+ "args": {
+  "cmd": "run",
+  "live": false,
+  "cap_sol": 0.05,
+  "allow_cap_above": false,
+  "per_client": 2,
+  "clients": "JitoLabs",
+  "reps": 1,
+  "minutes": 1.0,
+  "series": "ladder_shared,ladder_indep,equal_indep",
+  "burst": 8,
+  "cu_limit": 6000,
+  "gap_ms": 3,
+  "gap_ms_equal": 40,
+  "trigger_offset": 0,
+  "trigger_delay_ms": 0,
+  "prep_slots": 10,
+  "max_retries": 0,
+  "max_late_slots": 2,
+  "min_burst_gap_s": 10.0,
+  "seed": null
+ },
+ "endpoints": {
+  "rpc": "https://mainnet.helius-rpc.com/",
+  "ws": "wss://mainnet.helius-rpc.com/",
+  "send": "https://api.mainnet-beta.solana.com"
+ },
+ "epoch": {
+  "absoluteSlot": 465001038,
+  "blockHeight": 443021768,
+  "epoch": 1076,
+  "slotIndex": 169038,
+  "slotsInEpoch": 432000,
+  "transactionCount": 565047100882
+ },
+ "epoch_first_slot": 464832000,
+ "epoch_last_slot": 465263999,
+ "key": "main",
+ "payer_main": "2Kqf4idiM5GJaXbhhcYppZ1cCoRFDsCutS81ntmkHfw8",
+ "payers_sub": [
+  "HMCxcHch4MFqC8MmamzWmBU3rZwu7D3UcekisRHV9mFU",
+  "G9ebXLfnKqiHEjaVG1zFZmvZMd7PsPwYQuntatMEarUc",
+  "5zQG9ZF6t2sNeRxVnNSeHyJZkvzi2C3xA9uRH3scPoR2",
+  "Cj3w7tnzjQ5R2f8Lee8Tuc32xLymYxWKf5N3PbwKUFUF",
+  "9ccbitx38QCEpEfSkzjPEBJsg9hUjPSpe26MgYsxSryG",
+  "4BYYSHsqTagbvrYnJ1NNrqKPzxxbhNh1eZsZfKLiiFCc",
+  "CWP68LwxJMFTC3GKE3V35SKj71JxYHsLDTdHDYwHeS6H",
+  "B9QfxCw1Tyn3c7PvHCqX1faeTxpFEiRdZCE1U35ifvk1"
+ ],
+ "ladder": [
+  1000,
+  3000,
+  10000,
+  30000,
+  100000,
+  300000,
+  1000000,
+  3000000
+ ],
+ "equal_price": 100000,
+ "series": [
+  "ladder_shared",
+  "ladder_indep",
+  "equal_indep"
+ ],
+ "cu_limit": 6000,
+ "targets": {
+  "HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU": {
+   "identity": "HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU",
+   "vote": "he1iusunGwqrNtafDtLdhsUQDFvo13z9sUa36PauBtk",
+   "client": "JitoLabs",
+   "version": "4.4.0",
+   "feature_set": 3722100051,
+   "stake": 16704339555075496,
+   "tpu_quic": "64.130.57.215:8002",
+   "gossip": "64.130.57.215:8001",
+   "tpu_elsewhere": false,
+   "windows_left": 2422
+  },
+  "E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL": {
+   "identity": "E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL",
+   "vote": "8GbwASqdpw4dVcwbWUxbHXMrjyQx2aKkoBR5H1GJF8iD",
+   "client": "JitoLabs",
+   "version": "4.4.0",
+   "feature_set": 3722100051,
+   "stake": 10431126126568650,
+   "tpu_quic": "64.130.42.75:8002",
+   "gossip": "64.130.42.75:8001",
+   "tpu_elsewhere": false,
+   "windows_left": 1624
+  }
+ },
+ "started_utc": "2026-11-03 18:33:50"
+}
