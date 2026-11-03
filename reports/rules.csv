@@ -1,1 +1,50 @@
-client
+client,validator,series,bursts,fee_first,sent_first,verdict
+Agave,*,*,2,"0.57 [0.29, 0.67] n=28","0.43 [0.33, 0.71] n=28",no rule visible (noise)
+Agave,*,ladder_indep,1,"0.29 [0.29, 0.29] n=7","0.71 [0.71, 0.71] n=7",weak / mixed
+Agave,*,ladder_shared,1,"0.67 [0.67, 0.67] n=21","0.33 [0.33, 0.33] n=21",weak / mixed
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,ladder_indep,1,"0.29 [0.29, 0.29] n=7","0.71 [0.71, 0.71] n=7",weak / mixed
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,ladder_shared,1,"0.67 [0.67, 0.67] n=21","0.33 [0.33, 0.33] n=21",weak / mixed
+AgaveBam,*,*,6,"0.73 [0.66, 0.92] n=56","0.69 [0.54, 0.82] n=84",weak / mixed
+AgaveBam,*,equal_indep,1,-,"0.68 [0.68, 0.68] n=28",weak / mixed
+AgaveBam,*,ladder_indep,3,"0.86 [0.50, 1.00] n=14","0.57 [0.25, 0.83] n=14",no rule visible (noise)
+AgaveBam,*,ladder_shared,2,"0.69 [0.67, 0.71] n=42","0.74 [0.57, 0.90] n=42",weak / mixed
+AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,ladder_indep,1,"0.50 [0.50, 0.50] n=4","0.25 [0.25, 0.25] n=4",weak / mixed
+AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,ladder_shared,1,"0.71 [0.71, 0.71] n=21","0.57 [0.57, 0.57] n=21",weak / mixed
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,equal_indep,1,-,"0.68 [0.68, 0.68] n=28",weak / mixed
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,ladder_indep,2,"1.00 [1.00, 1.00] n=10","0.70 [0.50, 0.83] n=10",fee/priority
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,ladder_shared,1,"0.67 [0.67, 0.67] n=21","0.90 [0.90, 0.90] n=21",arrival (send order)
+FireBAM,*,*,2,"0.69 [0.69, 0.69] n=26","0.65 [0.46, 0.85] n=26",weak / mixed
+FireBAM,*,ladder_indep,1,"0.69 [0.69, 0.69] n=13","0.46 [0.46, 0.46] n=13",weak / mixed
+FireBAM,*,ladder_shared,1,"0.69 [0.69, 0.69] n=13","0.85 [0.85, 0.85] n=13",arrival (send order)
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,ladder_indep,1,"0.69 [0.69, 0.69] n=13","0.46 [0.46, 0.46] n=13",weak / mixed
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,ladder_shared,1,"0.69 [0.69, 0.69] n=13","0.85 [0.85, 0.85] n=13",arrival (send order)
+Firedancer,*,*,4,"0.66 [0.25, 0.84] n=53","0.79 [0.50, 0.86] n=53",no rule visible (noise)
+Firedancer,*,ladder_indep,2,"0.69 [0.48, 0.86] n=49","0.82 [0.79, 0.86] n=49",arrival (send order)
+Firedancer,*,ladder_shared,2,"0.25 [0.00, 0.33] n=4","0.50 [0.33, 1.00] n=4",weak / mixed
+Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,ladder_indep,1,"0.86 [0.86, 0.86] n=28","0.79 [0.79, 0.79] n=28",both (confounded?)
+Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,ladder_shared,1,"0.00 [0.00, 0.00] n=1","1.00 [1.00, 1.00] n=1",arrival (send order)
+Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,ladder_indep,1,"0.48 [0.48, 0.48] n=21","0.86 [0.86, 0.86] n=21",arrival (send order)
+Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,ladder_shared,1,"0.33 [0.33, 0.33] n=3","0.33 [0.33, 0.33] n=3",weak / mixed
+HarmonicAgave,*,*,4,"0.74 [0.59, 0.81] n=92","0.70 [0.62, 0.82] n=92",weak / mixed
+HarmonicAgave,*,ladder_indep,2,"0.67 [0.47, 0.79] n=43","0.72 [0.61, 0.93] n=43",weak / mixed
+HarmonicAgave,*,ladder_shared,2,"0.80 [0.76, 0.82] n=49","0.67 [0.64, 0.71] n=49",fee/priority
+HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,ladder_indep,1,"0.79 [0.79, 0.79] n=28","0.61 [0.61, 0.61] n=28",fee/priority
+HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,ladder_shared,1,"0.82 [0.82, 0.82] n=28","0.64 [0.64, 0.64] n=28",fee/priority
+HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,ladder_indep,1,"0.47 [0.47, 0.47] n=15","0.93 [0.93, 0.93] n=15",arrival (send order)
+HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,ladder_shared,1,"0.76 [0.76, 0.76] n=21","0.71 [0.71, 0.71] n=21",fee/priority
+HarmonicFiredancer,*,*,4,"0.63 [0.40, 0.86] n=75","0.68 [0.64, 0.70] n=75",weak / mixed
+HarmonicFiredancer,*,ladder_indep,2,"0.59 [0.57, 0.61] n=49","0.69 [0.68, 0.71] n=49",weak / mixed
+HarmonicFiredancer,*,ladder_shared,2,"0.69 [0.20, 1.00] n=26","0.65 [0.60, 0.69] n=26",weak / mixed
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,ladder_indep,1,"0.61 [0.61, 0.61] n=28","0.68 [0.68, 0.68] n=28",weak / mixed
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,ladder_shared,1,"0.20 [0.20, 0.20] n=10","0.60 [0.60, 0.60] n=10",weak / mixed
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,ladder_indep,1,"0.57 [0.57, 0.57] n=21","0.71 [0.71, 0.71] n=21",weak / mixed
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,ladder_shared,1,"1.00 [1.00, 1.00] n=16","0.69 [0.69, 0.69] n=16",fee/priority
+JitoLabs,*,*,5,"0.52 [0.43, 0.64] n=77","0.79 [0.63, 0.97] n=77",weak / mixed
+JitoLabs,*,ladder_indep,1,"0.38 [0.38, 0.38] n=21","0.62 [0.62, 0.62] n=21",weak / mixed
+JitoLabs,*,ladder_shared,4,"0.57 [0.50, 0.67] n=56","0.86 [0.67, 1.00] n=56",weak / mixed
+JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,ladder_shared,2,"0.65 [0.60, 0.73] n=26","0.77 [0.60, 1.00] n=26",weak / mixed
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,ladder_indep,1,"0.38 [0.38, 0.38] n=21","0.62 [0.62, 0.62] n=21",weak / mixed
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,ladder_shared,2,"0.50 [0.44, 0.52] n=30","0.93 [0.78, 1.00] n=30",arrival (send order)
+Rakurai,*,*,1,"0.39 [0.39, 0.39] n=28","0.71 [0.71, 0.71] n=28",weak / mixed
+Rakurai,*,ladder_shared,1,"0.39 [0.39, 0.39] n=28","0.71 [0.71, 0.71] n=28",weak / mixed
+Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,ladder_shared,1,"0.39 [0.39, 0.39] n=28","0.71 [0.71, 0.71] n=28",weak / mixed

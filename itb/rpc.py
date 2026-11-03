@@ -77,9 +77,14 @@ class Rpc:
                 "params": [tx_b64, {"encoding": "base64", "skipPreflight": True, "maxRetries": max_retries}]}
         try:
             r = await self.http.post(self.url, content=json.dumps(body))
-            j = r.json()
         except Exception as e:  # noqa: BLE001 - recorded, not raised
             return None, "http: %s" % e
+        if r.status_code != 200:
+            return None, "status %d" % r.status_code
+        try:
+            j = r.json()
+        except ValueError:
+            return None, "not json: %s" % r.text[:60]
         return j.get("result"), j.get("error")
 
 

@@ -114,6 +114,8 @@ class Experiment:
         self.blocks = BlockStore(cfg.data_dir, self.rpc)
         self.rng = random.Random(args.seed)
         self.burst_no = 0
+        self.last_burst_at = 0.0
+        self.skipped = set()
         self.done = {}
         self.collectors = []
         self.budget = Budget(pathlib.Path(cfg.data_dir) / "budget.json", int(args.cap_sol * wallet.LAMPORTS))
@@ -251,6 +253,7 @@ class Experiment:
                      start=win["start"], seen=seen_slot, est_fee=est, spent=spent,
                      errors=sum(1 for s in sent if s["err"]))
         self.done[win["leader"]] = self.done.get(win["leader"], 0) + 1
+        self.last_burst_at = time.time()
         self.collectors.append(asyncio.create_task(self.collect(bno, win, probes, key, est)))
 
     async def collect(self, bno, win, probes, key, est):
@@ -303,7 +306,8 @@ class Experiment:
                 break
             cur = self.clock.slot
             upcoming = [w for w in chain.windows(self.by_slot, cur + self.a.prep_slots, cur + 3000)
-                        if w["leader"] in self.targets and self.done.get(w["leader"], 0) < self.a.reps]
+                        if w["leader"] in self.targets and self.done.get(w["leader"], 0) < self.a.reps
+                        and w["start"] not in self.skipped]
             if not upcoming:
                 if cur + 3000 > max(self.by_slot):
                     _, _, nxt = await chain.schedule(self.rpc, {"absoluteSlot": max(self.by_slot) + 1, "slotIndex": 0,
@@ -320,6 +324,17 @@ class Experiment:
                 self.w.event("deadline", next_window_in_s=round((win["start"] - cur) * 0.4))
                 break
             await self.clock.wait_until(win["start"] - self.a.prep_slots, timeout=max(30, left))
+            # send endpoints rate-limit sendTransaction (public RPC: ~16 per 10 s); a burst too soon after the
+            # previous one would be cut short, and the cut falls on the probes sent last
+            # the burst itself fires when the window starts, (start - current slot) x ~0.4 s from now
+            fire_at = time.time() + max(0, win["start"] - self.clock.slot) * 0.4
+            short = self.a.min_burst_gap_s - (fire_at - self.last_burst_at)
+            if short > 1.0:
+                self.skipped.add(win["start"])
+                self.w.event("skip_window", leader=win["leader"][:8], start=win["start"], too_soon_s=round(short, 1))
+                continue
+            if short > 0:
+                await asyncio.sleep(short)
             try:
                 await self.burst(win, self.next_series(win["leader"]))
             except CapExceeded as e:
