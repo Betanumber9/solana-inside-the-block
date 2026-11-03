@@ -1,0 +1,78 @@
+client,validator,series,bursts,fee_first,sent_first,fee_wins_duel,verdict
+Agave,*,*,9,"0.59 [0.42, 0.74] n=58","0.81 [0.72, 0.85] n=98","0.29 [0.20, 0.58] n=31",send order matters
+Agave,*,equal_indep,4,-,"0.80 [0.75, 0.81] n=40",-,send order matters
+Agave,*,ladder_indep,3,"0.52 [0.38, 1.00] n=31","0.77 [0.56, 1.00] n=31","0.30 [0.19, 0.75] n=20",send order matters
+Agave,*,ladder_shared,2,"0.67 [0.50, 0.71] n=27","0.85 [0.83, 0.86] n=27","0.27 [0.25, 0.29] n=11",send order beats fee; strict: send
+Agave,5Us18hLZPXJTS4QVuGSsUw137Dyd2tgBaem24Xsf5nBS,equal_indep,2,-,"0.79 [0.67, 0.82] n=14",-,send order matters
+Agave,5Us18hLZPXJTS4QVuGSsUw137Dyd2tgBaem24Xsf5nBS,ladder_indep,2,"0.41 [0.38, 1.00] n=22","0.86 [0.86, 1.00] n=22","0.19 [0.19, 0.19] n=16",send order beats fee; strict: send
+Agave,5Us18hLZPXJTS4QVuGSsUw137Dyd2tgBaem24Xsf5nBS,ladder_shared,1,"0.71 [0.71, 0.71] n=21","0.86 [0.86, 0.86] n=21","0.29 [0.29, 0.29] n=7",send order beats fee; strict: send
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,equal_indep,2,-,"0.81 [0.80, 0.81] n=26",-,send order matters; strict: send
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,ladder_indep,1,"0.78 [0.78, 0.78] n=9","0.56 [0.56, 0.56] n=9","0.75 [0.75, 0.75] n=4",fee beats send order; strict: fee
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,ladder_shared,1,"0.50 [0.50, 0.50] n=6","0.83 [0.83, 0.83] n=6","0.25 [0.25, 0.25] n=4",send order beats fee; strict: send
+AgaveBam,*,*,23,"0.71 [0.60, 0.81] n=143","0.69 [0.61, 0.76] n=236","0.57 [0.41, 0.72] n=68","both matter, neither dominates"
+AgaveBam,*,equal_indep,10,-,"0.75 [0.66, 0.82] n=93",-,send order matters
+AgaveBam,*,ladder_indep,6,"0.70 [0.59, 0.82] n=77","0.71 [0.62, 0.81] n=77","0.48 [0.33, 0.65] n=33","both matter, neither dominates"
+AgaveBam,*,ladder_shared,7,"0.73 [0.50, 0.88] n=66","0.56 [0.44, 0.72] n=66","0.66 [0.32, 0.82] n=35",no rule visible (noise)
+AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,equal_indep,3,-,"0.64 [0.57, 1.00] n=11",-,send order matters
+AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,ladder_indep,1,"0.67 [0.67, 0.67] n=21","0.86 [0.86, 0.86] n=21","0.25 [0.25, 0.25] n=8",send order beats fee; strict: send
+AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,ladder_shared,2,"0.46 [0.42, 1.00] n=13","0.54 [0.50, 1.00] n=13","0.40 [0.40, 0.40] n=5",send order beats fee
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,equal_indep,7,-,"0.77 [0.67, 0.84] n=82",-,send order matters
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,ladder_indep,5,"0.71 [0.55, 0.89] n=56","0.66 [0.60, 0.74] n=56","0.56 [0.44, 0.70] n=25","both matter, neither dominates"
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,ladder_shared,5,"0.79 [0.56, 0.91] n=53","0.57 [0.43, 0.76] n=53","0.70 [0.35, 0.89] n=30",fee matters
+FireBAM,*,*,10,"0.74 [0.62, 0.85] n=111","0.71 [0.59, 0.79] n=146","0.55 [0.38, 0.80] n=51","both matter, neither dominates"
+FireBAM,*,equal_indep,4,-,"0.74 [0.50, 0.86] n=35",-,no rule visible (noise)
+FireBAM,*,ladder_indep,2,"0.71 [0.67, 0.77] n=34","0.53 [0.52, 0.54] n=34","0.69 [0.64, 0.80] n=16",fee beats send order
+FireBAM,*,ladder_shared,4,"0.75 [0.56, 0.93] n=77","0.77 [0.64, 0.84] n=77","0.49 [0.32, 0.90] n=35","both matter, neither dominates"
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,equal_indep,4,-,"0.74 [0.50, 0.86] n=35",-,no rule visible (noise)
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,ladder_indep,2,"0.71 [0.67, 0.77] n=34","0.53 [0.52, 0.54] n=34","0.69 [0.64, 0.80] n=16",fee beats send order
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,ladder_shared,4,"0.75 [0.56, 0.93] n=77","0.77 [0.64, 0.84] n=77","0.49 [0.32, 0.90] n=35","both matter, neither dominates"
+Firedancer,*,*,42,"0.64 [0.55, 0.72] n=375","0.69 [0.61, 0.77] n=552","0.50 [0.35, 0.65] n=187","both matter, neither dominates"
+Firedancer,*,equal_indep,14,-,"0.80 [0.71, 0.87] n=177",-,send order matters
+Firedancer,*,ladder_indep,14,"0.65 [0.54, 0.75] n=181","0.62 [0.51, 0.73] n=181","0.53 [0.36, 0.71] n=99","both matter, neither dominates"
+Firedancer,*,ladder_shared,14,"0.63 [0.49, 0.75] n=194","0.66 [0.51, 0.80] n=194","0.47 [0.19, 0.70] n=88",send order matters
+Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,equal_indep,7,-,"0.79 [0.67, 0.90] n=102",-,send order matters
+Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,ladder_indep,7,"0.73 [0.64, 0.84] n=109","0.50 [0.38, 0.62] n=109","0.71 [0.55, 1.00] n=59",fee beats send order
+Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,ladder_shared,6,"0.74 [0.57, 0.88] n=106","0.54 [0.35, 0.76] n=106","0.72 [0.33, 0.93] n=47",fee matters
+Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,equal_indep,7,-,"0.80 [0.67, 0.87] n=75",-,send order matters
+Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,ladder_indep,7,"0.51 [0.37, 0.69] n=72","0.79 [0.72, 0.85] n=72","0.25 [0.18, 0.36] n=40",send order beats fee
+Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,ladder_shared,8,"0.50 [0.34, 0.63] n=88","0.81 [0.73, 0.88] n=88","0.17 [0.08, 0.27] n=41",send order beats fee
+HarmonicAgave,*,*,25,"0.56 [0.45, 0.67] n=249","0.68 [0.60, 0.75] n=341","0.42 [0.26, 0.57] n=134",send order matters
+HarmonicAgave,*,equal_indep,8,-,"0.75 [0.64, 0.83] n=92",-,send order matters
+HarmonicAgave,*,ladder_indep,8,"0.47 [0.40, 0.54] n=107","0.69 [0.57, 0.81] n=107","0.25 [0.14, 0.40] n=48",send order beats fee
+HarmonicAgave,*,ladder_shared,9,"0.63 [0.44, 0.79] n=142","0.62 [0.48, 0.76] n=142","0.51 [0.30, 0.70] n=86",no rule visible (noise)
+HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,equal_indep,2,-,"0.84 [0.81, 0.88] n=32",-,send order matters; strict: send
+HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,ladder_indep,2,"0.55 [0.50, 0.60] n=20","0.80 [0.70, 0.90] n=20","0.22 [0.20, 0.25] n=9",send order beats fee
+HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,ladder_shared,2,"0.80 [0.76, 0.82] n=49","0.73 [0.61, 0.90] n=49","0.57 [0.29, 0.69] n=23","both matter, neither dominates; strict: fee"
+HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,equal_indep,6,-,"0.70 [0.57, 0.80] n=60",-,send order matters
+HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,ladder_indep,6,"0.45 [0.37, 0.54] n=87","0.67 [0.51, 0.79] n=87","0.26 [0.12, 0.45] n=39",send order beats fee
+HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,ladder_shared,7,"0.55 [0.32, 0.76] n=93","0.56 [0.40, 0.73] n=93","0.49 [0.24, 0.78] n=63",no rule visible (noise)
+HarmonicFiredancer,*,*,37,"0.59 [0.52, 0.67] n=357","0.62 [0.56, 0.68] n=438","0.51 [0.39, 0.61] n=186","both matter, neither dominates"
+HarmonicFiredancer,*,equal_indep,9,-,"0.77 [0.61, 0.87] n=81",-,send order matters
+HarmonicFiredancer,*,ladder_indep,14,"0.51 [0.43, 0.59] n=207","0.59 [0.50, 0.70] n=207","0.42 [0.25, 0.54] n=104",no rule visible (noise)
+HarmonicFiredancer,*,ladder_shared,14,"0.71 [0.58, 0.83] n=150","0.59 [0.51, 0.66] n=150","0.61 [0.45, 0.78] n=82","both matter, neither dominates"
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,equal_indep,4,-,"0.70 [0.21, 1.00] n=23",-,no rule visible (noise)
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,ladder_indep,6,"0.59 [0.49, 0.66] n=110","0.55 [0.44, 0.68] n=110","0.55 [0.38, 0.66] n=47",no rule visible (noise)
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,ladder_shared,7,"0.61 [0.46, 0.84] n=62","0.66 [0.54, 0.75] n=62","0.45 [0.27, 0.75] n=33",send order matters
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,equal_indep,5,-,"0.79 [0.69, 0.89] n=58",-,send order matters
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,ladder_indep,8,"0.42 [0.33, 0.49] n=97","0.64 [0.49, 0.80] n=97","0.32 [0.07, 0.47] n=57",send order beats fee
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,ladder_shared,7,"0.77 [0.65, 0.90] n=88","0.53 [0.46, 0.61] n=88","0.71 [0.53, 0.90] n=49",fee beats send order
+JitoLabs,*,*,33,"0.52 [0.45, 0.60] n=328","0.68 [0.59, 0.75] n=390","0.33 [0.20, 0.49] n=143",send order beats fee
+JitoLabs,*,equal_indep,10,-,"0.73 [0.55, 0.85] n=62",-,send order matters
+JitoLabs,*,ladder_indep,10,"0.60 [0.49, 0.71] n=165","0.70 [0.56, 0.83] n=165","0.38 [0.10, 0.66] n=66",send order matters
+JitoLabs,*,ladder_shared,13,"0.44 [0.37, 0.50] n=163","0.64 [0.50, 0.74] n=163","0.29 [0.20, 0.42] n=77",send order beats fee
+JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,equal_indep,5,-,"0.66 [0.33, 0.82] n=32",-,no rule visible (noise)
+JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,ladder_indep,6,"0.63 [0.49, 0.75] n=123","0.67 [0.50, 0.88] n=123","0.44 [0.09, 0.77] n=50",no rule visible (noise)
+JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,ladder_shared,7,"0.43 [0.33, 0.53] n=92","0.65 [0.49, 0.73] n=92","0.30 [0.20, 0.51] n=50",no rule visible (noise)
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,equal_indep,5,-,"0.80 [0.62, 0.95] n=30",-,send order matters
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,ladder_indep,4,"0.52 [0.48, 0.64] n=42","0.76 [0.64, 0.81] n=42","0.19 [0.08, 0.50] n=16",send order matters
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,ladder_shared,6,"0.44 [0.36, 0.56] n=71","0.62 [0.42, 0.80] n=71","0.26 [0.06, 0.43] n=27",send order beats fee
+Rakurai,*,*,12,"0.54 [0.44, 0.63] n=120","0.71 [0.62, 0.81] n=182","0.37 [0.22, 0.54] n=70",send order matters
+Rakurai,*,equal_indep,4,-,"0.76 [0.67, 0.86] n=62",-,send order matters
+Rakurai,*,ladder_indep,4,"0.48 [0.36, 0.64] n=46","0.74 [0.56, 0.84] n=46","0.30 [0.19, 0.56] n=30",send order matters
+Rakurai,*,ladder_shared,4,"0.58 [0.50, 0.66] n=74","0.66 [0.53, 0.86] n=74","0.42 [0.19, 0.62] n=40",send order matters
+Rakurai,E3mDbFMr8yZcCAZx5wPUFCRmLX31u8Nnj4jPoPc54h3F,equal_indep,2,-,"0.71 [0.62, 0.80] n=28",-,send order matters
+Rakurai,E3mDbFMr8yZcCAZx5wPUFCRmLX31u8Nnj4jPoPc54h3F,ladder_indep,2,"0.62 [0.56, 0.67] n=21","0.67 [0.58, 0.78] n=21","0.45 [0.25, 0.57] n=11","both matter, neither dominates"
+Rakurai,E3mDbFMr8yZcCAZx5wPUFCRmLX31u8Nnj4jPoPc54h3F,ladder_shared,2,"0.58 [0.47, 0.64] n=43","0.56 [0.50, 0.67] n=43","0.52 [0.33, 0.64] n=23",no rule visible (noise)
+Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,equal_indep,2,-,"0.79 [0.75, 1.00] n=34",-,send order matters
+Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,ladder_indep,2,"0.36 [0.33, 0.50] n=25","0.80 [0.50, 0.86] n=25","0.21 [0.18, 0.50] n=19",no rule visible (noise)
+Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,ladder_shared,2,"0.58 [0.52, 0.70] n=31","0.81 [0.60, 0.90] n=31","0.29 [0.10, 0.57] n=17","both matter, neither dominates"

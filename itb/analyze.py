@@ -117,8 +117,8 @@ def spearman(x, y):
 
 def main(cfg, a):
     data = pathlib.Path(cfg.data_dir)
-    out = pathlib.Path("reports")
-    out.mkdir(exist_ok=True)
+    out = pathlib.Path("reports") / (a.out or "")
+    out.mkdir(parents=True, exist_ok=True)
     rng = random.Random(7)
     sends, landed, metas = [], {}, {}
     for d in runs(data, a):

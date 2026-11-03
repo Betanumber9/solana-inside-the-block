@@ -199,6 +199,7 @@ def main():
     p = sub.add_parser("analyze", help="tables and figures from data/")
     p.add_argument("--runs", default="", help="comma list of run ids (default: all live runs)")
     p.add_argument("--include-dry", action="store_true")
+    p.add_argument("--out", default="", help="subfolder of reports/ (e.g. one per run condition)")
     p = sub.add_parser("recollect", help="finish collection for a stopped run (statuses, blocks, ledger)")
     p.add_argument("--runs", default="", help="comma list of run ids (default: all live runs)")
     p.add_argument("--cap-sol", type=float, default=HARD_CAP_SOL)
