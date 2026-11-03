@@ -9,12 +9,14 @@ into it, and then read the block. Inside a burst the transactions are identical 
 tested. The price and the send order are shuffled independently of each other, so the block can tell us which of
 the two the leader followed.
 
-**Result (3 November 2026, 16 validators, 8 clients, 554 bursts, 4 432 transactions, 0.035 SOL).** No validator
+**Result (3 November 2026, 16 validators, 8 clients, 676 bursts, 5 408 transactions, 0.043 SOL).** No validator
 ordered our transactions strictly by fee across a block. On the validators that take transactions through a BAM or
 Harmonic front end, our transactions that sat close together in the block were ordered by fee (0.74–0.95 of pairs),
 while those far apart were ordered by arrival. On the validators that take transactions on their own TPU (JitoLabs,
 Rakurai, Agave, and one of the two Firedancer nodes), fee made no visible difference and arrival order decided. The
-other Firedancer node sorted close transactions by fee in 116 of 116 pairs.
+other Firedancer node sorted close transactions by fee in 116 of 116 pairs. A confirmation run with predictions pushed
+to GitHub in advance ([PREREGISTRATION.md](PREREGISTRATION.md)) held 5 of 6. On front-end validators, a 120 ms pause
+alone flips the order from fee to arrival. The Firedancer prediction did not hold.
 
 Results and dates of every measurement are in [REPORT.md](REPORT.md). The generated tables are in
 [reports/summary.md](reports/summary.md). Raw data is in [data/](data).

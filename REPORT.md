@@ -16,12 +16,14 @@ All dates are UTC. All runs were in epoch 1076, after the Alpenglow upgrade of 2
 | `20261103T152855Z_live` | 2026-11-03 15:29–15:33 | pilot 2, public RPC, bursts too close | 25 | 200 |
 | `20261103T155835Z_live` | 2026-11-03 15:58–16:53 | **main 1**: send when the first slot of the window is seen | 251 | 2 008 |
 | `20261103T165600Z_live` | 2026-11-03 16:56–18:22 | **main 2**: send 2 slots before the window | 303 | 2 424 |
+| `20261103T193631Z_live` | 2026-11-03 19:36–20:53 | **confirmation**: pre-registered split series | 122 | 976 |
 
-- Slots 464 957 728 – 464 997 760.
+- Slots 464 957 728 – 464 997 760 for the main runs and 465 018 676 – 465 040 052 for the confirmation run.
 - The two pilots are kept in `data/` but left out of the results (see "What went wrong").
-- Total spend for everything, pilots and transfers included, from the wallet balances: **0.035048 SOL**. The main
-  wallet went from 198 800 000 to 163 751 915 lamports, and all sub-wallets were swept back to 0.
-- The ledger (`data/budget.json`) recorded 0.034949 SOL. The gap of 0.000099 SOL was traced on chain (see "What went
+- Total spend for everything, pilots, confirmation and transfers included, from the wallet balances:
+  **0.043181 SOL**. The main wallet went from 198 800 000 to 155 618 907 lamports, and all sub-wallets were swept back
+  to 0.
+- The ledger (`data/budget.json`) recorded 0.043082 SOL. The gap of 0.000099 SOL was traced on chain (see "What went
   wrong", items 6 and 7): 0.000067 is one burst fired late after a network drop, and 0.000044 is 4 probes sent while a
   pilot was being stopped. About 0.00001 SOL is left untraced. The cap was never close: 0.05 SOL.
 - `itb verify` re-fetched 60 random probes from RPC: 60 of 60 matched in slot, index and block leader.
@@ -177,11 +179,52 @@ result. Per-run tables: `reports/trigger_0/`, `reports/trigger_minus2/`.
   batches in time.
 - This uses other people's transactions, which arrive at unknown times. It is context, not evidence.
 
+## Confirmation run (pre-registered)
+
+The batch reading above came from looking at the data, so we tested it with timing we control.
+
+- **Before the run.** [PREREGISTRATION.md](PREREGISTRATION.md) and the test code (`itb/confirm.py`) were pushed to
+  GitHub at 19:36:09 UTC, commit `0a66f92`. The first confirmation probe was sent at 19:36 UTC, after the push.
+- **Design.** Each burst is two groups of 4 probes with one fee payer:
+  - group A is the cheap half of the ladder, sent first;
+  - group B is the dear half, sent after a pause of 0 ms (`split0`) or 120 ms (`split120`).
+- **Size.** 122 bursts, 976 probes, 0 failed sends.
+- **Landing.** All 976 landed, but only 511 inside the target's window: with the 120 ms pause, group B often reaches
+  the next leader.
+- **Results.** Output of `python -m itb confirm`; all cells are in
+  [reports/confirmation/summary.md](reports/confirmation/summary.md).
+
+| test | prediction | result [95% CI] | holds |
+|---|---|---|---|
+| P1 | front end: inside a group, the higher price sits earlier | 0.72 [0.66, 0.78], 314 pairs | yes |
+| P2 | front end: at 120 ms, the cheap group A (sent first) sits earlier | 0.88 [0.76, 0.96], 74 pairs | yes |
+| P3 | front end: the A-earlier share rises from 0 ms to 120 ms | +0.46 [+0.27, +0.64] | yes |
+| P4 | own TPU: inside a group, no fee sorting | 0.54 [0.43, 0.63], 218 pairs | yes |
+| P5 | own TPU: at 120 ms, group A sits earlier | 0.86 [0.65, 0.99], 50 pairs | yes |
+| P6 | Firedancer 9eGr: inside a group, higher price earlier (lower bound > 0.6) | 0.70 [0.42, 0.88], 46 pairs | **no** |
+
+**On the front-end validators the order can be switched with a pause alone.** We sent cheap probes first and dear
+ones right after. Sent together (0 ms), the dear group came out ahead: the A-earlier share was 0.41 [0.26, 0.57], and
+FireBAM alone was 0.12. With 120 ms between the groups, the cheap group came first: 0.88, and FireBAM alone was 1.00.
+Inside each group the fee order held at both gaps (0.70 and 0.75).
+
+**On the own-TPU validators, fee did nothing inside a group**, and at 120 ms arrival won (0.86).
+
+**P6 failed.** Firedancer `9eGr…` put the higher price first in 0.70 of within-group pairs, but the interval is wide
+(0.42–0.88) and its lower bound is under the 0.6 we wrote down. The 116-of-116 result from the main runs does not
+repeat at that strength here. It may be a smaller effect than the main runs suggested, or it may depend on conditions
+we did not hold fixed. We cannot tell which from 46 pairs.
+
+**Not predicted, seen in the cells:** Rakurai put the cheaper probe first inside a group, 0.34 [0.20, 0.44]. We have no
+explanation for it and did not test it.
+
 ## How confident this is
 
 - The overall verdicts per validator use rules fixed in code (commit `95d35e5`). That commit came after the two pilots
   and about 2 minutes into main 1. Main 1 results had not been analysed at that point.
-- These splits were added later, after looking at the data, and are **exploratory**:
+- The batch reading (fee inside a batch, arrival between batches) was then tested on new data against predictions
+  pushed in advance. 5 of 6 held (see "Confirmation run").
+- These splits of the main runs were added later, after looking at the data, and are **exploratory**:
   - near/far by distance in the block;
   - first slot against later slots;
   - main 1 against main 2.
