@@ -252,15 +252,15 @@ Runs: 20261103T155835Z_live (2026-11-03 15:58:39, epoch 1076), 20261103T165600Z_
 
 ## Background: all other transactions of the same blocks (supplementary)
 
-Spearman rho between position in block and priority fee per cost unit (Jito tip transactions excluded). Strict priority order would give rho near -1.
+Spearman rho between position in block and priority fee per cost unit (Jito tip transactions excluded). Strict priority order would give rho near -1. `neighbours sorted`: among transactions that set a compute-unit price, the share of neighbouring pairs where the earlier one pays more (ties skipped; 0.5 = no local sorting; 95% CI by resampling blocks).
 
-| client | blocks | median rho (all) | median rho (fee > 0) | share of blocks rho < -0.3 |
-|---|---|---|---|---|
-| Agave | 135 | -0.00 | -0.01 | 0.01 |
-| AgaveBam | 347 | -0.07 | -0.08 | 0.04 |
-| FireBAM | 166 | -0.06 | -0.08 | 0.01 |
-| Firedancer | 393 | -0.02 | -0.09 | 0.02 |
-| HarmonicAgave | 362 | -0.02 | -0.08 | 0.00 |
-| HarmonicFiredancer | 397 | -0.04 | -0.08 | 0.01 |
-| JitoLabs | 428 | +0.01 | -0.01 | 0.00 |
-| Rakurai | 133 | +0.04 | -0.01 | 0.00 |
+| client | blocks | median rho (all) | median rho (fee > 0) | share of blocks rho < -0.3 | neighbours sorted |
+|---|---|---|---|---|---|
+| Agave | 135 | -0.00 | -0.01 | 0.01 | 0.51 [0.50, 0.52] |
+| AgaveBam | 347 | -0.07 | -0.08 | 0.04 | 0.54 [0.54, 0.55] |
+| FireBAM | 166 | -0.06 | -0.08 | 0.01 | 0.55 [0.55, 0.56] |
+| Firedancer | 393 | -0.02 | -0.09 | 0.02 | 0.56 [0.56, 0.56] |
+| HarmonicAgave | 362 | -0.02 | -0.08 | 0.00 | 0.54 [0.54, 0.54] |
+| HarmonicFiredancer | 397 | -0.04 | -0.08 | 0.01 | 0.56 [0.55, 0.56] |
+| JitoLabs | 428 | +0.01 | -0.01 | 0.00 | 0.51 [0.51, 0.52] |
+| Rakurai | 133 | +0.04 | -0.01 | 0.00 | 0.52 [0.52, 0.53] |

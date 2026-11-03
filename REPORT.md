@@ -177,7 +177,26 @@ result. Per-run tables: `reports/trigger_0/`, `reports/trigger_minus2/`.
   for every client. In fewer than 5% of blocks it is below −0.3.
 - Seen from the whole block, no client sorts by fee. That matches the batch reading: most of a block is a sequence of
   batches in time.
-- This uses other people's transactions, which arrive at unknown times. It is context, not evidence.
+- **Neighbouring transactions show the batch pattern weakly but cleanly.** Among transactions that set a compute-unit
+  price, we counted how often a transaction pays more than the one right after it (0.5 means no local sorting). The
+  intervals are 95%, from resampling blocks.
+
+  | client | neighbours sorted |
+  |---|---|
+  | Agave | 0.51 [0.50, 0.52] |
+  | JitoLabs | 0.51 [0.51, 0.52] |
+  | Rakurai | 0.52 [0.52, 0.53] |
+  | AgaveBam | 0.54 [0.54, 0.55] |
+  | HarmonicAgave | 0.54 [0.54, 0.54] |
+  | FireBAM | 0.55 [0.55, 0.56] |
+  | HarmonicFiredancer | 0.56 [0.55, 0.56] |
+  | Firedancer | 0.56 [0.56, 0.56] |
+
+  The effect is small, because most neighbouring pairs of other people's transactions come from different batches.
+  But the order is the same as for our own probes: Agave, JitoLabs and Rakurai are at chance, and the front-end
+  clients and Firedancer sit above it with intervals that do not overlap. This metric was added after the main
+  results, so treat it as supporting evidence.
+- These are other people's transactions, which arrive at unknown times. They are context, not the main evidence.
 
 ## Confirmation run (pre-registered)
 
@@ -217,6 +236,47 @@ we did not hold fixed. We cannot tell which from 46 pairs.
 
 **Not predicted, seen in the cells:** Rakurai put the cheaper probe first inside a group, 0.34 [0.20, 0.44]. We have no
 explanation for it and did not test it.
+
+## Why: what the operators' own documents say
+
+Our data shows the result, not the mechanism. The public descriptions of these systems match the pattern. We cannot
+see which settings a given validator runs, so this section is an explanation, not a proof.
+
+- **BAM (AgaveBam, FireBAM).** Jito's Block Assembly Marketplace.
+  - A BAM validator "advertises the BAM instance through its TPU and TPU forward ports" ([Helius, BAM explainer](https://www.helius.dev/blog/block-assembly-marketplace-bam)).
+    That is the TPU-on-another-host we found in gossip for 100% of AgaveBam and FireBAM stake.
+  - In the BAM node, transactions "participate in a frequent periodic auction". The first scheduler subdivides "the
+    block into N slots", each with its own auction.
+  - The validator then receives "a predefined transaction sequence that must be scheduled exactly as provided".
+  - Within one auction, price decides; between auctions, time decides. That is the batch pattern in our pairs and the
+    flip in the confirmation run.
+- **Harmonic (HarmonicAgave, HarmonicFiredancer).**
+  - A "Remote TPU" aggregates incoming transactions and forwards them to block builders
+    ([Harmonic docs](https://docs.harmonic.gg)). Blocks are streamed as "microbatches" through the slot
+    ([streaming](https://docs.harmonic.gg/concepts/streaming-mode.md)).
+  - The documented strategies include "50ms Frequent Batch Auctions", which collect transactions over 50 ms and
+    sequence them "by descending priority fees and tips". They also include FIFO and a proprietary revenue strategy
+    ([scheduling strategies](https://docs.harmonic.gg/concepts/scheduling-strategies.md)).
+  - Our 120 ms pause is longer than 50 ms, and our ~4 ms sends fit inside one 50 ms buffer. With such a strategy that
+    gives exactly what P1-P3 measured.
+  - Which strategy each Harmonic validator uses is not public. The weaker within-group sorting on HarmonicFiredancer
+    (0.63) could mean some of them use another one.
+- **Agave and Jito-Solana (own TPU).**
+  - Anza describes the central scheduler as "constantly checking the incoming queue of transactions and processing
+    them as they arrive". "Conflicting transactions ... will always be processed in priority order"
+    ([Anza](https://www.anza.xyz/blog/introducing-the-central-scheduler-an-optional-feature-of-agave-v1-18)).
+  - If the queue is nearly empty when each of our probes arrives (they come ~4 ms apart), each one is scheduled before
+    the next is there to compete. That gives arrival order, which is what JitoLabs and Agave showed.
+  - This is our reading. We did not measure queue depth.
+- **Firedancer (own TPU).** The Firedancer config documents two pack strategies
+  ([default.toml](https://github.com/firedancer-io/firedancer/blob/main/src/app/firedancer/config/default.toml)):
+  - "perf": "fill the block as fast as possible using the highest-paying transactions available";
+  - "balanced" (default): fill "at a rate that is just fast enough to fill it by the end".
+
+  A validator that paces its block lets transactions wait and get sorted. One that packs immediately takes them close
+  to arrival order. That is a possible reason why `9eGr...` and `JD549...`, same version, behaved differently. Their
+  settings are not visible from outside, and the confirmation run did not reproduce the 9eGr effect at the
+  pre-registered strength (P6).
 
 ## How confident this is
 

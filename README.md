@@ -21,6 +21,42 @@ alone flips the order from fee to arrival. The Firedancer prediction did not hol
 Results and dates of every measurement are in [REPORT.md](REPORT.md). The generated tables are in
 [reports/summary.md](reports/summary.md). Raw data is in [data/](data).
 
+## Check it yourself in 5 minutes
+
+`itb show <run> <burst>` fetches every probe of a burst from RPC, not from our files:
+- slot and position: `getBlock`;
+- price and memo: `getTransaction`;
+- block leader: the fee reward.
+
+Only "sent as #" comes from our send log. Three bursts that show the result:
+
+```bash
+docker compose run --rm itb show 20261103T193631Z_live 8     # FireBAM, cheap group sent first, no pause
+docker compose run --rm itb show 20261103T193631Z_live 53    # HarmonicFiredancer, dear group sent 120 ms later
+docker compose run --rm itb show 20261103T155835Z_live 154   # JitoLabs, ladder with random prices
+```
+
+What you should see:
+
+1. **Burst 8 (FireBAM).** All 8 probes in slot 465 019 052 at positions 38-66, in strict descending price order:
+   3 000 000 first and 1 000 last. The cheap ones were sent first.
+2. **Burst 53 (HarmonicFiredancer).** In slot 465 022 254, the cheap group A (sent first) sits at positions 46-151, in
+   descending price inside the group. The dear group B (sent 120 ms later) comes after it: positions 551 and 903, and
+   two probes in the next slot.
+3. **Burst 154 (JitoLabs).** In slot 464 966 390, positions follow the send order 1, 2, 3, 4, 5. The prices in that
+   order are 3 000, 300 000, 3 000 000, 30 000, 1 000 000.
+
+Single bursts are illustrations. The numbers that carry the result are in [REPORT.md](REPORT.md). Without our tool, a
+position is one RPC call:
+
+```bash
+curl -s https://api.mainnet-beta.solana.com -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"getBlock","params":[465019052,{"transactionDetails":"signatures","maxSupportedTransactionVersion":1}]}' \
+  | python3 -c "import json,sys; print(json.load(sys.stdin)['result']['signatures'].index('3UswzKEUSReacvVyVfzQWxXvQDRdsDqmXqgGGv7aNzecervSLgtYRZWUDphqX3NowknS9S8KisaE8na6vcZK7b7'))"
+```
+
+This prints `38`: the 3 000 000 probe of burst 8.
+
 ## Run it
 
 ```bash
