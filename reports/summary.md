@@ -6,19 +6,21 @@ Runs: 20261103T152527Z_live (2026-11-03 15:25:33, epoch 1076), 20261103T152855Z_
 
 | client | validator | version | bursts | probes | landed | in window | one-block bursts | slot offsets |
 |---|---|---|---|---|---|---|---|---|
-| Agave | `7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE` | 4.3.2 | 3 | 24 | 24 | 15 | 0 | +1:11 +2:3 +3:1 +6:3 +9:1 +10:1 +12:1 +14:3 |
-| AgaveBam | `5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux` | 4.4.0 | 2 | 16 | 16 | 13 | 0 | +1:3 +2:10 +4:2 +6:1 |
-| AgaveBam | `DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy` | 4.4.0 | 4 | 48 | 35 | 34 | 1 | +1:14 +2:20 +8:1 |
-| FireBAM | `9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP` | 26.10.5 | 5 | 33 | 24 | 24 | 1 | +0:3 +1:18 +2:3 |
-| Firedancer | `9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY` | 26.10.5 | 3 | 24 | 20 | 11 | 2 | +0:8 +1:1 +3:2 +5:5 +8:4 |
-| Firedancer | `JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB` | 26.10.5 | 2 | 24 | 11 | 10 | 1 | +0:3 +1:7 +5:1 |
-| HarmonicAgave | `A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4` | 4.3.2 | 2 | 16 | 16 | 16 | 2 | +1:8 +2:8 |
-| HarmonicAgave | `Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk` | 4.4.0 | 3 | 32 | 19 | 14 | 0 | +1:13 +2:1 +7:1 +8:3 +9:1 |
-| HarmonicFiredancer | `Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM` | 26.10.5 | 4 | 32 | 24 | 13 | 1 | +2:8 +3:5 +4:10 +13:1 |
-| HarmonicFiredancer | `EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4` | 26.10.5 | 4 | 32 | 24 | 23 | 1 | +1:6 +2:17 +6:1 |
-| JitoLabs | `E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL` | 4.4.0 | 4 | 40 | 24 | 15 | 0 | +1:6 +2:3 +3:6 +7:8 +17:1 |
-| JitoLabs | `HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU` | 4.4.0 | 8 | 64 | 46 | 37 | 1 | +1:7 +2:22 +3:8 +4:4 +6:2 +7:2 +9:1 |
-| Rakurai | `ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY` | 4.4.0 | 1 | 8 | 8 | 8 | 1 | +1:8 |
+| Agave | `5Us18hLZPXJTS4QVuGSsUw137Dyd2tgBaem24Xsf5nBS` | 4.3.2 | 4 | 32 | 32 | 23 | 0 | +1:2 +2:7 +3:14 +4:5 +5:3 +7:1 |
+| Agave | `7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE` | 4.3.2 | 6 | 48 | 47 | 27 | 0 | +1:11 +2:13 +3:3 +6:5 +7:4 +8:3 +9:1 +10:3 +12:1 +14:3 |
+| AgaveBam | `5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux` | 4.4.0 | 6 | 56 | 56 | 39 | 0 | +1:4 +2:26 +3:9 +4:9 +5:6 +6:1 +17:1 |
+| AgaveBam | `DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy` | 4.4.0 | 23 | 200 | 186 | 106 | 1 | +1:22 +2:55 +3:29 +4:17 +5:12 +6:10 +7:11 +8:7 +9:3 +10:5 +11:5 +12:4 +13:1 +14:1 +15:2 +16:1 +20:1 |
+| FireBAM | `9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP` | 26.10.5 | 12 | 89 | 80 | 59 | 1 | +0:3 +1:27 +2:20 +3:9 +4:5 +5:3 +6:2 +7:6 +8:3 +12:1 +37:1 |
+| Firedancer | `9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY` | 26.10.5 | 20 | 160 | 156 | 106 | 5 | +0:11 +1:59 +2:23 +3:13 +4:14 +5:11 +6:3 +7:6 +8:5 +10:5 +11:2 +13:2 +14:2 |
+| Firedancer | `JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB` | 26.10.5 | 15 | 128 | 115 | 79 | 2 | +0:3 +1:38 +2:20 +3:18 +4:6 +5:10 +6:9 +7:7 +8:1 +9:1 +11:1 +18:1 |
+| HarmonicAgave | `A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4` | 4.3.2 | 6 | 48 | 48 | 45 | 3 | +1:16 +2:22 +3:7 +4:2 +7:1 |
+| HarmonicAgave | `Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk` | 4.4.0 | 23 | 200 | 187 | 114 | 0 | +1:26 +2:53 +3:35 +4:14 +5:14 +6:7 +7:9 +8:16 +9:2 +10:2 +11:2 +12:4 +14:1 +16:1 +19:1 |
+| HarmonicFiredancer | `Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM` | 26.10.5 | 11 | 88 | 80 | 48 | 2 | +1:5 +2:28 +3:15 +4:22 +5:4 +6:2 +7:1 +9:1 +13:1 +20:1 |
+| HarmonicFiredancer | `EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4` | 26.10.5 | 21 | 168 | 160 | 110 | 2 | +1:30 +2:62 +3:18 +4:22 +5:7 +6:8 +7:3 +8:7 +9:1 +10:1 +12:1 |
+| JitoLabs | `E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL` | 4.4.0 | 15 | 136 | 120 | 66 | 3 | +1:7 +2:41 +3:18 +4:17 +5:4 +6:2 +7:11 +8:4 +9:1 +11:1 +12:1 +13:3 +14:2 +15:4 +16:1 +17:1 +18:1 +26:1 |
+| JitoLabs | `HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU` | 4.4.0 | 29 | 232 | 214 | 114 | 1 | +1:10 +2:52 +3:45 +4:18 +5:20 +6:14 +7:8 +8:11 +9:9 +10:7 +11:3 +12:8 +13:4 +14:2 +15:1 +16:1 +19:1 |
+| Rakurai | `E3mDbFMr8yZcCAZx5wPUFCRmLX31u8Nnj4jPoPc54h3F` | 4.4.0 | 5 | 40 | 40 | 30 | 1 | +1:21 +2:9 +5:2 +6:2 +8:1 +11:4 +16:1 |
+| Rakurai | `ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY` | 4.4.0 | 3 | 24 | 24 | 20 | 1 | +1:15 +2:3 +3:2 +6:1 +7:1 +8:1 +15:1 |
 
 ## Our probes, pairs in the same block
 
@@ -26,57 +28,82 @@ Runs: 20261103T152527Z_live (2026-11-03 15:25:33, epoch 1076), 20261103T152855Z_
 
 | client | validator | series | bursts | fee_first | sent_first | fee_wins_duel | verdict |
 |---|---|---|---|---|---|---|---|
-| Agave | * | * | 2 | 0.57 [0.29, 0.67] n=28 | 0.43 [0.33, 0.71] n=28 | 0.60 [0.00, 0.71] n=20 | no rule visible (noise) |
-| Agave | * | ladder_indep | 1 | 0.29 [0.29, 0.29] n=7 | 0.71 [0.71, 0.71] n=7 | 0.00 [0.00, 0.00] n=3 | send order beats fee |
-| Agave | * | ladder_shared | 1 | 0.67 [0.67, 0.67] n=21 | 0.33 [0.33, 0.33] n=21 | 0.71 [0.71, 0.71] n=17 | fee beats send order |
+| Agave | * | * | 7 | 0.55 [0.37, 0.68] n=76 | 0.73 [0.54, 0.85] n=103 | 0.38 [0.16, 0.62] n=47 | send order matters |
+| Agave | * | equal_indep | 2 | - | 0.81 [0.81, 0.82] n=27 | - | send order matters; strict: send |
+| Agave | * | ladder_indep | 2 | 0.36 [0.29, 0.38] n=28 | 0.82 [0.71, 0.86] n=28 | 0.16 [0.00, 0.19] n=19 | send order beats fee |
+| Agave | * | ladder_shared | 3 | 0.67 [0.50, 0.71] n=48 | 0.62 [0.33, 0.86] n=48 | 0.54 [0.25, 0.71] n=28 | no rule visible (noise) |
+| Agave | `5Us18hLZ` | equal_indep | 1 | - | 0.82 [0.82, 0.82] n=11 | - | send order matters; strict: send |
+| Agave | `5Us18hLZ` | ladder_indep | 1 | 0.38 [0.38, 0.38] n=21 | 0.86 [0.86, 0.86] n=21 | 0.19 [0.19, 0.19] n=16 | send order beats fee; strict: send |
+| Agave | `5Us18hLZ` | ladder_shared | 1 | 0.71 [0.71, 0.71] n=21 | 0.86 [0.86, 0.86] n=21 | 0.29 [0.29, 0.29] n=7 | send order beats fee; strict: send |
+| Agave | `7QQGNm3p` | equal_indep | 1 | - | 0.81 [0.81, 0.81] n=16 | - | send order matters; strict: send |
 | Agave | `7QQGNm3p` | ladder_indep | 1 | 0.29 [0.29, 0.29] n=7 | 0.71 [0.71, 0.71] n=7 | 0.00 [0.00, 0.00] n=3 | send order beats fee |
-| Agave | `7QQGNm3p` | ladder_shared | 1 | 0.67 [0.67, 0.67] n=21 | 0.33 [0.33, 0.33] n=21 | 0.71 [0.71, 0.71] n=17 | fee beats send order |
-| AgaveBam | * | * | 7 | 0.77 [0.68, 0.88] n=84 | 0.64 [0.52, 0.78] n=112 | 0.63 [0.39, 0.83] n=46 | both matter, neither dominates |
-| AgaveBam | * | equal_indep | 1 | - | 0.68 [0.68, 0.68] n=28 | - | send order matters |
-| AgaveBam | * | ladder_indep | 3 | 0.86 [0.50, 1.00] n=14 | 0.57 [0.25, 0.83] n=14 | 0.83 [0.67, 1.00] n=6 | fee beats send order |
-| AgaveBam | * | ladder_shared | 3 | 0.76 [0.67, 0.86] n=70 | 0.64 [0.50, 0.90] n=70 | 0.60 [0.22, 0.81] n=40 | fee matters |
-| AgaveBam | `5Cchr1XG` | ladder_indep | 1 | 0.50 [0.50, 0.50] n=4 | 0.25 [0.25, 0.25] n=4 | 0.67 [0.67, 0.67] n=3 | fee beats send order |
-| AgaveBam | `5Cchr1XG` | ladder_shared | 1 | 0.71 [0.71, 0.71] n=21 | 0.57 [0.57, 0.57] n=21 | 0.60 [0.60, 0.60] n=15 | fee beats send order |
-| AgaveBam | `DRpbCBMx` | equal_indep | 1 | - | 0.68 [0.68, 0.68] n=28 | - | send order matters |
-| AgaveBam | `DRpbCBMx` | ladder_indep | 2 | 1.00 [1.00, 1.00] n=10 | 0.70 [0.50, 0.83] n=10 | 1.00 [1.00, 1.00] n=3 | fee beats send order; strict: fee |
-| AgaveBam | `DRpbCBMx` | ladder_shared | 2 | 0.78 [0.67, 0.86] n=49 | 0.67 [0.50, 0.90] n=49 | 0.60 [0.22, 0.81] n=25 | fee matters |
-| FireBAM | * | * | 3 | 0.74 [0.69, 0.79] n=54 | 0.76 [0.46, 0.86] n=54 | 0.48 [0.33, 0.67] n=25 | fee matters |
-| FireBAM | * | ladder_indep | 1 | 0.69 [0.69, 0.69] n=13 | 0.46 [0.46, 0.46] n=13 | 0.67 [0.67, 0.67] n=9 | fee beats send order |
-| FireBAM | * | ladder_shared | 2 | 0.76 [0.69, 0.79] n=41 | 0.85 [0.85, 0.86] n=41 | 0.38 [0.33, 0.40] n=16 | send order beats fee; strict: send |
-| FireBAM | `9jxgosAf` | ladder_indep | 1 | 0.69 [0.69, 0.69] n=13 | 0.46 [0.46, 0.46] n=13 | 0.67 [0.67, 0.67] n=9 | fee beats send order |
-| FireBAM | `9jxgosAf` | ladder_shared | 2 | 0.76 [0.69, 0.79] n=41 | 0.85 [0.85, 0.86] n=41 | 0.38 [0.33, 0.40] n=16 | send order beats fee; strict: send |
-| Firedancer | * | * | 4 | 0.66 [0.25, 0.84] n=53 | 0.79 [0.50, 0.86] n=53 | 0.36 [0.15, 0.58] n=25 | no rule visible (noise) |
-| Firedancer | * | ladder_indep | 2 | 0.69 [0.48, 0.86] n=49 | 0.82 [0.79, 0.86] n=49 | 0.36 [0.17, 0.60] n=22 | send order matters; strict: send |
-| Firedancer | * | ladder_shared | 2 | 0.25 [0.00, 0.33] n=4 | 0.50 [0.33, 1.00] n=4 | 0.33 [0.00, 0.50] n=3 | inconclusive |
-| Firedancer | `9eGrDohd` | ladder_indep | 1 | 0.86 [0.86, 0.86] n=28 | 0.79 [0.79, 0.79] n=28 | 0.60 [0.60, 0.60] n=10 | fee beats send order; strict: fee,send |
-| Firedancer | `9eGrDohd` | ladder_shared | 1 | 0.00 [0.00, 0.00] n=1 | 1.00 [1.00, 1.00] n=1 | 0.00 [0.00, 0.00] n=1 | send order beats fee; strict: send |
-| Firedancer | `JD549Hsb` | ladder_indep | 1 | 0.48 [0.48, 0.48] n=21 | 0.86 [0.86, 0.86] n=21 | 0.17 [0.17, 0.17] n=12 | send order beats fee; strict: send |
-| Firedancer | `JD549Hsb` | ladder_shared | 1 | 0.33 [0.33, 0.33] n=3 | 0.33 [0.33, 0.33] n=3 | 0.50 [0.50, 0.50] n=2 | inconclusive |
-| HarmonicAgave | * | * | 4 | 0.74 [0.59, 0.81] n=92 | 0.70 [0.62, 0.82] n=92 | 0.54 [0.30, 0.67] n=50 | both matter, neither dominates |
-| HarmonicAgave | * | ladder_indep | 2 | 0.67 [0.47, 0.79] n=43 | 0.72 [0.61, 0.93] n=43 | 0.46 [0.11, 0.65] n=26 | send order matters |
-| HarmonicAgave | * | ladder_shared | 2 | 0.80 [0.76, 0.82] n=49 | 0.67 [0.64, 0.71] n=49 | 0.62 [0.55, 0.69] n=24 | fee beats send order; strict: fee |
-| HarmonicAgave | `A1vqhA2f` | ladder_indep | 1 | 0.79 [0.79, 0.79] n=28 | 0.61 [0.61, 0.61] n=28 | 0.65 [0.65, 0.65] n=17 | fee beats send order; strict: fee |
-| HarmonicAgave | `A1vqhA2f` | ladder_shared | 1 | 0.82 [0.82, 0.82] n=28 | 0.64 [0.64, 0.64] n=28 | 0.69 [0.69, 0.69] n=13 | fee beats send order; strict: fee |
-| HarmonicAgave | `Fd7btgyS` | ladder_indep | 1 | 0.47 [0.47, 0.47] n=15 | 0.93 [0.93, 0.93] n=15 | 0.11 [0.11, 0.11] n=9 | send order beats fee; strict: send |
-| HarmonicAgave | `Fd7btgyS` | ladder_shared | 1 | 0.76 [0.76, 0.76] n=21 | 0.71 [0.71, 0.71] n=21 | 0.55 [0.55, 0.55] n=11 | fee beats send order; strict: fee |
-| HarmonicFiredancer | * | * | 5 | 0.67 [0.51, 0.84] n=103 | 0.63 [0.55, 0.70] n=103 | 0.55 [0.23, 0.77] n=42 | both matter, neither dominates |
-| HarmonicFiredancer | * | ladder_indep | 2 | 0.59 [0.57, 0.61] n=49 | 0.69 [0.68, 0.71] n=49 | 0.35 [0.20, 0.42] n=17 | send order beats fee |
-| HarmonicFiredancer | * | ladder_shared | 3 | 0.74 [0.20, 1.00] n=54 | 0.57 [0.50, 0.69] n=54 | 0.68 [0.00, 1.00] n=25 | no rule visible (noise) |
-| HarmonicFiredancer | `Awes4Tr6` | ladder_indep | 1 | 0.61 [0.61, 0.61] n=28 | 0.68 [0.68, 0.68] n=28 | 0.42 [0.42, 0.42] n=12 | send order beats fee |
-| HarmonicFiredancer | `Awes4Tr6` | ladder_shared | 1 | 0.20 [0.20, 0.20] n=10 | 0.60 [0.60, 0.60] n=10 | 0.00 [0.00, 0.00] n=4 | send order beats fee |
-| HarmonicFiredancer | `EvnRmnMr` | ladder_indep | 1 | 0.57 [0.57, 0.57] n=21 | 0.71 [0.71, 0.71] n=21 | 0.20 [0.20, 0.20] n=5 | send order beats fee |
-| HarmonicFiredancer | `EvnRmnMr` | ladder_shared | 2 | 0.86 [0.79, 1.00] n=44 | 0.57 [0.50, 0.69] n=44 | 0.81 [0.75, 1.00] n=21 | fee beats send order; strict: fee |
-| JitoLabs | * | * | 8 | 0.52 [0.45, 0.62] n=102 | 0.79 [0.67, 0.93] n=104 | 0.20 [0.08, 0.34] n=45 | send order beats fee |
-| JitoLabs | * | equal_indep | 1 | - | 1.00 [1.00, 1.00] n=2 | - | send order matters; strict: send |
-| JitoLabs | * | ladder_indep | 2 | 0.44 [0.38, 0.75] n=25 | 0.64 [0.62, 0.75] n=25 | 0.31 [0.27, 0.50] n=13 | send order matters |
-| JitoLabs | * | ladder_shared | 5 | 0.55 [0.48, 0.63] n=77 | 0.83 [0.70, 0.97] n=77 | 0.16 [0.03, 0.34] n=32 | send order beats fee |
-| JitoLabs | `E1r4Psq8` | ladder_shared | 2 | 0.65 [0.60, 0.73] n=26 | 0.77 [0.60, 1.00] n=26 | 0.33 [0.00, 0.50] n=9 | both matter, neither dominates |
-| JitoLabs | `HEL1USMZ` | equal_indep | 1 | - | 1.00 [1.00, 1.00] n=2 | - | send order matters; strict: send |
-| JitoLabs | `HEL1USMZ` | ladder_indep | 2 | 0.44 [0.38, 0.75] n=25 | 0.64 [0.62, 0.75] n=25 | 0.31 [0.27, 0.50] n=13 | send order matters |
-| JitoLabs | `HEL1USMZ` | ladder_shared | 3 | 0.49 [0.44, 0.52] n=51 | 0.86 [0.76, 1.00] n=51 | 0.09 [0.00, 0.20] n=23 | send order beats fee; strict: send |
-| Rakurai | * | * | 1 | 0.39 [0.39, 0.39] n=28 | 0.71 [0.71, 0.71] n=28 | 0.20 [0.20, 0.20] n=15 | send order beats fee |
-| Rakurai | * | ladder_shared | 1 | 0.39 [0.39, 0.39] n=28 | 0.71 [0.71, 0.71] n=28 | 0.20 [0.20, 0.20] n=15 | send order beats fee |
-| Rakurai | `ana2y2Yv` | ladder_shared | 1 | 0.39 [0.39, 0.39] n=28 | 0.71 [0.71, 0.71] n=28 | 0.20 [0.20, 0.20] n=15 | send order beats fee |
+| Agave | `7QQGNm3p` | ladder_shared | 2 | 0.63 [0.50, 0.67] n=27 | 0.44 [0.33, 0.83] n=27 | 0.62 [0.25, 0.71] n=21 | no rule visible (noise) |
+| AgaveBam | * | * | 23 | 0.72 [0.62, 0.81] n=175 | 0.70 [0.63, 0.78] n=271 | 0.55 [0.39, 0.69] n=84 | both matter, neither dominates |
+| AgaveBam | * | equal_indep | 7 | - | 0.76 [0.68, 0.84] n=96 | - | send order matters |
+| AgaveBam | * | ladder_indep | 8 | 0.74 [0.61, 0.89] n=70 | 0.71 [0.56, 0.80] n=70 | 0.54 [0.37, 0.77] n=28 | both matter, neither dominates |
+| AgaveBam | * | ladder_shared | 8 | 0.70 [0.56, 0.81] n=105 | 0.65 [0.53, 0.80] n=105 | 0.55 [0.30, 0.72] n=56 | both matter, neither dominates |
+| AgaveBam | `5Cchr1XG` | equal_indep | 1 | - | 0.57 [0.57, 0.57] n=7 | - | send order matters |
+| AgaveBam | `5Cchr1XG` | ladder_indep | 2 | 0.64 [0.50, 0.67] n=25 | 0.76 [0.25, 0.86] n=25 | 0.36 [0.25, 0.67] n=11 | no rule visible (noise) |
+| AgaveBam | `5Cchr1XG` | ladder_shared | 3 | 0.62 [0.42, 1.00] n=34 | 0.56 [0.50, 1.00] n=34 | 0.55 [0.40, 0.60] n=20 | no rule visible (noise) |
+| AgaveBam | `DRpbCBMx` | equal_indep | 6 | - | 0.78 [0.70, 0.85] n=89 | - | send order matters |
+| AgaveBam | `DRpbCBMx` | ladder_indep | 6 | 0.80 [0.60, 0.97] n=45 | 0.69 [0.59, 0.76] n=45 | 0.65 [0.47, 0.90] n=17 | both matter, neither dominates |
+| AgaveBam | `DRpbCBMx` | ladder_shared | 5 | 0.75 [0.58, 0.86] n=71 | 0.69 [0.53, 0.88] n=71 | 0.56 [0.21, 0.79] n=36 | both matter, neither dominates |
+| FireBAM | * | * | 8 | 0.70 [0.59, 0.80] n=109 | 0.70 [0.56, 0.80] n=122 | 0.49 [0.35, 0.67] n=55 | both matter, neither dominates |
+| FireBAM | * | equal_indep | 2 | - | 0.62 [0.43, 0.83] n=13 | - | no rule visible (noise) |
+| FireBAM | * | ladder_indep | 2 | 0.68 [0.67, 0.69] n=34 | 0.50 [0.46, 0.52] n=34 | 0.65 [0.64, 0.67] n=20 | fee beats send order |
+| FireBAM | * | ladder_shared | 4 | 0.71 [0.55, 0.87] n=75 | 0.80 [0.67, 0.85] n=75 | 0.40 [0.29, 0.73] n=35 | both matter, neither dominates |
+| FireBAM | `9jxgosAf` | equal_indep | 2 | - | 0.62 [0.43, 0.83] n=13 | - | no rule visible (noise) |
+| FireBAM | `9jxgosAf` | ladder_indep | 2 | 0.68 [0.67, 0.69] n=34 | 0.50 [0.46, 0.52] n=34 | 0.65 [0.64, 0.67] n=20 | fee beats send order |
+| FireBAM | `9jxgosAf` | ladder_shared | 4 | 0.71 [0.55, 0.87] n=75 | 0.80 [0.68, 0.85] n=75 | 0.40 [0.29, 0.73] n=35 | both matter, neither dominates |
+| Firedancer | * | * | 28 | 0.69 [0.59, 0.78] n=290 | 0.70 [0.59, 0.78] n=396 | 0.54 [0.37, 0.71] n=150 | both matter, neither dominates |
+| Firedancer | * | equal_indep | 7 | - | 0.83 [0.71, 0.92] n=106 | - | send order matters |
+| Firedancer | * | ladder_indep | 10 | 0.67 [0.53, 0.79] n=160 | 0.68 [0.57, 0.77] n=160 | 0.49 [0.33, 0.69] n=90 | both matter, neither dominates |
+| Firedancer | * | ladder_shared | 11 | 0.72 [0.57, 0.83] n=130 | 0.61 [0.42, 0.82] n=130 | 0.62 [0.26, 0.84] n=60 | fee matters |
+| Firedancer | `9eGrDohd` | equal_indep | 4 | - | 0.86 [0.74, 0.97] n=65 | - | send order matters |
+| Firedancer | `9eGrDohd` | ladder_indep | 6 | 0.78 [0.67, 0.89] n=105 | 0.62 [0.47, 0.72] n=105 | 0.66 [0.50, 0.90] n=53 | fee matters |
+| Firedancer | `9eGrDohd` | ladder_shared | 5 | 0.77 [0.53, 0.92] n=75 | 0.47 [0.26, 0.79] n=75 | 0.79 [0.29, 0.95] n=39 | fee matters |
+| Firedancer | `JD549Hsb` | equal_indep | 3 | - | 0.78 [0.56, 0.86] n=41 | - | send order matters |
+| Firedancer | `JD549Hsb` | ladder_indep | 4 | 0.45 [0.36, 0.62] n=55 | 0.80 [0.72, 0.86] n=55 | 0.24 [0.19, 0.38] n=37 | send order beats fee |
+| Firedancer | `JD549Hsb` | ladder_shared | 6 | 0.64 [0.55, 0.72] n=55 | 0.80 [0.67, 0.90] n=55 | 0.29 [0.16, 0.45] n=21 | send order beats fee |
+| HarmonicAgave | * | * | 24 | 0.63 [0.50, 0.73] n=282 | 0.69 [0.62, 0.76] n=343 | 0.45 [0.29, 0.59] n=150 | both matter, neither dominates |
+| HarmonicAgave | * | equal_indep | 6 | - | 0.70 [0.56, 0.81] n=61 | - | send order matters |
+| HarmonicAgave | * | ladder_indep | 8 | 0.54 [0.41, 0.67] n=119 | 0.71 [0.58, 0.85] n=119 | 0.33 [0.13, 0.53] n=63 | send order matters |
+| HarmonicAgave | * | ladder_shared | 10 | 0.70 [0.52, 0.80] n=163 | 0.67 [0.56, 0.77] n=163 | 0.53 [0.32, 0.71] n=87 | both matter, neither dominates |
+| HarmonicAgave | `A1vqhA2f` | equal_indep | 1 | - | 0.81 [0.81, 0.81] n=16 | - | send order matters; strict: send |
+| HarmonicAgave | `A1vqhA2f` | ladder_indep | 2 | 0.74 [0.60, 0.79] n=38 | 0.68 [0.61, 0.90] n=38 | 0.55 [0.20, 0.65] n=22 | both matter, neither dominates |
+| HarmonicAgave | `A1vqhA2f` | ladder_shared | 3 | 0.81 [0.76, 0.82] n=77 | 0.70 [0.61, 0.90] n=77 | 0.61 [0.29, 0.69] n=36 | both matter, neither dominates; strict: fee |
+| HarmonicAgave | `Fd7btgyS` | equal_indep | 5 | - | 0.67 [0.52, 0.80] n=45 | - | send order matters |
+| HarmonicAgave | `Fd7btgyS` | ladder_indep | 6 | 0.44 [0.37, 0.54] n=81 | 0.73 [0.54, 0.86] n=81 | 0.22 [0.10, 0.43] n=41 | send order beats fee |
+| HarmonicAgave | `Fd7btgyS` | ladder_shared | 7 | 0.60 [0.34, 0.78] n=86 | 0.64 [0.44, 0.77] n=86 | 0.47 [0.21, 0.78] n=51 | no rule visible (noise) |
+| HarmonicFiredancer | * | * | 25 | 0.58 [0.48, 0.67] n=284 | 0.63 [0.56, 0.70] n=346 | 0.48 [0.34, 0.60] n=146 | send order matters |
+| HarmonicFiredancer | * | equal_indep | 5 | - | 0.74 [0.53, 0.86] n=62 | - | send order matters |
+| HarmonicFiredancer | * | ladder_indep | 11 | 0.49 [0.40, 0.57] n=177 | 0.61 [0.51, 0.73] n=177 | 0.38 [0.20, 0.50] n=89 | send order matters |
+| HarmonicFiredancer | * | ladder_shared | 9 | 0.73 [0.54, 0.88] n=107 | 0.59 [0.51, 0.67] n=107 | 0.63 [0.43, 0.81] n=57 | both matter, neither dominates |
+| HarmonicFiredancer | `Awes4Tr6` | equal_indep | 1 | - | 0.17 [0.17, 0.17] n=6 | - | inconclusive |
+| HarmonicFiredancer | `Awes4Tr6` | ladder_indep | 4 | 0.56 [0.40, 0.62] n=81 | 0.56 [0.45, 0.72] n=81 | 0.50 [0.26, 0.62] n=40 | no rule visible (noise) |
+| HarmonicFiredancer | `Awes4Tr6` | ladder_shared | 3 | 0.41 [0.20, 1.00] n=22 | 0.68 [0.60, 1.00] n=22 | 0.20 [0.00, 0.33] n=10 | send order beats fee |
+| HarmonicFiredancer | `EvnRmnMr` | equal_indep | 4 | - | 0.80 [0.71, 0.90] n=56 | - | send order matters |
+| HarmonicFiredancer | `EvnRmnMr` | ladder_indep | 7 | 0.44 [0.34, 0.52] n=96 | 0.66 [0.51, 0.81] n=96 | 0.29 [0.06, 0.47] n=49 | send order beats fee |
+| HarmonicFiredancer | `EvnRmnMr` | ladder_shared | 6 | 0.81 [0.68, 0.97] n=85 | 0.56 [0.46, 0.66] n=85 | 0.72 [0.54, 0.92] n=47 | fee beats send order |
+| JitoLabs | * | * | 28 | 0.50 [0.44, 0.54] n=292 | 0.72 [0.62, 0.80] n=334 | 0.24 [0.14, 0.35] n=122 | send order beats fee |
+| JitoLabs | * | equal_indep | 7 | - | 0.71 [0.55, 0.87] n=42 | - | send order matters |
+| JitoLabs | * | ladder_indep | 8 | 0.51 [0.43, 0.58] n=121 | 0.72 [0.58, 0.86] n=121 | 0.23 [0.07, 0.45] n=47 | send order beats fee |
+| JitoLabs | * | ladder_shared | 13 | 0.49 [0.42, 0.56] n=171 | 0.71 [0.57, 0.84] n=171 | 0.24 [0.13, 0.36] n=75 | send order beats fee |
+| JitoLabs | `E1r4Psq8` | equal_indep | 2 | - | 0.50 [0.33, 0.56] n=12 | - | no rule visible (noise) |
+| JitoLabs | `E1r4Psq8` | ladder_indep | 3 | 0.55 [0.00, 0.61] n=58 | 0.72 [0.50, 1.00] n=58 | 0.25 [0.00, 0.71] n=20 | no rule visible (noise) |
+| JitoLabs | `E1r4Psq8` | ladder_shared | 5 | 0.53 [0.40, 0.67] n=70 | 0.71 [0.56, 0.85] n=70 | 0.30 [0.17, 0.53] n=33 | send order matters |
+| JitoLabs | `HEL1USMZ` | equal_indep | 5 | - | 0.80 [0.62, 0.95] n=30 | - | send order matters |
+| JitoLabs | `HEL1USMZ` | ladder_indep | 5 | 0.48 [0.42, 0.59] n=63 | 0.71 [0.62, 0.80] n=63 | 0.22 [0.10, 0.37] n=27 | send order beats fee |
+| JitoLabs | `HEL1USMZ` | ladder_shared | 8 | 0.46 [0.39, 0.54] n=101 | 0.71 [0.50, 0.89] n=101 | 0.19 [0.05, 0.35] n=42 | send order beats fee |
+| Rakurai | * | * | 7 | 0.51 [0.43, 0.61] n=105 | 0.68 [0.57, 0.80] n=118 | 0.33 [0.17, 0.53] n=54 | send order matters |
+| Rakurai | * | equal_indep | 1 | - | 0.62 [0.62, 0.62] n=13 | - | send order matters |
+| Rakurai | * | ladder_indep | 2 | 0.54 [0.50, 0.56] n=13 | 0.69 [0.50, 0.78] n=13 | 0.33 [0.25, 0.50] n=6 | no rule visible (noise) |
+| Rakurai | * | ladder_shared | 4 | 0.51 [0.42, 0.62] n=92 | 0.68 [0.55, 0.85] n=92 | 0.33 [0.15, 0.54] n=48 | send order matters |
+| Rakurai | `E3mDbFMr` | equal_indep | 1 | - | 0.62 [0.62, 0.62] n=13 | - | send order matters |
+| Rakurai | `E3mDbFMr` | ladder_indep | 1 | 0.56 [0.56, 0.56] n=9 | 0.78 [0.78, 0.78] n=9 | 0.25 [0.25, 0.25] n=4 | send order beats fee; strict: send |
+| Rakurai | `E3mDbFMr` | ladder_shared | 2 | 0.58 [0.47, 0.64] n=43 | 0.56 [0.50, 0.67] n=43 | 0.52 [0.33, 0.64] n=23 | no rule visible (noise) |
+| Rakurai | `ana2y2Yv` | ladder_indep | 1 | 0.50 [0.50, 0.50] n=4 | 0.50 [0.50, 0.50] n=4 | 0.50 [0.50, 0.50] n=2 | no rule visible (noise) |
+| Rakurai | `ana2y2Yv` | ladder_shared | 2 | 0.45 [0.39, 0.52] n=49 | 0.80 [0.71, 0.90] n=49 | 0.16 [0.10, 0.20] n=25 | send order beats fee |
 
 ## Background: all other transactions of the same blocks (supplementary)
 
@@ -84,11 +111,11 @@ Spearman rho between position in block and priority fee per cost unit (Jito tip 
 
 | client | blocks | median rho (all) | median rho (fee > 0) | share of blocks rho < -0.3 |
 |---|---|---|---|---|
-| Agave | 12 | -0.01 | -0.03 | 0.00 |
-| AgaveBam | 34 | -0.03 | -0.05 | 0.00 |
-| FireBAM | 12 | +0.07 | +0.00 | 0.00 |
-| Firedancer | 24 | +0.00 | -0.06 | 0.00 |
-| HarmonicAgave | 21 | -0.06 | -0.08 | 0.05 |
-| HarmonicFiredancer | 24 | -0.07 | -0.08 | 0.04 |
-| JitoLabs | 39 | -0.00 | -0.03 | 0.00 |
-| Rakurai | 4 | -0.01 | -0.06 | 0.00 |
+| Agave | 40 | +0.02 | -0.01 | 0.00 |
+| AgaveBam | 135 | -0.06 | -0.07 | 0.03 |
+| FireBAM | 42 | -0.06 | -0.06 | 0.00 |
+| Firedancer | 145 | -0.01 | -0.07 | 0.00 |
+| HarmonicAgave | 139 | -0.03 | -0.09 | 0.01 |
+| HarmonicFiredancer | 130 | -0.04 | -0.07 | 0.01 |
+| JitoLabs | 199 | +0.01 | -0.01 | 0.00 |
+| Rakurai | 33 | +0.02 | -0.02 | 0.00 |

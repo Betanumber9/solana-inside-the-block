@@ -199,6 +199,9 @@ def main():
     p = sub.add_parser("analyze", help="tables and figures from data/")
     p.add_argument("--runs", default="", help="comma list of run ids (default: all live runs)")
     p.add_argument("--include-dry", action="store_true")
+    p = sub.add_parser("recollect", help="finish collection for a stopped run (statuses, blocks, ledger)")
+    p.add_argument("--runs", default="", help="comma list of run ids (default: all live runs)")
+    p.add_argument("--cap-sol", type=float, default=HARD_CAP_SOL)
     p = sub.add_parser("verify", help="re-fetch blocks from RPC and check recorded positions")
     p.add_argument("--sample", type=int, default=50)
     a = ap.parse_args()
@@ -206,6 +209,9 @@ def main():
     if a.cmd == "analyze":
         from .analyze import main as analyze_main
         return analyze_main(cfg, a)
+    if a.cmd == "recollect":
+        from .recollect import main as recollect_main
+        return asyncio.run(recollect_main(cfg, a))
     if a.cmd == "verify":
         from .verify import main as verify_main
         return asyncio.run(verify_main(cfg, a))
