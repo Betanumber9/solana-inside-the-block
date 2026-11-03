@@ -54,9 +54,14 @@ burst, so the leader's cost for every probe is the same and its priority depends
 
 | series | fee payers | prices | send spacing | what it isolates |
 |---|---|---|---|---|
-| `ladder_shared` | one payer for all 8 probes | 8 prices, 1 000 to 3 000 000 micro-lamports/CU | 3 ms | priority among transactions that conflict (same writable account) |
-| `ladder_indep` | 8 payers, one per probe | same ladder | 3 ms | priority among transactions that can run in parallel |
-| `equal_indep` | 8 payers | all 100 000 | 40 ms | send order alone: price is constant |
+| `ladder_shared` | one payer for all 8 probes | 8 prices, 1 000 to 3 000 000 micro-lamports/CU | 3 ms set, 4.4 ms measured* | priority among transactions that conflict (same writable account) |
+| `ladder_indep` | 8 payers, one per probe | same ladder | 3 ms set, 4.4 ms measured* | priority among transactions that can run in parallel |
+| `equal_indep` | 8 payers | all 100 000 | 40 ms set, 46 ms measured* | send order alone: price is constant |
+
+\* The spacing is set with `asyncio.sleep`, and the timer on the Windows machine that ran the experiment is coarse.
+The real gaps, taken from the recorded dispatch times, have a median of 4.4 ms (90% under 16 ms) in the ladder series.
+A whole ladder burst spans about 40 ms. In `equal_indep` the median gap is 46 ms and a burst spans about 325 ms. The
+analysis uses the recorded order of sending, not the set spacing.
 
 In every burst, price and send position come from two independent random permutations. A fee rule and an arrival
 rule then predict different orders for the same burst, and the pair counts show which one the block followed.
@@ -123,7 +128,7 @@ The bounty asks for our own transactions as primary evidence, and the background
 different times.
 
 **Send order.** Send order is randomized against price in every burst. `equal_indep` removes price entirely and widens
-the spacing to 40 ms, so an arrival rule has the best chance to show. What we control is the order in which we hand
+the spacing to about 46 ms, so an arrival rule has the best chance to show. What we control is the order in which we hand
 transactions to the RPC. The order in which they reach the leader can differ (see below).
 
 **Noise versus rule.** Bursts are repeated on the same validator (`--reps`), on two validators per client, and across
@@ -133,7 +138,7 @@ report says so where it happens.
 ## What this design does not separate
 
 - **Arrival time at the leader.** We know when we sent each probe, not when the leader received it. RPC forwarding,
-  QUIC streams, and BAM or Harmonic front ends can reorder probes that we sent 3 ms apart. An "arrival" result means
+  QUIC streams, and BAM or Harmonic front ends can reorder probes that we sent a few milliseconds apart. An "arrival" result means
   "order of sending through this path", nothing finer.
 - **The leader's scheduler versus the service in front of it.** For BAM and Harmonic validators we measure the
   combined pipeline.

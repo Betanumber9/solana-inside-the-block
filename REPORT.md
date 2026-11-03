@@ -132,14 +132,14 @@ Series pooled over all validators:
 |---|---|---|
 | `ladder_shared` (one payer, conflicting) | 0.61 [0.58, 0.65] | 0.60 [0.57, 0.63] |
 | `ladder_indep` (no shared account) | 0.58 [0.54, 0.61] | 0.61 [0.58, 0.64] |
-| `equal_indep` (same price, 40 ms apart) | – | 0.75 [0.72, 0.77] |
+| `equal_indep` (same price, ~46 ms apart) | – | 0.75 [0.72, 0.77] |
 
 - **Conflict versus no conflict.** Overall, sharing the fee payer barely changed the fee effect. The exception is
   HarmonicAgave: with a shared payer, fee beats send order (duel 0.64 [0.52, 0.76]); without one, send order beats
   fee (0.38 [0.29, 0.47]). That fits a scheduler that sorts by fee only among transactions that cannot run in
   parallel.
-- **Spacing.** With 40 ms between sends and equal prices, the earlier-sent probe came first in 0.75 of pairs, against
-  about 0.60 with 3 ms spacing. The path from our machine to the leader keeps send order roughly, and keeps it better
+- **Spacing.** With about 46 ms between sends and equal prices, the earlier-sent probe came first in 0.75 of pairs,
+  against about 0.60 with ~4 ms spacing (measured medians; see the README note on the timer). The path from our machine to the leader keeps send order roughly, and keeps it better
   when the sends are further apart.
 
 ## Sending before the window (main 1 against main 2)

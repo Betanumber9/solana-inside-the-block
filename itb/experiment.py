@@ -138,7 +138,11 @@ class Experiment:
         self.epoch = land["epoch"]
         first, last, self.by_slot = await chain.schedule(self.rpc, self.epoch)
         clients = set(self.a.clients.split(",")) if self.a.clients else None
-        self.targets = pick_targets(land, self.by_slot, self.clock.slot + 50, self.a.per_client, clients)
+        if self.a.validators:
+            ids = [v for v in self.a.validators.split(",") if v]
+            self.targets = {pk: dict(land["validators"][pk], windows_left=None) for pk in ids if pk in land["validators"]}
+        else:
+            self.targets = pick_targets(land, self.by_slot, self.clock.slot + 50, self.a.per_client, clients)
         self.cu_limit = self.a.cu_limit
         meta = {"run_id": self.run_id, "live": self.live, "args": vars(self.a), "endpoints": self.cfg.public(),
                 "epoch": self.epoch, "epoch_first_slot": first, "epoch_last_slot": last, "key": self.key_kind,
@@ -179,19 +183,32 @@ class Experiment:
 
     def build(self, series, blockhash):
         n = self.a.burst
+        group = [None] * n
         if series == "equal_indep":
             prices = [EQUAL_PRICE] * n
+        elif series.startswith("split"):
+            # confirmation series: group A = the cheaper half, sent first; group B = the dearer half, sent
+            # split_gap_ms later. Inside each group, price and send order are shuffled independently.
+            half = n // 2
+            ladder = sorted(LADDER[:n])
+            prices = self.rng.sample(ladder[:half], half) + self.rng.sample(ladder[half:], n - half)
+            group = ["A"] * half + ["B"] * (n - half)
         else:
             prices = LADDER[:n] if n <= len(LADDER) else [LADDER[i % len(LADDER)] for i in range(n)]
             prices = self.rng.sample(prices, n)
-        order = self.rng.sample(range(n), n)  # order[pos] = probe k sent at position pos
+        if series.startswith("split"):
+            half = n // 2
+            order = self.rng.sample(range(half), half) + self.rng.sample(range(half, n), n - half)
+        else:
+            order = self.rng.sample(range(n), n)  # order[pos] = probe k sent at position pos
         bno = self.burst_no
         probes = []
         for k in range(n):
-            payer = self.key if series == "ladder_shared" else self.subs[k]
+            payer = self.key if series in ("ladder_shared",) or series.startswith("split") else self.subs[k]
             tx = wallet.probe_tx(payer, blockhash, self.cu_limit, prices[k], wallet.memo_text(bno, k))
             probes.append({"k": k, "price": prices[k], "payer": str(payer.pubkey()), "sig": str(tx.signatures[0]),
-                           "memo": wallet.memo_text(bno, k), "send_pos": order.index(k), "tx": wallet.b64(tx)})
+                           "memo": wallet.memo_text(bno, k), "send_pos": order.index(k), "tx": wallet.b64(tx),
+                           "group": group[k]})
         return probes, order
 
     async def balances(self):
@@ -240,10 +257,13 @@ class Experiment:
                          "resp": res if res == "dry-run" else (res == p["sig"]), "err": err})
 
         tasks = []
+        split_gap = int(series[5:]) if series.startswith("split") else 0
         for pos, k in enumerate(order):
             tasks.append(asyncio.create_task(fire(probes[k], pos)))
-            if gap and pos < len(order) - 1:
-                await asyncio.sleep(gap / 1000)
+            if pos < len(order) - 1:
+                wait = gap + (split_gap if pos == len(order) // 2 - 1 else 0)
+                if wait:
+                    await asyncio.sleep(wait / 1000)
         await asyncio.gather(*tasks)
         by_k = {s["k"]: s for s in sent}
         for p in probes:
@@ -253,7 +273,7 @@ class Experiment:
                    "seen_lag_ms": round(seen_lag * 1000, 1), "gap_ms": gap, "cu_limit": self.cu_limit,
                    "blockhash": bh["value"]["blockhash"], "send_url": self.cfg.public()["send"],
                    "max_retries": self.a.max_retries, **{x: p[x] for x in ("k", "price", "payer", "sig", "memo",
-                                                                           "send_pos")}, **by_k[p["k"]]}
+                                                                           "send_pos", "group")}, **by_k[p["k"]]}
             self.w.jsonl("sends.jsonl", row)
         self.w.event("burst", n=bno, series=series, client=t["client"], leader=win["leader"][:8],
                      start=win["start"], seen=seen_slot, est_fee=est, spent=spent,

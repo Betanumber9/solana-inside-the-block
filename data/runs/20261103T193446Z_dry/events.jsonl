@@ -1,0 +1,8 @@
+{"t":1793734490.6957889,"kind":"target","client":"AgaveBam","version":"4.4.0","identity":"DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy","stake_sol":13043664,"windows_left":null}
+{"t":1793734490.6982117,"kind":"target","client":"JitoLabs","version":"4.4.0","identity":"HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU","stake_sol":16704339,"windows_left":null}
+{"t":1793734490.6998556,"kind":"target","client":"Firedancer","version":"26.10.5","identity":"9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY","stake_sol":6979030,"windows_left":null}
+{"t":1793734490.9349022,"kind":"calibrate","err":null,"units":4939,"limit":6000,"fee_max":23000}
+{"t":1793734496.5679047,"kind":"burst","n":1,"series":"split0","client":"JitoLabs","leader":"HEL1USMZ","start":465018192,"seen":465018190,"est_fee":66664,"spent":0,"errors":0}
+{"t":1793734496.5830176,"kind":"deadline","next_window_in_s":98}
+{"t":1793734496.5844934,"kind":"waiting_collectors","n":1}
+{"t":1793734506.7811022,"kind":"collected","burst":1,"landed":0,"of":8,"slots":"-","skipped":0,"leader_ok":true}

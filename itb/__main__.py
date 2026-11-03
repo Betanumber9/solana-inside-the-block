@@ -177,6 +177,7 @@ def main():
     common_live(p)
     p.add_argument("--per-client", type=int, default=2, help="validators per client")
     p.add_argument("--clients", default="", help="comma list of gossip clientIds (default: all known)")
+    p.add_argument("--validators", default="", help="comma list of identities (overrides --per-client/--clients)")
     p.add_argument("--reps", type=int, default=6, help="bursts per validator")
     p.add_argument("--minutes", type=float, default=60, help="stop after this long")
     p.add_argument("--series", default=",".join(("ladder_shared", "ladder_indep", "equal_indep")))
@@ -204,6 +205,8 @@ def main():
     p = sub.add_parser("recollect", help="finish collection for a stopped run (statuses, blocks, ledger)")
     p.add_argument("--runs", default="", help="comma list of run ids (default: all live runs)")
     p.add_argument("--cap-sol", type=float, default=HARD_CAP_SOL)
+    p = sub.add_parser("confirm", help="pre-registered tests of the confirmation runs (PREREGISTRATION.md)")
+    p.add_argument("--runs", default="", help="comma list of run ids (default: live runs with split series)")
     p = sub.add_parser("verify", help="re-fetch blocks from RPC and check recorded positions")
     p.add_argument("--sample", type=int, default=50)
     a = ap.parse_args()
@@ -214,6 +217,9 @@ def main():
     if a.cmd == "recollect":
         from .recollect import main as recollect_main
         return asyncio.run(recollect_main(cfg, a))
+    if a.cmd == "confirm":
+        from .confirm import main as confirm_main
+        return confirm_main(cfg, a)
     if a.cmd == "verify":
         from .verify import main as verify_main
         return asyncio.run(verify_main(cfg, a))

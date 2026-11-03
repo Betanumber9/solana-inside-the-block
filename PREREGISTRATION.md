@@ -1,0 +1,48 @@
+# Pre-registration: confirmation runs
+
+Written on 3 November 2026, after the main runs and before any confirmation run. The commit that adds this file is
+pushed to GitHub before the first confirmation transaction is sent. The push time and the slot numbers in the run data
+show the order.
+
+## Why
+
+The main runs suggested a model, but it came from an exploratory split: pairs close together in the block against
+pairs far apart. Distance in the block is an outcome, not something we controlled. Here we control the timing
+directly and say in advance what the model predicts.
+
+**Model.** A leader, or the BAM/Harmonic front end in front of it, takes in transactions in batches in arrival order
+and sorts each batch by priority fee. Validators that take transactions on their own TPU showed no fee sorting in the
+main runs.
+
+## Design
+
+- **Series `split0` and `split120`**, alternating per validator. All 8 probes have the same fee payer (the main
+  wallet).
+  - Group A is the 4 cheapest prices of the ladder (1 000, 3 000, 10 000, 30 000 micro-lamports/CU). It is sent
+    first, in random order.
+  - Group B is the 4 dearest (100 000, 300 000, 1 000 000, 3 000 000). It is sent after A, in random order.
+  - Between the last A send and the first B send we wait 0 ms (`split0`) or 120 ms (`split120`). Inside a group the
+    spacing is the same as in the ladder series.
+- **Validators:** the same 16 identities as in the main runs (`--validators`). Classes are fixed by where each one
+  announces its TPU at run start: `front_end` if the TPU is on another host than gossip, `own_tpu` otherwise.
+  Firedancer `9eGrDohd…` is also tested on its own.
+- **Run settings:** `--trigger-offset -2`, `--reps 8` (4 bursts per gap per validator), at most 90 minutes, and the
+  same spend cap ledger (total for the whole project stays ≤ 0.05 SOL).
+- **Pairs used:** probes that landed in the same block inside the target's window. 95% intervals come from resampling
+  bursts (2 000 draws). The code is `itb/confirm.py`, committed together with this file.
+
+## Predictions
+
+| test | prediction | counted as holding if |
+|---|---|---|
+| P1 | front_end: inside a group, the higher price sits earlier | lower bound > 0.5 |
+| P2 | front_end: at 120 ms, group A (cheaper, sent first) sits earlier than group B | lower bound > 0.5 |
+| P3 | front_end: the A-earlier share is higher at 120 ms than at 0 ms | lower bound of the difference > 0 |
+| P4 | own_tpu: inside a group, no fee sorting | the interval contains 0.5 |
+| P5 | own_tpu: at 120 ms, group A sits earlier | lower bound > 0.5 |
+| P6 | Firedancer 9eGr: inside a group, the higher price sits earlier | lower bound > 0.6 |
+
+- A failed prediction is reported as failed. We will not change the tests, the classes or the thresholds after
+  seeing the confirmation data.
+- If a network outage cuts a run short, one more run with identical settings may be added to reach the reps target.
+  That is the only allowed addition, and it would be listed in REPORT.md.
