@@ -174,8 +174,20 @@ def main(cfg, a):
                        "first_send_pos": first["send_pos"], "second_send_pos": second["send_pos"],
                        "send_gap_ms": round((second["dispatch_ns"] - first["dispatch_ns"]) / 1e6, 2)}
                 pair_rows.append(row)
+                # first slot of the window: the leader's block had not started when the probes were sent
+                # (only possible with an early trigger), so they could wait in its buffer together
+                where = "@first_slot" if slot == x["window_start"] else "@later_slot"
+                trig = "@trigger%+d" % (x["trigger_slot"] - x["window_start"])
+                # exploratory (chosen after looking at the data): how far apart the two probes sit in the block.
+                # Close pairs were most likely picked up by the scheduler in the same pass.
+                d = abs(x["index"] - y["index"])
+                dist = "@dist0-3" if d <= 3 else "@dist4-15" if d <= 15 else "@dist16-63" if d <= 63 else "@dist64+"
+                near = "@near(<=15)" if d <= 15 else "@far(>15)"
                 for key in ((x["client"], x["leader"], x["series"]), (x["client"], "*", x["series"]),
-                            (x["client"], "*", "*")):
+                            (x["client"], "*", "*"), (x["client"], "*", where), ("*", "*", where),
+                            (x["client"], "*", trig), ("*", "*", x["series"]), ("*", "*", "*"),
+                            (x["client"], "*", near), ("*", "*", near), (x["client"], "*", dist), ("*", "*", dist),
+                            (x["client"], x["leader"], near)):
                     g = groups[key]
                     if first["price"] != second["price"]:
                         c = g["fee"][(run, burst)]

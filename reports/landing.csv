@@ -1,16 +1,17 @@
 client,validator,version,bursts,probes,landed,in_window,one_block_bursts,slot_offsets
-Agave,5Us18hLZPXJTS4QVuGSsUw137Dyd2tgBaem24Xsf5nBS,4.3.2,4,32,32,23,0,+1:2 +2:7 +3:14 +4:5 +5:3 +7:1
-Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,4.3.2,6,48,47,27,0,+1:11 +2:13 +3:3 +6:5 +7:4 +8:3 +9:1 +10:3 +12:1 +14:3
-AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,4.4.0,6,56,56,39,0,+1:4 +2:26 +3:9 +4:9 +5:6 +6:1 +17:1
-AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,4.4.0,23,200,186,106,1,+1:22 +2:55 +3:29 +4:17 +5:12 +6:10 +7:11 +8:7 +9:3 +10:5 +11:5 +12:4 +13:1 +14:1 +15:2 +16:1 +20:1
-FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,26.10.5,12,89,80,59,1,+0:3 +1:27 +2:20 +3:9 +4:5 +5:3 +6:2 +7:6 +8:3 +12:1 +37:1
-Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,26.10.5,20,160,156,106,5,+0:11 +1:59 +2:23 +3:13 +4:14 +5:11 +6:3 +7:6 +8:5 +10:5 +11:2 +13:2 +14:2
-Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,26.10.5,15,128,115,79,2,+0:3 +1:38 +2:20 +3:18 +4:6 +5:10 +6:9 +7:7 +8:1 +9:1 +11:1 +18:1
-HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,4.3.2,6,48,48,45,3,+1:16 +2:22 +3:7 +4:2 +7:1
-HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,4.4.0,23,200,187,114,0,+1:26 +2:53 +3:35 +4:14 +5:14 +6:7 +7:9 +8:16 +9:2 +10:2 +11:2 +12:4 +14:1 +16:1 +19:1
-HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,26.10.5,11,88,80,48,2,+1:5 +2:28 +3:15 +4:22 +5:4 +6:2 +7:1 +9:1 +13:1 +20:1
-HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,26.10.5,21,168,160,110,2,+1:30 +2:62 +3:18 +4:22 +5:7 +6:8 +7:3 +8:7 +9:1 +10:1 +12:1
-JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,4.4.0,15,136,120,66,3,+1:7 +2:41 +3:18 +4:17 +5:4 +6:2 +7:11 +8:4 +9:1 +11:1 +12:1 +13:3 +14:2 +15:4 +16:1 +17:1 +18:1 +26:1
-JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,4.4.0,29,232,214,114,1,+1:10 +2:52 +3:45 +4:18 +5:20 +6:14 +7:8 +8:11 +9:9 +10:7 +11:3 +12:8 +13:4 +14:2 +15:1 +16:1 +19:1
-Rakurai,E3mDbFMr8yZcCAZx5wPUFCRmLX31u8Nnj4jPoPc54h3F,4.4.0,5,40,40,30,1,+1:21 +2:9 +5:2 +6:2 +8:1 +11:4 +16:1
-Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,4.4.0,3,24,24,20,1,+1:15 +2:3 +3:2 +6:1 +7:1 +8:1 +15:1
+Agave,5Us18hLZPXJTS4QVuGSsUw137Dyd2tgBaem24Xsf5nBS,4.3.2,10,80,80,56,0,+0:4 +1:7 +2:22 +3:23 +4:12 +5:6 +6:2 +7:1 +8:1 +9:2
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,4.3.2,14,112,111,66,1,+0:10 +1:22 +2:26 +3:8 +4:12 +5:9 +6:5 +7:4 +8:4 +9:3 +10:3 +12:1 +14:3 +17:1
+AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,4.4.0,20,176,176,85,1,+0:20 +1:20 +2:28 +3:17 +4:39 +5:27 +6:12 +7:1 +8:7 +9:3 +13:1 +17:1
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,4.4.0,42,368,354,239,2,+0:20 +1:72 +2:91 +3:56 +4:27 +5:16 +6:21 +7:16 +8:10 +9:5 +10:5 +11:5 +12:4 +13:1 +14:1 +15:2 +16:1 +20:1
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,26.10.5,22,169,165,126,5,+0:11 +1:48 +2:48 +3:16 +4:6 +5:6 +6:12 +7:7 +8:3 +9:2 +10:2 +12:1 +16:1 +19:1 +37:1
+FireBAM,LA1NEzryoih6CQW3gwQqJQffK2mKgnXcjSQZSRpM3wc,26.10.5,1,8,8,8,0,+1:1 +2:3 +3:4
+Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,26.10.5,38,320,316,241,7,-1:3 +0:58 +1:108 +2:52 +3:23 +4:29 +5:13 +6:4 +7:9 +8:5 +9:1 +10:5 +11:2 +13:2 +14:2
+Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,26.10.5,34,280,259,202,3,+0:25 +1:85 +2:54 +3:38 +4:16 +5:12 +6:14 +7:9 +8:1 +9:1 +11:1 +15:1 +16:1 +18:1
+HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,4.3.2,16,128,128,103,5,+0:16 +1:39 +2:35 +3:13 +4:4 +5:8 +6:2 +7:2 +14:1 +190:7 +191:1
+HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,4.4.0,45,384,376,275,3,+0:35 +1:76 +2:122 +3:41 +4:26 +5:21 +6:15 +7:11 +8:16 +9:2 +10:2 +11:2 +12:4 +14:1 +16:1 +19:1
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,26.10.5,36,296,288,182,3,+0:10 +1:33 +2:60 +3:79 +4:49 +5:20 +6:17 +7:4 +8:3 +9:5 +10:4 +11:1 +13:1 +20:2
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,26.10.5,36,288,285,198,4,+0:29 +1:43 +2:86 +3:40 +4:37 +5:13 +6:11 +7:5 +8:9 +9:4 +10:1 +11:1 +12:6
+JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,4.4.0,41,344,334,211,8,+0:31 +1:34 +2:92 +3:54 +4:40 +5:13 +6:8 +7:21 +8:6 +9:3 +10:6 +11:6 +12:4 +13:4 +14:3 +15:4 +16:1 +17:1 +18:2 +26:1
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,4.4.0,44,352,343,225,4,+0:1 +1:42 +2:98 +3:77 +4:29 +5:24 +6:14 +7:11 +8:11 +9:9 +10:7 +11:3 +12:8 +13:4 +14:2 +15:1 +16:1 +19:1
+Rakurai,E3mDbFMr8yZcCAZx5wPUFCRmLX31u8Nnj4jPoPc54h3F,4.4.0,10,88,88,70,2,+0:10 +1:36 +2:23 +3:1 +5:2 +6:2 +7:6 +8:1 +11:4 +15:1 +16:2
+Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,4.4.0,8,64,64,49,2,+1:23 +2:19 +3:7 +4:6 +6:3 +7:2 +8:2 +9:1 +15:1
