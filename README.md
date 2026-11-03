@@ -57,13 +57,18 @@ Series rotate per validator, so each validator gets all three.
 ## What decides the verdict
 
 The unit of evidence is a pair of our probes that landed in the same block. For each pair we record whether the
-higher price came first and whether the earlier send came first. Pairs from one burst are not independent, so the
+higher price came first and whether the earlier send came first. The cleanest pairs are the "duels": pairs where the
+higher price was sent later. There a fee rule and an arrival rule predict opposite orders. Pairs from one burst are not independent, so the
 95% intervals come from resampling whole bursts (2 000 draws). These rules are fixed in code before the live runs
 (`itb/analyze.py`):
 
-- a rule holds when the lower bound of its share is above 0.75;
-- "no rule visible" when both intervals contain 0.5;
-- anything else is reported as weak or mixed, with the numbers.
+- which factor dominates comes from the duels. "Fee beats send order" means the whole duel interval is above 0.5;
+  "send order beats fee" means it is below 0.5;
+- if the duels do not decide, each factor "matters" when its own interval (fee_first or sent_first) is above 0.5;
+- "no rule visible" when the fee_first and sent_first intervals both contain 0.5;
+- a factor is "strict" when its lower bound is above 0.75.
+
+These rules were committed after the two pilot runs and before the main runs had been analysed (commit `95d35e5`).
 
 Probes that landed in different slots are not used for order. A later slot is not a scheduling decision inside a
 block. They are counted separately in the landing table.
@@ -80,7 +85,11 @@ client with the most windows left in the epoch. The leader of every block we use
 (`data/runs/<run>/landscape.json.gz`).
 
 **The path of a transaction.** Our backend sends HTTP `sendTransaction` to an RPC node with `skipPreflight` and
-`maxRetries=0`. The RPC node forwards over QUIC to the TPU address the leader announces in gossip. We record the
+`maxRetries=0`. In the measured runs, transactions went to the public endpoint `api.mainnet-beta.solana.com`, and all
+reads (schedule, blocks, statuses) went to a separate keyed provider. The first live pilot used the keyed provider for
+sending too, and its free tier rejected the later sends of each burst with HTTP 429. That biases send order, so this
+path was dropped (see REPORT.md). The public endpoint also rate-limits `sendTransaction`, so bursts are spaced at least
+10 s apart (`--min-burst-gap-s`). A window that comes too soon after the previous burst is skipped and logged. The RPC node forwards over QUIC to the TPU address the leader announces in gossip. We record the
 dispatch time and the RPC's reply time in nanoseconds for every probe, plus the endpoint used. `maxRetries=0` means
 the RPC node sends once and does not rebroadcast, so a probe cannot be re-sent in a later slot by the RPC.
 

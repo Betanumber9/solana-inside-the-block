@@ -1,14 +1,14 @@
 client,validator,version,bursts,probes,landed,in_window,one_block_bursts,slot_offsets
-Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,4.3.2,2,16,16,14,0,+1:11 +2:3 +6:2
+Agave,7QQGNm3ptwinipDCyaCF7jY5katgmFUu1ieP2f7nwLpE,4.3.2,3,24,24,15,0,+1:11 +2:3 +3:1 +6:3 +9:1 +10:1 +12:1 +14:3
 AgaveBam,5Cchr1XGEg7dbBXByV5NY2ad8jfxAM7HA3x8D56rq9Ux,4.4.0,2,16,16,13,0,+1:3 +2:10 +4:2 +6:1
-AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,4.4.0,4,40,27,26,2,+1:14 +2:12 +8:1
-FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,26.10.5,4,25,16,16,0,+0:3 +1:10 +2:3
+AgaveBam,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,4.4.0,4,48,35,34,1,+1:14 +2:20 +8:1
+FireBAM,9jxgosAfHgHzwnxsHw4RAZYaLVokMbnYtmiZBreynGFP,26.10.5,5,33,24,24,1,+0:3 +1:18 +2:3
 Firedancer,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,26.10.5,3,24,20,11,2,+0:8 +1:1 +3:2 +5:5 +8:4
 Firedancer,JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,26.10.5,2,24,11,10,1,+0:3 +1:7 +5:1
 HarmonicAgave,A1vqhA2fS6K7CvHsJKX1ACcHJFEmyRg4KuR5pctHANy4,4.3.2,2,16,16,16,2,+1:8 +2:8
 HarmonicAgave,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk,4.4.0,3,32,19,14,0,+1:13 +2:1 +7:1 +8:3 +9:1
-HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,26.10.5,3,24,16,13,1,+2:8 +3:5 +4:3
-HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,26.10.5,3,24,16,15,0,+1:6 +2:9 +6:1
+HarmonicFiredancer,Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM,26.10.5,4,32,24,13,1,+2:8 +3:5 +4:10 +13:1
+HarmonicFiredancer,EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4,26.10.5,4,32,24,23,1,+1:6 +2:17 +6:1
 JitoLabs,E1r4Psq84tHfQ6aPTvvDka4U3u8zPVD7gEUrH25RdxHL,4.4.0,4,40,24,15,0,+1:6 +2:3 +3:6 +7:8 +17:1
-JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,4.4.0,5,40,22,21,1,+1:7 +2:10 +3:4 +6:1
+JitoLabs,HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,4.4.0,8,64,46,37,1,+1:7 +2:22 +3:8 +4:4 +6:2 +7:2 +9:1
 Rakurai,ana2y2YvQ3ZPMwm6qhnN3nJoUSiT3qx5Pvetkq9xcfY,4.4.0,1,8,8,8,1,+1:8
