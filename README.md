@@ -25,6 +25,7 @@ Results and dates of every measurement are in [REPORT.md](REPORT.md). The genera
 docker compose up                       # 10-minute dry-run: real schedule and windows, nothing is sent, no key needed
 docker compose run --rm itb clients     # who runs which client right now, stake share, where their TPU points
 docker compose run --rm itb plan        # which validators would be measured and when their windows come
+docker compose run --rm itb selftest    # offline tests: block parsing, windows, probes, spend cap, verdict rules
 ```
 
 Real sending needs a key and the explicit flag:

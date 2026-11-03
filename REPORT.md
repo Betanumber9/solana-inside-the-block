@@ -59,6 +59,11 @@ FireBAM `LA1N…` had only 3 windows during the runs. Its rows are reported but 
 1. **when a transaction reached the leader;**
 2. **for transactions that reached it close together, the fee, on some validators.**
 
+![Fee and arrival against the distance between two of our probes in the block](reports/figure_distance.png)
+
+*Exploratory view of the main runs: the split by distance was chosen after looking at the data. The confirmation runs
+(below) test it with timing we control, against predictions written in advance.*
+
 The split runs along the path more than along the client name:
 
 - **Validators that take transactions through a front end.** These are the BAM and Harmonic groups (AgaveBam,

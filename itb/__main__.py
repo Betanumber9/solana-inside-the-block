@@ -205,6 +205,8 @@ def main():
     p = sub.add_parser("recollect", help="finish collection for a stopped run (statuses, blocks, ledger)")
     p.add_argument("--runs", default="", help="comma list of run ids (default: all live runs)")
     p.add_argument("--cap-sol", type=float, default=HARD_CAP_SOL)
+    sub.add_parser("figure", help="reports/figure_distance.png from reports/pairs.csv (needs matplotlib)")
+    sub.add_parser("selftest", help="offline unit tests (parsing, windows, probes, spend cap, verdict rules)")
     p = sub.add_parser("confirm", help="pre-registered tests of the confirmation runs (PREREGISTRATION.md)")
     p.add_argument("--runs", default="", help="comma list of run ids (default: live runs with split series)")
     p = sub.add_parser("verify", help="re-fetch blocks from RPC and check recorded positions")
@@ -217,6 +219,13 @@ def main():
     if a.cmd == "recollect":
         from .recollect import main as recollect_main
         return asyncio.run(recollect_main(cfg, a))
+    if a.cmd == "figure":
+        from .figure import main as figure_main
+        return figure_main(cfg, a)
+    if a.cmd == "selftest":
+        import unittest
+        suite = unittest.defaultTestLoader.loadTestsFromName("itb.tests.test_core")
+        raise SystemExit(0 if unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful() else 1)
     if a.cmd == "confirm":
         from .confirm import main as confirm_main
         return confirm_main(cfg, a)
