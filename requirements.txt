@@ -1,0 +1,4 @@
+solders==0.29.0
+httpx==0.28.1
+websockets==15.0.1
+base58==2.1.1

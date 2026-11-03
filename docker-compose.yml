@@ -1,0 +1,13 @@
+# docker compose up                      -> dry-run (nothing is sent, no key needed)
+# docker compose run --rm itb run --live -> real sending, capped by --cap-sol (default 0.05 SOL, ledger in data/)
+services:
+  itb:
+    build: .
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+      # key lives outside the repo: put keypair.json in ./secrets (git-ignored) or point ITB_SECRETS elsewhere
+      - ${ITB_SECRETS:-./secrets}:/app/secrets

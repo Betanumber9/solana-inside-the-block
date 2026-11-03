@@ -1,0 +1,179 @@
+# Inside the Block: how Solana leaders order transactions
+
+This repo answers one question for a set of mainnet validators running different clients: when our own
+transactions land in a validator's block, what decides which one comes first? Is it the fee, the time we sent them,
+or nothing we can see?
+
+The method is simple. We wait for a chosen validator's leader window, send a small burst of our own transactions
+into it, and then read the block. Inside a burst the transactions are identical except for the variable being
+tested. The price and the send order are shuffled independently of each other, so the block can tell us which of
+the two the leader followed.
+
+Results and dates of every measurement are in [REPORT.md](REPORT.md). The generated tables are in
+[reports/summary.md](reports/summary.md). Raw data is in [data/](data).
+
+## Run it
+
+```bash
+docker compose up                       # 10-minute dry-run: real schedule and windows, nothing is sent, no key needed
+docker compose run --rm itb clients     # who runs which client right now, stake share, where their TPU points
+docker compose run --rm itb plan        # which validators would be measured and when their windows come
+```
+
+Real sending needs a key and the explicit flag:
+
+```bash
+cp .env.example .env                    # optional: your RPC endpoint (the public one works, slowly)
+# put a funded keypair.json (solana-keygen format) into ./secrets/  (git-ignored), or set ITB_SECRET_KEY in .env
+docker compose run --rm itb fund --live            # 8 extra fee payers, 0.004 SOL each (parked, not spent)
+docker compose run --rm itb run --live --reps 6    # the experiment, stops at the spend cap (default 0.05 SOL)
+docker compose run --rm itb sweep --live           # return the sub-wallet funds to the main wallet
+docker compose run --rm itb analyze                # reports/summary.md, pairs.csv, landing.csv, rules.csv
+docker compose run --rm itb verify                 # re-fetch blocks from RPC and check recorded positions
+```
+
+Without Docker: `pip install -r requirements.txt`, then `python -m itb <command>`.
+
+## The probe
+
+Every probe is the same small transaction: `SetComputeUnitLimit(6000)`, `SetComputeUnitPrice(p)` and a 9-byte memo
+(`itb` + burst number + probe index, so each probe can also be found by its memo). The memo uses 4 939 compute units
+(measured with `simulateTransaction` at the start of every run; the run refuses to start if the limit is too low).
+The fee payer is the only writable account. Size, compute limit, accounts and signature count are equal across a
+burst, so the leader's cost for every probe is the same and its priority depends only on `p`.
+
+## Three series
+
+| series | fee payers | prices | send spacing | what it isolates |
+|---|---|---|---|---|
+| `ladder_shared` | one payer for all 8 probes | 8 prices, 1 000 to 3 000 000 micro-lamports/CU | 3 ms | priority among transactions that conflict (same writable account) |
+| `ladder_indep` | 8 payers, one per probe | same ladder | 3 ms | priority among transactions that can run in parallel |
+| `equal_indep` | 8 payers | all 100 000 | 40 ms | send order alone: price is constant |
+
+In every burst, price and send position come from two independent random permutations. A fee rule and an arrival
+rule then predict different orders for the same burst, and the pair counts show which one the block followed.
+Series rotate per validator, so each validator gets all three.
+
+## What decides the verdict
+
+The unit of evidence is a pair of our probes that landed in the same block. For each pair we record whether the
+higher price came first and whether the earlier send came first. Pairs from one burst are not independent, so the
+95% intervals come from resampling whole bursts (2 000 draws). These rules are fixed in code before the live runs
+(`itb/analyze.py`):
+
+- a rule holds when the lower bound of its share is above 0.75;
+- "no rule visible" when both intervals contain 0.5;
+- anything else is reported as weak or mixed, with the numbers.
+
+Probes that landed in different slots are not used for order. A later slot is not a scheduling decision inside a
+block. They are counted separately in the landing table.
+
+## The points the bounty asks about
+
+**Leader schedule and leader types.** Leaders come from `getLeaderSchedule` for the current epoch. The client comes
+from the `clientId` each node announces in gossip (`getClusterNodes`), with its version string. Measured on
+03.11.2026 (epoch 1076), staked nodes reported AgaveBam 37.7%, HarmonicAgave 21.8%, JitoLabs 21.8%,
+HarmonicFiredancer 8.7%, Firedancer 5.7%, FireBAM 2.0%, Rakurai 1.25% and plain Agave 1.0% of stake. Plain Agave is
+the only one whose scheduler is fully public, and it holds about 1% of stake. The run takes the 2 validators per
+client with the most windows left in the epoch. The leader of every block we use is read from the block itself (the
+`Fee` reward goes to the leader) and checked against the schedule. A snapshot of all of this is saved with every run
+(`data/runs/<run>/landscape.json.gz`).
+
+**The path of a transaction.** Our backend sends HTTP `sendTransaction` to an RPC node with `skipPreflight` and
+`maxRetries=0`. The RPC node forwards over QUIC to the TPU address the leader announces in gossip. We record the
+dispatch time and the RPC's reply time in nanoseconds for every probe, plus the endpoint used. `maxRetries=0` means
+the RPC node sends once and does not rebroadcast, so a probe cannot be re-sent in a later slot by the RPC.
+
+The TPU address is part of the path and differs a lot by client. On 03.11, every AgaveBam, FireBAM and
+HarmonicFiredancer node announced a TPU on a different host than its own gossip address. There were only 17, 10 and
+6 distinct hosts for those groups, and one host served 91 validators. These are the BAM and Harmonic front ends.
+JitoLabs and Firedancer were 7% by stake, and Rakurai and Agave were 0%. So for most stake, a transaction reaches an
+intermediate service before the leader, and any ordering we see is the ordering of that whole chain, not of the
+validator binary alone. `itb clients` prints this table, and each target's TPU host is stored in the run metadata.
+
+**How our own transactions interact.** In `ladder_shared` all probes write-lock the same fee payer, so the leader
+cannot execute them in parallel and must serialize them. In the other two series no probe shares a writable account
+with another, so they can run in parallel. Comparing the two shows whether a leader orders by priority only when
+transactions conflict.
+
+**Competition inside the block.** Our ladder goes from 1 000 to 3 000 000 micro-lamports per CU. In the blocks read
+during the dry-runs on 03.11, the median priority fee per cost unit of other transactions was about 7 000
+micro-lamports, the 75th percentile about 155 000, and the 90th percentile about 620 000. Our probes sit roughly
+between the 30th and 90th percentiles. They are neither the cheapest nor the most expensive in the block. For every block we touched, the whole block is saved (position,
+fee, cost units, compute limit and price, Jito-tip flag of every transaction). The report gives, per client, the rank
+correlation between position and priority fee per cost unit for all other transactions. This is extra context only.
+The bounty asks for our own transactions as primary evidence, and the background mixes transactions that arrived at
+different times.
+
+**Send order.** Send order is randomized against price in every burst. `equal_indep` removes price entirely and widens
+the spacing to 40 ms, so an arrival rule has the best chance to show. What we control is the order in which we hand
+transactions to the RPC. The order in which they reach the leader can differ (see below).
+
+**Noise versus rule.** Bursts are repeated on the same validator (`--reps`), on two validators per client, and across
+three series. The intervals are computed over bursts, not over pairs. "No rule visible" is a valid outcome and the
+report says so where it happens.
+
+## What this design does not separate
+
+- **Arrival time at the leader.** We know when we sent each probe, not when the leader received it. RPC forwarding,
+  QUIC streams, and BAM or Harmonic front ends can reorder probes that we sent 3 ms apart. An "arrival" result means
+  "order of sending through this path", nothing finer.
+- **The leader's scheduler versus the service in front of it.** For BAM and Harmonic validators we measure the
+  combined pipeline.
+- **Entries.** `getBlock` gives the order of transactions in the block but not the entry boundaries. Probes that do
+  not conflict can be recorded in the same entry, where their relative order means little. `ladder_shared` probes
+  conflict and cannot share an entry, which is why that series is the cleanest test of priority.
+- **Different RPC providers.** One endpoint per run. The endpoint is logged, so runs over different providers can be
+  compared, but we did not set out to measure that.
+- **Jito bundles and tips.** These are out of scope. Transactions that pay a Jito tip are flagged and left out of the
+  background statistics. Our probes never pay tips.
+
+## Spend cap
+
+- `--cap-sol` (default 0.05; higher needs `--allow-cap-above`) covers all live runs together. The ledger is
+  `data/budget.json`.
+- Before each burst the worst-case fee of the burst is reserved: 5 000 lamports + price × limit per probe, about
+  0.000067 SOL for a ladder burst. The burst is refused if confirmed fees plus open reservations plus this burst
+  would exceed the cap.
+- After the window the actual fees are read from the block and the reservation is settled. A reservation stays open
+  until the blockhash has expired, so a late landing cannot slip past the ledger.
+- A second, independent check sums the balances of all our wallets before every burst and stops the run if they have
+  dropped by more than the cap since the first live run.
+- Funding sub-wallets moves SOL between our own wallets. Only the transfer fee counts as spend.
+
+## Dry-run
+
+`run` without `--live` does everything except `sendTransaction`:
+
+- picks targets from the live schedule;
+- waits for their windows;
+- fetches a blockhash;
+- builds and signs the probes (with a throwaway key if no key is mounted);
+- records when it would have sent and which slot it saw at that moment;
+- reads the blocks of the window.
+
+That shows whether the timing hits the window before any money is spent. The blocks read during a dry-run are real
+mainnet data and feed the background statistics.
+
+## Data
+
+```
+data/budget.json                    spend ledger (live)
+data/landscape/<time>.json          client/stake/TPU snapshots from `itb clients`
+data/blocks/<slot>.json.gz          every block we read, one row per transaction (index, signature, fee, cost, ...)
+data/runs/<run>/meta.json           arguments, endpoints (without API keys), targets, epoch, payer addresses
+data/runs/<run>/landscape.json.gz   snapshot at run start
+data/runs/<run>/sends.jsonl         one row per probe: burst, series, leader, client, price, send position,
+                                    dispatch/ack time (ns), slot seen at dispatch, signature, memo
+data/runs/<run>/landed.jsonl        one row per probe: landed slot, index in block, block size, block leader, fee
+data/runs/<run>/events.jsonl        everything the run did, in order
+reports/                            generated by `itb analyze`
+```
+
+Any position can be checked without this code: `getBlock <slot>` with `transactionDetails: "signatures"` and
+`maxSupportedTransactionVersion: 1`, then find the signature. `itb verify` does this for a random sample.
+
+## Alpenglow
+
+All measurements were taken after the Alpenglow upgrade of 21 October 2026, and none before it. Blocks we read no
+longer contain vote transactions, which is consistent with that.
