@@ -214,3 +214,12 @@ reports/                            generated tables, the figure and the full re
 
 All runs were after the Alpenglow upgrade of 21 October 2026. The blocks I read no longer contain vote transactions,
 which fits that.
+
+## A note on the commit history
+
+The first 10 commits, from `cf88b91` to `96174dc` (3 November, up to 18:36 UTC), were made before I connected this
+repo to my GitHub account. Git on my laptop had a placeholder e-mail in its settings, `nikita@users.noreply.github.com`.
+That address belongs to an unrelated GitHub account, so GitHub shows those commits under someone else's name and
+picture. The commits are mine, and that person has no access to this repo. I did not rewrite the history to fix it:
+the commit hashes and push times are the evidence that the predictions were written before the data, so they stay as
+they are. The `claude` co-author on most commits is the AI coding assistant I used.
