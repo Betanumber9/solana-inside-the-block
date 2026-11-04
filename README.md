@@ -1,10 +1,11 @@
 # Inside the Block: how Solana leaders order transactions
 
-*From the author.* I ran every measurement here on 3 November 2026 from my laptop in Ukraine, paying the fees from
-my own wallet [`2Kqf4idi…Hfw8`](https://solscan.io/account/2Kqf4idiM5GJaXbhhcYppZ1cCoRFDsCutS81ntmkHfw8). My home
-internet dropped twice that evening. One burst went out ten minutes late because of it, and that is written up in
-the report together with everything else that went wrong. Before the last run I pushed my predictions to this repo,
-so you can check that I did not fit them to the data afterwards. One of the six did not hold, and I left it that way.
+*From the author.* I ran every measurement here on 3 and 4 November 2026 from my laptop in Ukraine, paying the fees
+from my own wallet [`2Kqf4idi…Hfw8`](https://solscan.io/account/2Kqf4idiM5GJaXbhhcYppZ1cCoRFDsCutS81ntmkHfw8). My
+home internet dropped during one run. One burst went out ten minutes late because of it, and that is written up in the
+report together with everything else that went wrong. Before each follow-up run I pushed my predictions to this repo,
+so you can check that I did not fit them to the data afterwards. Two of the eight did not hold, and I left them that
+way. One of them changed my main conclusion, and the report says how.
 
 This repo answers one question for a set of mainnet validators running different clients: when our own
 transactions land in a validator's block, what decides which one comes first? Is it the fee, the time we sent them,
@@ -13,7 +14,10 @@ or nothing we can see?
 The method is simple. We wait for a chosen validator's leader window, send a small burst of our own transactions
 into it, and then read the block. Inside a burst the transactions are identical except for the variable being
 tested. The price and the send order are shuffled independently of each other, so the block can tell us which of
-the two the leader followed.
+the two the leader followed. We sent the bursts two ways: through the public RPC, and straight to the leader's TPU
+over QUIC.
+
+**The answer for each validator is the first table in [REPORT.md](REPORT.md#answer-per-validator).**
 
 **Result (3–4 November 2026, 16 validators, 8 clients, 859 bursts, 6 140 transactions, 0.048 SOL).**
 
@@ -89,6 +93,21 @@ docker compose run --rm itb sweep --live           # return the sub-wallet funds
 docker compose run --rm itb analyze                # reports/summary.md, pairs.csv, landing.csv, rules.csv
 docker compose run --rm itb verify                 # re-fetch blocks from RPC and check recorded positions
 docker compose run --rm itb recollect              # finish collection if a run was interrupted
+docker compose run --rm itb confirm                # pre-registered tests P1-P6 (split runs)
+docker compose run --rm itb paths                  # pre-registered tests P7-P8 (direct TPU against RPC)
+```
+
+The runs in `data/` were made with these settings:
+
+```bash
+# main 1
+itb run --live --reps 24 --minutes 150 --seed 303
+# main 2
+itb run --live --reps 24 --minutes 90 --trigger-offset -2 --seed 404
+# confirmation (--validators: the 16 identities in data/runs/20261103T165600Z_live/meta.json)
+itb run --live --reps 8 --minutes 90 --series split0,split120 --trigger-offset -2 --seed 505 --validators ...
+# path run (same 16 validators)
+itb run --live --reps 12 --minutes 120 --burst 4 --series ladder_shared --path alternate --trigger-offset -2 --seed 707 --validators ...
 ```
 
 Without Docker: `pip install -r requirements.txt`, then `python -m itb <command>`.
@@ -122,8 +141,8 @@ Series rotate per validator, so each validator gets all three.
 
 The unit of evidence is a pair of our probes that landed in the same block. For each pair we record whether the
 higher price came first and whether the earlier send came first. The cleanest pairs are the "duels": pairs where the
-higher price was sent later. There a fee rule and an arrival rule predict opposite orders. Pairs from one burst are not independent, so the
-95% intervals come from resampling whole bursts (2 000 draws). These rules are fixed in code before the live runs
+higher price was sent later. There a fee rule and an arrival rule predict opposite orders. Pairs from one burst are
+not independent, so the 95% intervals come from resampling whole bursts (2 000 draws). These rules are fixed in code
 (`itb/analyze.py`):
 
 - which factor dominates comes from the duels. "Fee beats send order" means the whole duel interval is above 0.5;
@@ -133,6 +152,8 @@ higher price was sent later. There a fee rule and an arrival rule predict opposi
 - a factor is "strict" when its lower bound is above 0.75.
 
 These rules were committed after the two pilot runs and before the main runs had been analysed (commit `95d35e5`).
+The two follow-up runs, confirmation and path, each had their own predictions pushed before they started
+([PREREGISTRATION.md](PREREGISTRATION.md); tests in `itb/confirm.py` and `itb/paths.py`).
 
 Probes that landed in different slots are not used for order. A later slot is not a scheduling decision inside a
 block. They are counted separately in the landing table.
@@ -154,12 +175,16 @@ reads (schedule, blocks, statuses) went to a separate keyed provider. The first 
 sending too, and its free tier rejected the later sends of each burst with HTTP 429. That biases send order, so this
 path was dropped (see REPORT.md). The public endpoint also rate-limits `sendTransaction`, so bursts are spaced at least
 10 s apart (`--min-burst-gap-s`). A window that comes too soon after the previous burst is skipped and logged.
-A second path, `--path tpu`, skips RPC. `itb/tpu.py` opens a QUIC connection (ALPN `solana-tpu`, unstaked
-self-signed client certificate) to the TPU address the leader announces in gossip before its window. It then sends
-one transaction per stream. `--path alternate` switches between the two paths per validator, so they can be compared
-on the same leaders at the same time (REPORT.md, "Path run"). The RPC node forwards over QUIC to the TPU address the leader announces in gossip. We record the
-dispatch time and the RPC's reply time in nanoseconds for every probe, plus the endpoint used. `maxRetries=0` means
-the RPC node sends once and does not rebroadcast, so a probe cannot be re-sent in a later slot by the RPC.
+The RPC node forwards over QUIC to the TPU address the leader announces in gossip. `maxRetries=0` means it sends once
+and does not rebroadcast, so a probe cannot be re-sent into a later slot by the RPC. We record the dispatch time and
+the RPC's reply time in nanoseconds for every probe, plus the endpoint used.
+
+A second path, `--path tpu`, skips RPC. `itb/tpu.py` opens a QUIC connection to the TPU address the leader announces
+in gossip before its window. It uses ALPN `solana-tpu` and an unstaked, self-signed client certificate, and sends one
+transaction per stream. `--path alternate` switches between the two paths per validator, so they can be compared on
+the same leaders at the same time. The difference turned out to be the main result (REPORT.md, "Path run"). Through
+RPC a burst spreads over 1–3 slots. Sent directly, it lands in the first slot of the window, and almost every leader
+then orders it by fee.
 
 The TPU address is part of the path and differs a lot by client. On 03.11, every AgaveBam, FireBAM and
 HarmonicFiredancer node announced a TPU on a different host than its own gossip address. There were only 17, 10 and
@@ -193,15 +218,17 @@ report says so where it happens.
 ## What this design does not separate
 
 - **Arrival time at the leader.** We know when we sent each probe, not when the leader received it. RPC forwarding,
-  QUIC streams, and BAM or Harmonic front ends can reorder probes that we sent a few milliseconds apart. An "arrival" result means
-  "order of sending through this path", nothing finer.
+  QUIC streams, and BAM or Harmonic front ends can reorder probes that we sent a few milliseconds apart. An "arrival"
+  result means "order of sending through this path", nothing finer. The direct path removes the RPC hop but not the
+  front ends.
 - **The leader's scheduler versus the service in front of it.** For BAM and Harmonic validators we measure the
   combined pipeline.
 - **Entries.** `getBlock` gives the order of transactions in the block but not the entry boundaries. Probes that do
   not conflict can be recorded in the same entry, where their relative order means little. `ladder_shared` probes
   conflict and cannot share an entry, which is why that series is the cleanest test of priority.
-- **Different RPC providers.** One endpoint per run. The endpoint is logged, so runs over different providers can be
-  compared, but we did not set out to measure that.
+- **Different RPC providers and staked senders.** We used the public RPC and an unstaked direct connection. Paid
+  senders with staked connections (SWQoS) were not tried. FireBAM dropped 24 of 36 direct probes, which a staked
+  connection would probably avoid.
 - **Jito bundles and tips.** These are out of scope. Transactions that pay a Jito tip are flagged and left out of the
   background statistics. Our probes never pay tips.
 
