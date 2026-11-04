@@ -7,7 +7,7 @@ including every validator × series row, are in [reports/summary.md](reports/sum
 
 ## Measurements
 
-All dates are UTC. All runs were in epoch 1076, after the Alpenglow upgrade of 21.10.2026.
+All dates are UTC. The 3 November runs were in epoch 1076 and the 4 November path run in epoch 1077, all after the Alpenglow upgrade of 21.10.2026.
 
 | run | when (UTC) | what | bursts | probes |
 |---|---|---|---|---|
@@ -17,13 +17,16 @@ All dates are UTC. All runs were in epoch 1076, after the Alpenglow upgrade of 2
 | `20261103T155835Z_live` | 2026-11-03 15:58–16:53 | **main 1**: send when the first slot of the window is seen | 251 | 2 008 |
 | `20261103T165600Z_live` | 2026-11-03 16:56–18:22 | **main 2**: send 2 slots before the window | 303 | 2 424 |
 | `20261103T193631Z_live` | 2026-11-03 19:36–20:53 | **confirmation**: pre-registered split series | 122 | 976 |
+| `20261104T062417Z_live` | 2026-11-04 06:24 | test of the direct TPU path (stopped by hand) | 2 | 8 |
+| `20261104T122307Z_live` | 2026-11-04 12:23–14:16 | **paths**: direct TPU against RPC, pre-registered | 183 | 732 |
 
 - Slots 464 957 728 – 464 997 760 for the main runs and 465 018 676 – 465 040 052 for the confirmation run.
 - The two pilots are kept in `data/` but left out of the results (see "What went wrong").
-- Total spend for everything, pilots, confirmation and transfers included, from the wallet balances:
-  **0.043181 SOL**. The main wallet went from 198 800 000 to 155 618 907 lamports, and all sub-wallets were swept back
-  to 0.
-- The ledger (`data/budget.json`) recorded 0.043082 SOL. The gap of 0.000099 SOL was traced on chain (see "What went
+- Total spend for everything, pilots, confirmation, path run and transfers included, from the wallet balances:
+  **0.047954 SOL**, under the 0.05 SOL cap. The main wallet went from 198 800 000 to 150 845 693 lamports, and all
+  sub-wallets were swept back to 0.
+- The 4 November runs are in epochs 1076 (test) and 1077 (path run) (slots 465 200 112 – 465 332 080), still after Alpenglow.
+- The ledger (`data/budget.json`) recorded 0.047856 SOL. The gap of 0.000099 SOL was traced on chain (see "What went
   wrong", items 6 and 7): 0.000067 is one burst fired late after a network drop, and 0.000044 is 4 probes sent while a
   pilot was being stopped. About 0.00001 SOL is left untraced. The cap was never close: 0.05 SOL.
 - `itb verify` re-fetched 60 random probes from RPC: 60 of 60 matched in slot, index and block leader.
@@ -56,10 +59,22 @@ FireBAM `LA1N…` had only 3 windows during the runs. Its rows are reported but 
 
 ## Short answer
 
-**No validator ordered our transactions strictly by fee across the whole block. Two things decide the order:**
+1. **When our transactions reach the leader together, almost every validator puts the higher fee first.**
+   - Sent straight to the leader's TPU just before its block, our conflicting probes landed in fee order 0.90–1.00 of
+     the time on 15 of 16 validators: Jito, Rakurai, Agave, BAM, Harmonic and one Firedancer.
+   - The exception is Firedancer `JD549…` at 0.24. It put the cheaper probe first.
+   - Details are in "Path run" below.
+2. **Whether they reach it together depends on time and on the path.**
+   - Through the public RPC our probes arrive spread over 1–3 slots, and then arrival order wins. On Jito, Rakurai
+     and Agave the fee had no visible effect on that path (0.43–0.58).
+   - BAM and Harmonic front ends collect transactions in batches (Harmonic documents 50 ms batches). The fee wins
+     inside a batch, arrival wins between batches, and a 120 ms pause between two groups flips the order (confirmation
+     run).
+3. **Nothing is strict across a whole block.** A block is a sequence of batches in time.
 
-1. **when a transaction reached the leader;**
-2. **for transactions that reached it close together, the fee, on some validators.**
+The rest of this section is the main runs, all sent through RPC. Read the client differences below as differences
+seen through that path. The path run shows that most of the "arrival order" on own-TPU validators came from how RPC
+delivers transactions, not from the validator.
 
 ![Fee and arrival against the distance between two of our probes in the block](reports/figure_distance.png)
 
@@ -278,12 +293,78 @@ see which settings a given validator runs, so this section is an explanation, no
   settings are not visible from outside, and the confirmation run did not reproduce the 9eGr effect at the
   pre-registered strength (P6).
 
+## Path run: direct TPU against RPC (pre-registered addendum)
+
+**What we did.**
+- The addendum in [PREREGISTRATION.md](PREREGISTRATION.md) was pushed before the run (commits `d577b61` and
+  `1c06aef`).
+- `itb/tpu.py` connects over QUIC to the TPU address each leader announces in gossip, as an unstaked client with a
+  self-signed certificate, and sends one transaction per stream. All 16 addresses accepted the connection, front ends
+  included.
+- Bursts were 4 probes with one fee payer, so all probes conflict. Prices were 1 000, 10 000, 100 000 and
+  1 000 000 micro-lamports/CU. Sends started 2 slots before the window.
+- Each validator alternated paths: its 1st, 3rd, … burst went direct and its 2nd, 4th, … through RPC.
+- 183 bursts, 732 probes, 2 failed sends. Output of `python -m itb paths`; all cells are in
+  [reports/paths/summary.md](reports/paths/summary.md).
+
+**Landing.**
+
+| group | path | in window | outside | lost | where they landed (slot offset) |
+|---|---|---|---|---|---|
+| own TPU | direct | 188 | 0 | 0 | 185 in slot +0 |
+| own TPU | RPC | 151 | 37 | 0 | spread over −1 … +9 |
+| front end | direct | 150 | 6 | 24 | 146 in slot +0 |
+| front end | RPC | 115 | 61 | 0 | spread over −1 … +9 |
+
+The direct path puts the whole burst into the first slot of the window almost every time. Through RPC the same burst
+spreads over several slots and sometimes reaches the next leader. 24 direct probes were lost, all on FireBAM (16 of 24
+on `9jxgosAf…`, 8 of 12 on `LA1NEzry…`): that front end sometimes drops unstaked QUIC traffic.
+
+**Order (pairs in one block, higher fee earlier).**
+
+| client | validator | direct | RPC |
+|---|---|---|---|
+| JitoLabs | `HEL1USMZ` / `E1r4Psq8` | 1.00 / 1.00 | 0.75 / 0.69 |
+| Rakurai | `ana2y2Yv` / `E3mDbFMr` | 1.00 / 1.00 | 0.90 / 0.68 |
+| Agave | `5Us18hLZ` / `7QQGNm3p` | 1.00 / 0.92 | 0.58 / 0.58 |
+| AgaveBam | `DRpbCBMx` / `5Cchr1XG` | 1.00 / 1.00 | 0.58 / 1.00 |
+| FireBAM | `9jxgosAf` / `LA1NEzry` | 1.00 / 1.00 | 0.92 / 1.00 |
+| HarmonicAgave | `Fd7btgyS` / `A1vqhA2f` / `Awes4Tr6`* | 0.97 / 0.92 / 0.90 | 0.62 / 1.00 / 0.77 |
+| HarmonicFiredancer | `EvnRmnMr` | 0.97 | 0.75 |
+| Firedancer | `9eGrDohd` | 1.00 | 0.61 |
+| Firedancer | `JD549Hsb` | **0.24** | 0.45 |
+
+\* `Awes4Tr6…` announced HarmonicFiredancer on 3 November and HarmonicAgave on 4 November. The client string can change
+from one day to the next.
+
+Pooled with 95% intervals over bursts:
+- own-TPU validators: direct 0.90 [0.82, 0.97], RPC 0.63 [0.53, 0.73];
+- front-end validators: direct 0.96 [0.94, 0.99], RPC 0.79 [0.67, 0.91].
+
+On the direct path, send order no longer mattered: 0.52 and 0.49.
+
+**Pre-registered tests.**
+- **P7 (send order survives at least as well on the direct path, own TPU): did not hold.** tpu minus rpc =
+  −0.06 [−0.18, +0.05]. We expected the direct path to keep send order. Instead it put all four probes into the
+  scheduler at once, where the fee decided.
+- **P8 (front-end fee sorting of close pairs does not depend on the path): held.** −0.01 [−0.06, +0.08].
+
+**What this changes.**
+- On Jito, Rakurai and Agave the main runs found no fee effect. That was a property of the RPC path, not of the
+  validator. When conflicting transactions are in the leader's buffer together, these schedulers put the higher fee
+  first, as Anza documents for conflicting transactions.
+- Firedancer `JD549…` is the one validator whose order went against the fee on the direct path (0.24 over 33 pairs).
+  Its twin `9eGrDohd…`, same version, went with the fee (1.00). We do not know why.
+- **Limits.** The path run used only conflicting probes, so it says nothing direct about transactions that can run in
+  parallel. It is about 6 bursts per validator and path.
+
 ## How confident this is
 
 - The overall verdicts per validator use rules fixed in code (commit `95d35e5`). That commit came after the two pilots
   and about 2 minutes into main 1. Main 1 results had not been analysed at that point.
 - The batch reading (fee inside a batch, arrival between batches) was then tested on new data against predictions
-  pushed in advance. 5 of 6 held (see "Confirmation run").
+  pushed in advance. 5 of 6 held (see "Confirmation run"). The path run added two more pre-registered tests, and 1 of
+  the 2 held (see "Path run").
 - These splits of the main runs were added later, after looking at the data, and are **exploratory**:
   - near/far by distance in the block;
   - first slot against later slots;
@@ -328,8 +409,9 @@ see which settings a given validator runs, so this section is an explanation, no
 
 ## What this does not tell us
 
-- **Arrival time at the leader.** We know when we sent, not when the leader received. All "arrival" findings mean
-  "send order through public RPC → leader TPU or front end".
+- **Arrival time at the leader.** We know when we sent, not when the leader received. In the main runs, "arrival"
+  means "send order through public RPC → leader TPU or front end". The path run shows how much the RPC path itself
+  changes the result.
 - **Who sorts.** For BAM and Harmonic validators we cannot tell whether the sorting happens in the front end or in
   the leader. The data shows the result of the whole chain.
 - **Entries.** Block order is not entry order. Close pairs that do not conflict may sit in one entry.

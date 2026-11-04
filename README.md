@@ -15,14 +15,20 @@ into it, and then read the block. Inside a burst the transactions are identical 
 tested. The price and the send order are shuffled independently of each other, so the block can tell us which of
 the two the leader followed.
 
-**Result (3 November 2026, 16 validators, 8 clients, 676 bursts, 5 408 transactions, 0.043 SOL).** No validator
-ordered our transactions strictly by fee across a block. On the validators that take transactions through a BAM or
-Harmonic front end, our transactions that sat close together in the block were ordered by fee (0.74–0.95 of pairs),
-while those far apart were ordered by arrival. On the validators that take transactions on their own TPU (JitoLabs,
-Rakurai, Agave, and one of the two Firedancer nodes), fee made no visible difference and arrival order decided. The
-other Firedancer node sorted close transactions by fee in 116 of 116 pairs. A confirmation run with predictions pushed
-to GitHub in advance ([PREREGISTRATION.md](PREREGISTRATION.md)) held 5 of 6. On front-end validators, a 120 ms pause
-alone flips the order from fee to arrival. The Firedancer prediction did not hold.
+**Result (3–4 November 2026, 16 validators, 8 clients, 859 bursts, 6 140 transactions, 0.048 SOL).**
+
+1. **When our transactions reached a leader together, almost every validator put the higher fee first.** We sent
+   them straight to the leader's TPU over QUIC, just before its block. Conflicting probes landed in fee order 0.90–1.00
+   of the time on 15 of 16 validators: Jito, Rakurai, Agave, BAM, Harmonic and one Firedancer. The other Firedancer
+   put the cheaper one first (0.24).
+2. **Through the public RPC the same probes arrived spread over 1–3 slots, and arrival order took over.** On Jito,
+   Rakurai and Agave the fee then made no visible difference.
+3. **BAM and Harmonic front ends sort inside time batches.** Close transactions were ordered by fee (0.74–0.95) and
+   distant ones by arrival. A 120 ms pause alone flips the order of two groups.
+4. **No validator orders a whole block by fee.**
+
+Predictions were pushed to GitHub before each follow-up run ([PREREGISTRATION.md](PREREGISTRATION.md)): 6 of 8 held.
+The two that failed are reported as failed.
 
 Results and dates of every measurement are in [REPORT.md](REPORT.md). The generated tables are in
 [reports/summary.md](reports/summary.md). Raw data is in [data/](data).
@@ -147,7 +153,11 @@ client with the most windows left in the epoch. The leader of every block we use
 reads (schedule, blocks, statuses) went to a separate keyed provider. The first live pilot used the keyed provider for
 sending too, and its free tier rejected the later sends of each burst with HTTP 429. That biases send order, so this
 path was dropped (see REPORT.md). The public endpoint also rate-limits `sendTransaction`, so bursts are spaced at least
-10 s apart (`--min-burst-gap-s`). A window that comes too soon after the previous burst is skipped and logged. The RPC node forwards over QUIC to the TPU address the leader announces in gossip. We record the
+10 s apart (`--min-burst-gap-s`). A window that comes too soon after the previous burst is skipped and logged.
+A second path, `--path tpu`, skips RPC. `itb/tpu.py` opens a QUIC connection (ALPN `solana-tpu`, unstaked
+self-signed client certificate) to the TPU address the leader announces in gossip before its window. It then sends
+one transaction per stream. `--path alternate` switches between the two paths per validator, so they can be compared
+on the same leaders at the same time (REPORT.md, "Path run"). The RPC node forwards over QUIC to the TPU address the leader announces in gossip. We record the
 dispatch time and the RPC's reply time in nanoseconds for every probe, plus the endpoint used. `maxRetries=0` means
 the RPC node sends once and does not rebroadcast, so a probe cannot be re-sent in a later slot by the RPC.
 
