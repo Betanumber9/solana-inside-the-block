@@ -208,6 +208,8 @@ def main():
     p = sub.add_parser("recollect", help="finish collection for a stopped run (statuses, blocks, ledger)")
     p.add_argument("--runs", default="", help="comma list of run ids (default: all live runs)")
     p.add_argument("--cap-sol", type=float, default=HARD_CAP_SOL)
+    p = sub.add_parser("paths", help="pre-registered RPC vs direct TPU comparison (PREREGISTRATION.md addendum)")
+    p.add_argument("--runs", default="")
     p = sub.add_parser("show", help="one burst as the chain has it (positions, prices, memos fetched from RPC)")
     p.add_argument("run")
     p.add_argument("burst", type=int)
@@ -225,6 +227,9 @@ def main():
     if a.cmd == "recollect":
         from .recollect import main as recollect_main
         return asyncio.run(recollect_main(cfg, a))
+    if a.cmd == "paths":
+        from .paths import main as paths_main
+        return paths_main(cfg, a)
     if a.cmd == "show":
         from .show import main as show_main
         return show_main(cfg, a)
