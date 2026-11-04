@@ -70,3 +70,22 @@ only checked that the direct path works. It is reported but not used for the tes
 
 - These two are weak tests: about 6 bursts per validator and path, 6 pairs per burst. We say so in advance.
 - Landing delay (slot offset) per path is reported as a plain description. There is no prediction for it.
+
+---
+
+# Addendum 2 (4 November 2026): the two Firedancer nodes
+
+Written and pushed before the run. In the path run, Firedancer `JD549Hsb…` put the higher fee first in only 0.24 of 33
+direct pairs, and its twin `9eGrDohd…` did so in 1.00 of 36. Both run 26.10.5. That came from 6 bursts each, so we
+repeat it on fresh data.
+
+- **Setup.** `--path tpu`, 4 probes with one fee payer (`ladder_shared`, 1 000 / 10 000 / 100 000 / 1 000 000),
+  `--trigger-offset -2`, `--validators` set to only these two nodes, `--reps 15`, at most 75 minutes. The total spend
+  for the project stays under 0.05 SOL.
+- **Analysis.** `itb firedancer`: pairs of probes in the same block inside the window, share where the higher price
+  sits earlier, 95% bootstrap over bursts.
+
+| test | prediction | counted as holding if |
+|---|---|---|
+| P9 | `JD549Hsb…` puts the higher fee first less than half the time | upper bound of the interval < 0.5 |
+| P10 | `9eGrDohd…` puts the higher fee first | lower bound of the interval > 0.8 |
