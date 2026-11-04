@@ -1,0 +1,9 @@
+{"t":1793822502.7526016,"kind":"target","client":"Firedancer","version":"26.10.5","identity":"JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB","stake_sol":6290113,"windows_left":null}
+{"t":1793822502.7550833,"kind":"target","client":"Firedancer","version":"26.10.5","identity":"9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY","stake_sol":6980105,"windows_left":null}
+{"t":1793822502.935012,"kind":"calibrate","err":null,"units":4939,"limit":6000,"fee_max":23000}
+{"t":1793822518.8338828,"kind":"burst","n":1,"series":"ladder_shared","client":"Firedancer","leader":"JD549Hsb","start":465428536,"seen":465428534,"est_fee":26666,"spent":47914307,"errors":0}
+{"t":1793822528.6084497,"kind":"collected","burst":1,"landed":4,"of":4,"slots":"0","skipped":0,"leader_ok":true}
+{"t":1793822554.753877,"kind":"burst","n":2,"series":"ladder_shared","client":"Firedancer","leader":"9eGrDohd","start":465428708,"seen":465428706,"est_fee":26666,"spent":47940973,"errors":0}
+{"t":1793822564.344419,"kind":"collected","burst":2,"landed":4,"of":4,"slots":"0","skipped":0,"leader_ok":true}
+{"t":1793822577.7287562,"kind":"burst","n":3,"series":"ladder_shared","client":"Firedancer","leader":"9eGrDohd","start":465428816,"seen":465428814,"est_fee":26666,"spent":47967639,"errors":0}
+{"t":1793822587.3638885,"kind":"collected","burst":3,"landed":4,"of":4,"slots":"0","skipped":0,"leader_ok":true}

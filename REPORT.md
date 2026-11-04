@@ -26,6 +26,10 @@ One validator did not fit. Firedancer `JD549Hsb…` put the cheaper transaction 
 in fee order. Its neighbour `9eGrDohd…` runs the same version and put the dearer one first every time. I don't know
 why.
 
+![Higher fee first, per validator: sent together straight to the leader against through the public RPC](reports/figure_paths.png)
+
+The same numbers as a table:
+
 | client | validator | sent together, direct (higher fee first) | through public RPC (higher fee first) |
 |---|---|---|---|
 | AgaveBam | `DRpbCBMx…` | 1.00 | 0.71 |

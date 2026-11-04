@@ -10,6 +10,8 @@ The short answer: it depends on whether transactions are waiting at the leader a
 is what happens through the public RPC, the earlier one usually went first, whatever it paid. The answer for each
 validator, and how I got there, is in **[REPORT.md](REPORT.md)**.
 
+![Higher fee first, per validator: sent together straight to the leader against through the public RPC](reports/figure_paths.png)
+
 Before each follow-up run I pushed my predictions to this repo ([PREREGISTRATION.md](PREREGISTRATION.md)), so you can
 check I did not fit them afterwards. 6 of 8 held. The two that failed are in the report, and one of them changed my
 main conclusion.

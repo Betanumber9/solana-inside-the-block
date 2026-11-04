@@ -1,0 +1,97 @@
+{
+ "run_id": "20261104T200138Z_live",
+ "live": true,
+ "args": {
+  "cmd": "run",
+  "live": true,
+  "cap_sol": 0.05,
+  "allow_cap_above": false,
+  "per_client": 2,
+  "clients": "",
+  "validators": "JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY",
+  "reps": 15,
+  "minutes": 75.0,
+  "series": "ladder_shared",
+  "burst": 4,
+  "cu_limit": 6000,
+  "gap_ms": 3,
+  "gap_ms_equal": 40,
+  "trigger_offset": -2,
+  "trigger_delay_ms": 0,
+  "prep_slots": 10,
+  "max_retries": 0,
+  "path": "tpu",
+  "max_late_slots": 2,
+  "min_burst_gap_s": 10.0,
+  "seed": 808
+ },
+ "endpoints": {
+  "rpc": "https://mainnet.helius-rpc.com/",
+  "ws": "wss://mainnet.helius-rpc.com/",
+  "send": "https://api.mainnet-beta.solana.com"
+ },
+ "epoch": {
+  "absoluteSlot": 465428458,
+  "blockHeight": 443448854,
+  "epoch": 1077,
+  "slotIndex": 164458,
+  "slotsInEpoch": 432000,
+  "transactionCount": 565236691896
+ },
+ "epoch_first_slot": 465264000,
+ "epoch_last_slot": 465695999,
+ "key": "main",
+ "payer_main": "2Kqf4idiM5GJaXbhhcYppZ1cCoRFDsCutS81ntmkHfw8",
+ "payers_sub": [
+  "HMCxcHch4MFqC8MmamzWmBU3rZwu7D3UcekisRHV9mFU",
+  "G9ebXLfnKqiHEjaVG1zFZmvZMd7PsPwYQuntatMEarUc",
+  "5zQG9ZF6t2sNeRxVnNSeHyJZkvzi2C3xA9uRH3scPoR2",
+  "Cj3w7tnzjQ5R2f8Lee8Tuc32xLymYxWKf5N3PbwKUFUF",
+  "9ccbitx38QCEpEfSkzjPEBJsg9hUjPSpe26MgYsxSryG",
+  "4BYYSHsqTagbvrYnJ1NNrqKPzxxbhNh1eZsZfKLiiFCc",
+  "CWP68LwxJMFTC3GKE3V35SKj71JxYHsLDTdHDYwHeS6H",
+  "B9QfxCw1Tyn3c7PvHCqX1faeTxpFEiRdZCE1U35ifvk1"
+ ],
+ "ladder": [
+  1000,
+  3000,
+  10000,
+  30000,
+  100000,
+  300000,
+  1000000,
+  3000000
+ ],
+ "equal_price": 100000,
+ "series": [
+  "ladder_shared"
+ ],
+ "cu_limit": 6000,
+ "targets": {
+  "JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB": {
+   "identity": "JD549HsbJHeEKKUrKgg4Fj2iyv2RGjsV7NTZjZUrHybB",
+   "vote": "3JD3jMmnR6g88qff2WZ3cMHJRjJMUk9yVZtmYTYeFrXf",
+   "client": "Firedancer",
+   "version": "26.10.5",
+   "feature_set": 1766517360,
+   "stake": 6290113419540060,
+   "tpu_quic": "86.54.153.246:9007",
+   "gossip": "86.54.153.246:8001",
+   "tpu_elsewhere": false,
+   "windows_left": null
+  },
+  "9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY": {
+   "identity": "9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY",
+   "vote": "CvSb7wdQAFpHuSpTYTJnX5SYH4hCfQ9VuGnqrKaKwycB",
+   "client": "Firedancer",
+   "version": "26.10.5",
+   "feature_set": 1766517360,
+   "stake": 6980105038144179,
+   "tpu_quic": "86.54.152.246:9007",
+   "gossip": "86.54.152.246:8001",
+   "tpu_elsewhere": false,
+   "windows_left": null
+  }
+ },
+ "started_utc": "2026-11-04 20:01:42"
+}
