@@ -1,5 +1,11 @@
 # Inside the Block: how Solana leaders order transactions
 
+*From the author.* I ran every measurement here on 3 November 2026 from my laptop in Ukraine, paying the fees from
+my own wallet [`2Kqf4idi…Hfw8`](https://solscan.io/account/2Kqf4idiM5GJaXbhhcYppZ1cCoRFDsCutS81ntmkHfw8). My home
+internet dropped twice that evening. One burst went out ten minutes late because of it, and that is written up in
+the report together with everything else that went wrong. Before the last run I pushed my predictions to this repo,
+so you can check that I did not fit them to the data afterwards. One of the six did not hold, and I left it that way.
+
 This repo answers one question for a set of mainnet validators running different clients: when our own
 transactions land in a validator's block, what decides which one comes first? Is it the fee, the time we sent them,
 or nothing we can see?
