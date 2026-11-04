@@ -210,6 +210,8 @@ def main():
     p.add_argument("--cap-sol", type=float, default=HARD_CAP_SOL)
     p = sub.add_parser("paths", help="pre-registered RPC vs direct TPU comparison (PREREGISTRATION.md addendum)")
     p.add_argument("--runs", default="")
+    p = sub.add_parser("indep", help="pre-registered tests P11-P12 (PREREGISTRATION.md addendum 3)")
+    p.add_argument("--runs", required=True)
     p = sub.add_parser("firedancer", help="pre-registered tests P9-P10 (PREREGISTRATION.md addendum 2)")
     p.add_argument("--runs", required=True)
     p = sub.add_parser("show", help="one burst as the chain has it (positions, prices, memos fetched from RPC)")
@@ -232,6 +234,9 @@ def main():
     if a.cmd == "paths":
         from .paths import main as paths_main
         return paths_main(cfg, a)
+    if a.cmd == "indep":
+        from .indep import main as indep_main
+        return indep_main(cfg, a)
     if a.cmd == "firedancer":
         from .firedancer import main as firedancer_main
         return firedancer_main(cfg, a)

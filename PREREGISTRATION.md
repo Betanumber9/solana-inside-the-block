@@ -89,3 +89,26 @@ repeat it on fresh data.
 |---|---|---|
 | P9 | `JD549Hsb…` puts the higher fee first less than half the time | upper bound of the interval < 0.5 |
 | P10 | `9eGrDohd…` puts the higher fee first | lower bound of the interval > 0.8 |
+
+---
+
+# Addendum 3 (4 November 2026): independent transactions on the direct path
+
+Written and pushed before the run. All direct-path tests so far used one fee payer, so the probes conflicted, and
+Anza documents that conflicting transactions are handled in priority order. Here every probe has its own fee payer
+and no probe shares a writable account with another.
+
+- **Setup.** `--path tpu`, `--series ladder_indep`, 4 probes from 4 different fee payers (1 000 / 10 000 / 100 000 /
+  1 000 000 micro-lamports/CU), `--trigger-offset -2`, the same 16 validators, `--reps 3`, at most 75 minutes.
+  `--cap-sol 0.0498`, so the whole project stays under 0.05 SOL. The run stops when the cap is reached, probably after
+  about 40 bursts.
+- **Analysis.** `itb indep`: pairs in the same block inside the window, share where the higher price sits earlier.
+  The classes are the same as before (front_end / own_tpu by where the TPU points). 95% bootstrap over bursts.
+
+| test | prediction | counted as holding if |
+|---|---|---|
+| P11 | front_end: independent probes sent together are in fee order | lower bound > 0.5 |
+| P12 | own_tpu: independent probes sent together are in fee order | lower bound > 0.5 |
+
+- Both are weak tests (about 2–3 bursts per validator). If either interval contains 0.5, we report "no fee order
+  visible for independent transactions" for that class.
