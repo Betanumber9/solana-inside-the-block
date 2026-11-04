@@ -13,16 +13,25 @@ validator, and how I got there, is in **[REPORT.md](REPORT.md)**.
 ![Higher fee first, per validator: sent together straight to the leader against through the public RPC](reports/figure_paths.png)
 
 Before each follow-up run I pushed my predictions to this repo ([PREREGISTRATION.md](PREREGISTRATION.md)), so you can
-check I did not fit them afterwards. 7 of 10 held. The three that failed are in the report, and one of them changed my
-main conclusion.
+check I did not fit them afterwards. 9 of 12 held. The three that failed are in the report, and one of them changed
+my main conclusion.
 
-In numbers: 16 validators across 8 clients, 889 bursts and 6 260 transactions, for 0.049 SOL.
+In numbers: 16 validators across 8 clients, 930 bursts and 6 424 transactions, for 0.0499 SOL.
 
-*Коротко українською.* 3 і 4 листопада я надіслав 6 260 власних транзакцій у блоки 16 валідаторів mainnet із 8
+*Коротко українською.* 3 і 4 листопада я надіслав 6 424 власні транзакції у блоки 16 валідаторів mainnet із 8
 різними клієнтами й подивився, де саме вони опинилися. Якщо транзакції чекають у лідера одночасно, майже всі
 валідатори ставлять першою ту, що платить більше: 15 з 16, у 90–100% випадків. Якщо ж вони приходять у різний час, а
 через публічний RPC буває саме так, першою зазвичай іде та, що прийшла раніше. Перед кожним перевірочним прогоном я
-викладав прогнози в репозиторій, і справдилися 7 з 10.
+викладав прогнози в репозиторій, і справдилися 9 з 12.
+
+## For judges: where each criterion is answered
+
+| criterion | where |
+|---|---|
+| design (35%) | "Why this design" and "The points the bounty asks about" below; [PREREGISTRATION.md](PREREGISTRATION.md) |
+| verifiability (25%) | "Check it yourself in 5 minutes" below; raw signatures and slots in `data/runs/*/landed.jsonl`; `itb verify` |
+| analysis (25%) | [REPORT.md](REPORT.md): answer per validator, five steps, 12 predictions with the 3 that failed, what went wrong |
+| engineering (15%) | "Spend cap", "Dry-run" and "Run it" below; `itb selftest`; `docker compose up` |
 
 ## Check it yourself in 5 minutes
 
@@ -66,6 +75,7 @@ docker compose run --rm itb analyze     # tables for the main runs
 docker compose run --rm itb confirm     # pre-registered tests P1–P6
 docker compose run --rm itb paths       # pre-registered tests P7–P8
 docker compose run --rm itb firedancer --runs 20261104T200138Z_live   # P9–P10
+docker compose run --rm itb indep --runs 20261104T212401Z_live        # P11–P12
 docker compose run --rm itb verify      # re-fetch a random sample from RPC and compare positions
 ```
 
@@ -180,7 +190,7 @@ and either one stops sending:
 - The sum of all my wallets' balances is checked before every burst against the balance at the first live run.
 
 Moving SOL to the extra fee payers and back is not spend; only the transfer fees count. The whole project spent
-0.048754 SOL.
+0.049861 SOL; the last run was stopped by the cap itself.
 
 ## Dry-run
 

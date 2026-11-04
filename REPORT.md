@@ -1,6 +1,6 @@
 # What decides where a transaction lands in a Solana block
 
-On 3 and 4 November 2026 I sent 6 260 of my own transactions into the blocks of 16 mainnet validators. The
+On 3 and 4 November 2026 I sent 6 424 of my own transactions into the blocks of 16 mainnet validators. The
 validators run 8 different clients, two of each. For every transaction I looked at where it landed. This report says
 what I found, how I checked it, and where I am not sure. Every table and number in full is in
 [reports/FULL_REPORT.md](reports/FULL_REPORT.md).
@@ -55,7 +55,7 @@ directly (6 and 12 pairs). Intervals and the rest are in the full report.
 
 ## How I got there
 
-I did it in four steps. Most of them changed what I believed.
+I did it in five steps. Most of them changed what I believed.
 
 **Step 1, through the public RPC (3 November, 554 bursts, 4 432 transactions).** I waited for each validator's leader
 window and sent a burst of 8 identical small transactions. They differed only in fee and in the order I sent them,
@@ -109,6 +109,20 @@ so I wrote two more predictions and repeated it: 15 direct bursts per node, all 
 The difference between the twins stays, but it is simpler than I thought. One sorts by fee every time, the other
 hardly sorts at all.
 
+**Step 5, transactions that don't conflict (4 November, 41 bursts).** All direct tests so far used one fee payer for
+the whole burst. The transactions conflicted, and Anza says conflicting transactions are handled in priority order. So
+the last open question was whether the fee also decides for transactions that could run in parallel. I gave each of
+the four transactions its own fee payer, wrote two more predictions, and sent until the spend cap stopped the run.
+
+| validators | higher fee first, independent transactions sent together | pairs |
+|---|---|---|
+| BAM and Harmonic front ends | 0.75 [0.62, 0.85] | 114 |
+| own TPU (Jito, Agave, Rakurai, Firedancer) | 0.87 [0.78, 0.94] | 120 |
+
+Both predictions held. The rule is the same for independent transactions, a little less strict than for conflicting
+ones (0.90–0.96). The weakest client was HarmonicAgave at 0.59 over 54 pairs. Per-client numbers are in
+`reports/indep/summary.md`.
+
 ## Why it works like this
 
 The public documents of these systems fit what I measured. I cannot see any validator's settings, so this is an
@@ -131,7 +145,7 @@ explanation, not proof.
 
 ## How sure I am
 
-- 7 of 10 predictions written in advance held. The 3 that failed are described above, not hidden.
+- 9 of 12 predictions written in advance held. The 3 that failed are described above, not hidden.
 - Intervals are computed by resampling whole bursts, so pairs from one burst are not counted as independent
   evidence.
 - I checked 60 random transactions against the chain with a fresh RPC call: 60 of 60 matched in slot, position and
@@ -143,8 +157,8 @@ explanation, not proof.
 
 - I know when I sent each transaction, not when the leader received it.
 - For BAM and Harmonic I measure the front end and the validator together, not each one alone.
-- The direct test used only transactions that share a fee payer. Whether leaders also sort independent transactions
-  that arrive together, I did not test directly.
+- The direct test of independent transactions (step 5) has only 2–3 bursts per validator. It answers by group, not
+  per validator.
 - Two validators per client is too few to call anything a property of the client. One validator even changed its
   client name overnight (HarmonicFiredancer to HarmonicAgave).
 - All of this is from about 4.5 hours of sending over two days. These systems change often.
@@ -178,6 +192,8 @@ All runs were after the Alpenglow upgrade of 21 October. Times are UTC.
 | `20261104T062417Z_live` | 4 Nov 06:24 | test of the direct sender, not used | 2 |
 | `20261104T122307Z_live` | 4 Nov 12:23–14:16 | step 3, direct against RPC | 183 |
 | `20261104T200138Z_live` | 4 Nov 20:01–20:24 | step 4, Firedancer repeat | 30 |
+| `20261104T212401Z_live` | 4 Nov 21:24–21:34 | step 5, independent transactions | 41 |
 
-The whole project cost 0.049 SOL (0.048754, read from the wallet balances), under the 0.05 SOL limit. The spend
+The whole project cost 0.0499 SOL (0.049861, read from the wallet balances), under the 0.05 SOL limit. The last run
+was stopped by the spend cap itself. The spend
 ledger is `data/budget.json`.

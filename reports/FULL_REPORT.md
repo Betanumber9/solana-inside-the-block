@@ -8,6 +8,12 @@ first in 1.00 [1.00, 1.00] of 90 pairs (P10 held). `JD549Hsb…` did so in 0.59 
 Pooled with the path run: 9eGr 1.00 over 126 pairs, JD549 0.50 over 123. Spend for the whole project after this run is
 0.048754 SOL from the wallet balances (ledger 0.048655). Sections below were written before this run.
 
+**Added later, 4 November 21:24–21:34 UTC: independent probes on the direct path** (run `20261104T212401Z_live`,
+pre-registered addendum 3, `itb indep`). 4 probes from 4 fee payers, 41 bursts, 164 probes, 156 in the window; the
+run was stopped by the spend cap. Higher fee first: front_end 0.75 [0.62, 0.85] over 114 pairs (P11 held), own_tpu
+0.87 [0.78, 0.94] over 120 pairs (P12 held). Total spend for the project: 0.049861 SOL from the wallet balances
+(ledger 0.049762).
+
 The bounty asks, for each validator: by what rule does it order transactions in its block, how strictly does the rule
 hold, and is there a rule at all. The answer is the first table below. The rest of the report is the evidence, from
 the strongest test to the weakest.
