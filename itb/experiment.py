@@ -241,7 +241,9 @@ class Experiment:
         gap = self.a.gap_ms_equal if series == "equal_indep" else self.a.gap_ms
         trigger = win["start"] + self.a.trigger_offset
         conn, send_via = None, self.cfg.public()["send"]
-        path = self.a.path if self.a.path != "alternate" else ("tpu" if bno % 2 else "rpc")
+        # alternate per validator: its 1st, 3rd, ... burst direct, its 2nd, 4th, ... through RPC
+        path = self.a.path if self.a.path != "alternate" else ("tpu" if self.done.get(win["leader"], 0) % 2 == 0
+                                                              else "rpc")
         if path == "tpu":
             # connect before the window so the handshake is not part of the timing
             send_via = "tpu:" + t["tpu_quic"]

@@ -54,9 +54,10 @@ main runs.
 Written and pushed before the path run. A short live test on 4 November, run `20261104T062417Z_live` with 2 bursts,
 only checked that the direct path works. It is reported but not used for the tests below.
 
-- **New option `--path alternate`.** Odd bursts go over QUIC straight to the TPU address the leader announces in
-  gossip (`itb/tpu.py`, an unstaked client with a self-signed certificate, one stream per transaction). Even bursts go
-  through `sendTransaction` on the public RPC as before.
+- **New option `--path alternate`.** The direct path sends over QUIC straight to the TPU address the leader announces
+  in gossip (`itb/tpu.py`, an unstaked client with a self-signed certificate, one stream per transaction). The RPC
+  path uses `sendTransaction` on the public RPC as before. The paths alternate per validator: its 1st, 3rd, … burst
+  goes direct, and its 2nd, 4th, … burst goes through RPC.
 - **Bursts.** 4 probes (1 000 / 10 000 / 100 000 / 1 000 000 micro-lamports/CU), one fee payer (`ladder_shared`),
   `--trigger-offset -2`, the same 16 validators, `--reps 12` (6 per path), at most 120 minutes. The spend cap stays at
   0.05 SOL in total.
