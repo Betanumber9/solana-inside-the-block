@@ -46,3 +46,26 @@ main runs.
   seeing the confirmation data.
 - If a network outage cuts a run short, one more run with identical settings may be added to reach the reps target.
   That is the only allowed addition, and it would be listed in REPORT.md.
+
+---
+
+# Addendum (4 November 2026): RPC path against the direct TPU path
+
+Written and pushed before the path run. A short live test on 4 November, run `20261104T062417Z_live` with 2 bursts,
+only checked that the direct path works. It is reported but not used for the tests below.
+
+- **New option `--path alternate`.** Odd bursts go over QUIC straight to the TPU address the leader announces in
+  gossip (`itb/tpu.py`, an unstaked client with a self-signed certificate, one stream per transaction). Even bursts go
+  through `sendTransaction` on the public RPC as before.
+- **Bursts.** 4 probes (1 000 / 10 000 / 100 000 / 1 000 000 micro-lamports/CU), one fee payer (`ladder_shared`),
+  `--trigger-offset -2`, the same 16 validators, `--reps 12` (6 per path), at most 120 minutes. The spend cap stays at
+  0.05 SOL in total.
+- **Questions and predictions.** Same pair definitions as in the main runs, 95% bootstrap over bursts.
+
+| test | prediction | counted as holding if |
+|---|---|---|
+| P7 | own_tpu: the send order survives at least as well on the direct path as through RPC (sent_first, tpu minus rpc) | the point estimate is ≥ 0, and the interval is reported |
+| P8 | front_end: fee sorting of close pairs (≤15 positions) does not depend on the path | the interval of the difference (tpu minus rpc) contains 0 |
+
+- These two are weak tests: about 6 bursts per validator and path, 6 pairs per burst. We say so in advance.
+- Landing delay (slot offset) per path is reported as a plain description. There is no prediction for it.

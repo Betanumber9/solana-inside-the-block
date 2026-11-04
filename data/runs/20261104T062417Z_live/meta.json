@@ -1,0 +1,121 @@
+{
+ "run_id": "20261104T062417Z_live",
+ "live": true,
+ "args": {
+  "cmd": "run",
+  "live": true,
+  "cap_sol": 0.05,
+  "allow_cap_above": false,
+  "per_client": 2,
+  "clients": "",
+  "validators": "HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU,DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy,9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY,Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk",
+  "reps": 1,
+  "minutes": 4.0,
+  "series": "ladder_shared",
+  "burst": 4,
+  "cu_limit": 6000,
+  "gap_ms": 3,
+  "gap_ms_equal": 40,
+  "trigger_offset": -2,
+  "trigger_delay_ms": 0,
+  "prep_slots": 10,
+  "max_retries": 0,
+  "path": "alternate",
+  "max_late_slots": 2,
+  "min_burst_gap_s": 10.0,
+  "seed": 606
+ },
+ "endpoints": {
+  "rpc": "https://mainnet.helius-rpc.com/",
+  "ws": "wss://mainnet.helius-rpc.com/",
+  "send": "https://api.mainnet-beta.solana.com"
+ },
+ "epoch": {
+  "absoluteSlot": 465200075,
+  "blockHeight": 443220634,
+  "epoch": 1076,
+  "slotIndex": 368075,
+  "slotsInEpoch": 432000,
+  "transactionCount": 565138810698
+ },
+ "epoch_first_slot": 464832000,
+ "epoch_last_slot": 465263999,
+ "key": "main",
+ "payer_main": "2Kqf4idiM5GJaXbhhcYppZ1cCoRFDsCutS81ntmkHfw8",
+ "payers_sub": [
+  "HMCxcHch4MFqC8MmamzWmBU3rZwu7D3UcekisRHV9mFU",
+  "G9ebXLfnKqiHEjaVG1zFZmvZMd7PsPwYQuntatMEarUc",
+  "5zQG9ZF6t2sNeRxVnNSeHyJZkvzi2C3xA9uRH3scPoR2",
+  "Cj3w7tnzjQ5R2f8Lee8Tuc32xLymYxWKf5N3PbwKUFUF",
+  "9ccbitx38QCEpEfSkzjPEBJsg9hUjPSpe26MgYsxSryG",
+  "4BYYSHsqTagbvrYnJ1NNrqKPzxxbhNh1eZsZfKLiiFCc",
+  "CWP68LwxJMFTC3GKE3V35SKj71JxYHsLDTdHDYwHeS6H",
+  "B9QfxCw1Tyn3c7PvHCqX1faeTxpFEiRdZCE1U35ifvk1"
+ ],
+ "ladder": [
+  1000,
+  3000,
+  10000,
+  30000,
+  100000,
+  300000,
+  1000000,
+  3000000
+ ],
+ "equal_price": 100000,
+ "series": [
+  "ladder_shared"
+ ],
+ "cu_limit": 6000,
+ "targets": {
+  "HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU": {
+   "identity": "HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU",
+   "vote": "he1iusunGwqrNtafDtLdhsUQDFvo13z9sUa36PauBtk",
+   "client": "JitoLabs",
+   "version": "4.4.0",
+   "feature_set": 3722100051,
+   "stake": 16704339555075496,
+   "tpu_quic": "64.130.57.215:8002",
+   "gossip": "64.130.57.215:8001",
+   "tpu_elsewhere": false,
+   "windows_left": null
+  },
+  "DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy": {
+   "identity": "DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy",
+   "vote": "3N7s9zXMZ4QqvHQR15t5GNHyqc89KduzMP7423eWiD5g",
+   "client": "AgaveBam",
+   "version": "4.4.0",
+   "feature_set": 3722100051,
+   "stake": 13043664457593953,
+   "tpu_quic": "208.91.105.53:5010",
+   "gossip": "67.202.63.79:8000",
+   "tpu_elsewhere": true,
+   "windows_left": null
+  },
+  "9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY": {
+   "identity": "9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY",
+   "vote": "CvSb7wdQAFpHuSpTYTJnX5SYH4hCfQ9VuGnqrKaKwycB",
+   "client": "Firedancer",
+   "version": "26.10.5",
+   "feature_set": 1766517360,
+   "stake": 6979030581064864,
+   "tpu_quic": "86.54.152.246:9007",
+   "gossip": "86.54.152.246:8001",
+   "tpu_elsewhere": false,
+   "windows_left": null
+  },
+  "Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk": {
+   "identity": "Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk",
+   "vote": "CcaHc2L43ZWjwCHART3oZoJvHLAe9hzT2DJNUpBzoTN1",
+   "client": "HarmonicAgave",
+   "version": "4.4.0",
+   "feature_set": 3722100051,
+   "stake": 17030640786382967,
+   "tpu_quic": "198.13.140.105:12341",
+   "gossip": "141.95.45.24:8001",
+   "tpu_elsewhere": true,
+   "windows_left": null
+  }
+ },
+ "started_utc": "2026-11-04 06:24:22"
+}

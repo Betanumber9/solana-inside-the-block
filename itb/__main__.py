@@ -189,6 +189,9 @@ def main():
     p.add_argument("--trigger-delay-ms", type=float, default=0)
     p.add_argument("--prep-slots", type=int, default=10, help="start preparing this many slots before")
     p.add_argument("--max-retries", type=int, default=0, help="sendTransaction maxRetries (0 = one shot)")
+    p.add_argument("--path", choices=("rpc", "tpu", "alternate"), default="rpc",
+                   help="rpc: sendTransaction to an RPC node; tpu: QUIC straight to the leader's announced TPU; "
+                        "alternate: tpu on odd bursts, rpc on even")
     p.add_argument("--max-late-slots", type=int, default=2, help="abandon a burst if the trigger slot passed by more")
     p.add_argument("--min-burst-gap-s", type=float, default=10.0, help="skip windows closer than this to the last burst")
     p.add_argument("--seed", type=int, default=None)

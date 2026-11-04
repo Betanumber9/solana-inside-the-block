@@ -1,0 +1,8 @@
+{"t":1793773462.5182803,"kind":"target","client":"JitoLabs","version":"4.4.0","identity":"HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU","stake_sol":16704339,"windows_left":null}
+{"t":1793773462.520197,"kind":"target","client":"AgaveBam","version":"4.4.0","identity":"DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy","stake_sol":13043664,"windows_left":null}
+{"t":1793773462.521637,"kind":"target","client":"Firedancer","version":"26.10.5","identity":"9eGrDohdNTAo61DRHyfMuqKWXqYnA3i254Wiszxe8FoY","stake_sol":6979030,"windows_left":null}
+{"t":1793773462.5230157,"kind":"target","client":"HarmonicAgave","version":"4.4.0","identity":"Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk","stake_sol":17030640,"windows_left":null}
+{"t":1793773462.7464426,"kind":"calibrate","err":null,"units":4939,"limit":6000,"fee_max":23000}
+{"t":1793773469.227839,"kind":"burst","n":1,"series":"ladder_shared","client":"HarmonicAgave","leader":"Fd7btgyS","start":465200112,"seen":465200110,"est_fee":26666,"spent":43141093,"errors":0}
+{"t":1793773480.135396,"kind":"collected","burst":1,"landed":4,"of":4,"slots":"2,3","skipped":0,"leader_ok":true}
+{"t":1793773487.6716719,"kind":"burst","n":2,"series":"ladder_shared","client":"AgaveBam","leader":"DRpbCBMx","start":465200204,"seen":465200202,"est_fee":26666,"spent":43167759,"errors":0}

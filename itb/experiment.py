@@ -9,6 +9,7 @@ Price and send position are assigned by two independent random permutations, so 
 In dry-run everything happens (schedule, timing, building, signing, block reading) except sendTransaction.
 """
 import asyncio
+import base64
 import gzip
 import json
 import pathlib
@@ -23,7 +24,7 @@ from solders.message import Message
 from solders.pubkey import Pubkey
 from solders.transaction import Transaction
 
-from . import chain, wallet
+from . import chain, tpu, wallet
 from .budget import Budget, CapExceeded
 from .rpc import Rpc, SlotClock
 
@@ -181,6 +182,14 @@ class Experiment:
         n = self.done.get(leader, 0)
         return self.series[n % len(self.series)]
 
+    @staticmethod
+    def ladder(n):
+        """n prices from LADDER, spread over its whole range (all 8 when n = 8)."""
+        if n >= len(LADDER):
+            return [LADDER[i % len(LADDER)] for i in range(n)]
+        step = len(LADDER) / n
+        return [LADDER[int(i * step)] for i in range(n)]
+
     def build(self, series, blockhash):
         n = self.a.burst
         group = [None] * n
@@ -190,12 +199,11 @@ class Experiment:
             # confirmation series: group A = the cheaper half, sent first; group B = the dearer half, sent
             # split_gap_ms later. Inside each group, price and send order are shuffled independently.
             half = n // 2
-            ladder = sorted(LADDER[:n])
+            ladder = sorted(self.ladder(n))
             prices = self.rng.sample(ladder[:half], half) + self.rng.sample(ladder[half:], n - half)
             group = ["A"] * half + ["B"] * (n - half)
         else:
-            prices = LADDER[:n] if n <= len(LADDER) else [LADDER[i % len(LADDER)] for i in range(n)]
-            prices = self.rng.sample(prices, n)
+            prices = self.rng.sample(self.ladder(n), n)
         if series.startswith("split"):
             half = n // 2
             order = self.rng.sample(range(half), half) + self.rng.sample(range(half, n), n - half)
@@ -232,6 +240,18 @@ class Experiment:
             spent = 0
         gap = self.a.gap_ms_equal if series == "equal_indep" else self.a.gap_ms
         trigger = win["start"] + self.a.trigger_offset
+        conn, send_via = None, self.cfg.public()["send"]
+        path = self.a.path if self.a.path != "alternate" else ("tpu" if bno % 2 else "rpc")
+        if path == "tpu":
+            # connect before the window so the handshake is not part of the timing
+            send_via = "tpu:" + t["tpu_quic"]
+            try:
+                conn = await tpu.TpuConnection(t["tpu_quic"]).open()
+            except Exception as e:  # noqa: BLE001
+                self.w.event("tpu_connect_failed", burst=bno, addr=t["tpu_quic"], err=repr(e)[:120])
+                if self.live:
+                    self.budget.settle(key, 0)
+                return
         if self.clock.slot >= trigger:
             self.w.event("late", burst=bno, at=self.clock.slot, trigger=trigger)
         await self.clock.wait_until(trigger, timeout=90)
@@ -241,6 +261,8 @@ class Experiment:
             self.w.event("abandoned_late", burst=bno, seen=seen_slot, trigger=trigger)
             if self.live:
                 self.budget.settle(key, 0)
+            if conn:
+                await conn.close()
             return
         if self.a.trigger_delay_ms:
             await asyncio.sleep(self.a.trigger_delay_ms / 1000)
@@ -249,7 +271,13 @@ class Experiment:
         async def fire(p, pos):
             t0 = now_ns()
             slot_at = self.clock.slot
-            if self.live:
+            if self.live and conn:
+                try:
+                    conn.send(base64.b64decode(p["tx"]))
+                    res, err = p["sig"], None
+                except Exception as e:  # noqa: BLE001
+                    res, err = None, "quic: %r" % e
+            elif self.live:
                 res, err = await self.send_rpc.send_raw(p["tx"], self.a.max_retries)
             else:
                 res, err = "dry-run", None
@@ -265,13 +293,16 @@ class Experiment:
                 if wait:
                     await asyncio.sleep(wait / 1000)
         await asyncio.gather(*tasks)
+        if conn:
+            await asyncio.sleep(0.5)  # let the streams flush before closing
+            await conn.close()
         by_k = {s["k"]: s for s in sent}
         for p in probes:
             row = {"run": self.run_id, "burst": bno, "series": series, "live": self.live, "leader": win["leader"],
                    "client": t["client"], "version": t["version"], "window_start": win["start"],
                    "window_slots": win["slots"], "trigger_slot": trigger, "seen_slot": seen_slot,
                    "seen_lag_ms": round(seen_lag * 1000, 1), "gap_ms": gap, "cu_limit": self.cu_limit,
-                   "blockhash": bh["value"]["blockhash"], "send_url": self.cfg.public()["send"],
+                   "blockhash": bh["value"]["blockhash"], "send_url": send_via, "path": path,
                    "max_retries": self.a.max_retries, **{x: p[x] for x in ("k", "price", "payer", "sig", "memo",
                                                                            "send_pos", "group")}, **by_k[p["k"]]}
             self.w.jsonl("sends.jsonl", row)
