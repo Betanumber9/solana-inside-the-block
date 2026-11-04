@@ -121,7 +121,7 @@ def paths_figure(cfg, a):
 
     data = pathlib.Path(cfg.data_dir)
     meta = json.loads((data / "runs" / "20261103T165600Z_live" / "meta.json").read_text())["targets"]
-    direct = pair_shares(data, ["20261104T122307Z_live"], path="tpu")
+    direct = pair_shares(data, ["20261104T122307Z_live", "20261104T200138Z_live"], path="tpu")
     rpc = pair_shares(data, ["20261103T155835Z_live", "20261103T165600Z_live"])
     order = ["AgaveBam", "FireBAM", "HarmonicAgave", "HarmonicFiredancer", "JitoLabs", "Rakurai", "Agave", "Firedancer"]
     rows = sorted(meta.items(), key=lambda kv: (order.index(kv[1]["client"]), kv[0]))

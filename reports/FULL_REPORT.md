@@ -2,6 +2,12 @@
 
 This is the long version with every table. The short version is [REPORT.md](../REPORT.md).
 
+**Added later, 4 November 20:01–20:24 UTC: Firedancer repeat** (run `20261104T200138Z_live`, pre-registered addendum 2,
+`itb firedancer`). 15 direct bursts per node, 120 probes, all landed in the window. `9eGrDohd…` put the higher fee
+first in 1.00 [1.00, 1.00] of 90 pairs (P10 held). `JD549Hsb…` did so in 0.59 [0.39, 0.79] (P9, "below 0.5", failed).
+Pooled with the path run: 9eGr 1.00 over 126 pairs, JD549 0.50 over 123. Spend for the whole project after this run is
+0.048754 SOL from the wallet balances (ledger 0.048655). Sections below were written before this run.
+
 The bounty asks, for each validator: by what rule does it order transactions in its block, how strictly does the rule
 hold, and is there a rule at all. The answer is the first table below. The rest of the report is the evidence, from
 the strongest test to the weakest.

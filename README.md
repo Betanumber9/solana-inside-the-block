@@ -13,10 +13,16 @@ validator, and how I got there, is in **[REPORT.md](REPORT.md)**.
 ![Higher fee first, per validator: sent together straight to the leader against through the public RPC](reports/figure_paths.png)
 
 Before each follow-up run I pushed my predictions to this repo ([PREREGISTRATION.md](PREREGISTRATION.md)), so you can
-check I did not fit them afterwards. 6 of 8 held. The two that failed are in the report, and one of them changed my
+check I did not fit them afterwards. 7 of 10 held. The three that failed are in the report, and one of them changed my
 main conclusion.
 
-In numbers: 16 validators across 8 clients, 859 bursts and 6 140 transactions, for 0.048 SOL.
+In numbers: 16 validators across 8 clients, 889 bursts and 6 260 transactions, for 0.049 SOL.
+
+*Коротко українською.* 3 і 4 листопада я надіслав 6 260 власних транзакцій у блоки 16 валідаторів mainnet із 8
+різними клієнтами й подивився, де саме вони опинилися. Якщо транзакції чекають у лідера одночасно, майже всі
+валідатори ставлять першою ту, що платить більше: 15 з 16, у 90–100% випадків. Якщо ж вони приходять у різний час, а
+через публічний RPC буває саме так, першою зазвичай іде та, що прийшла раніше. Перед кожним перевірочним прогоном я
+викладав прогнози в репозиторій, і справдилися 7 з 10.
 
 ## Check it yourself in 5 minutes
 
@@ -59,6 +65,7 @@ docker compose run --rm itb selftest    # offline tests: block parsing, windows,
 docker compose run --rm itb analyze     # tables for the main runs
 docker compose run --rm itb confirm     # pre-registered tests P1–P6
 docker compose run --rm itb paths       # pre-registered tests P7–P8
+docker compose run --rm itb firedancer --runs 20261104T200138Z_live   # P9–P10
 docker compose run --rm itb verify      # re-fetch a random sample from RPC and compare positions
 ```
 
@@ -173,7 +180,7 @@ and either one stops sending:
 - The sum of all my wallets' balances is checked before every burst against the balance at the first live run.
 
 Moving SOL to the extra fee payers and back is not spend; only the transfer fees count. The whole project spent
-0.047954 SOL.
+0.048754 SOL.
 
 ## Dry-run
 

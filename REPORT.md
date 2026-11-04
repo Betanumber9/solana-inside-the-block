@@ -1,6 +1,6 @@
 # What decides where a transaction lands in a Solana block
 
-On 3 and 4 November 2026 I sent 6 140 of my own transactions into the blocks of 16 mainnet validators. The
+On 3 and 4 November 2026 I sent 6 260 of my own transactions into the blocks of 16 mainnet validators. The
 validators run 8 different clients, two of each. For every transaction I looked at where it landed. This report says
 what I found, how I checked it, and where I am not sure. Every table and number in full is in
 [reports/FULL_REPORT.md](reports/FULL_REPORT.md).
@@ -22,9 +22,9 @@ So asking "fee or arrival?" misses the point. What matters is which transactions
 orders a whole block by fee. A block is a sequence of small groups taken in time order, and each group is sorted by
 fee.
 
-One validator did not fit. Firedancer `JD549Hsb…` put the cheaper transaction first when four arrived together, 0.24
-in fee order. Its neighbour `9eGrDohd…` runs the same version and put the dearer one first every time. I don't know
-why.
+One validator did not fit. Firedancer `JD549Hsb…` does not sort reliably even when transactions arrive together.
+Over two direct runs it put the dearer one first in 0.50 of 123 pairs. Its neighbour `9eGrDohd…` runs the same version
+and put the dearer one first in all 126 pairs.
 
 ![Higher fee first, per validator: sent together straight to the leader against through the public RPC](reports/figure_paths.png)
 
@@ -46,8 +46,8 @@ The same numbers as a table:
 | Rakurai | `E3mDbFMr…` | 1.00 | 0.57 |
 | Agave | `7QQGNm3p…` | 0.92 | 0.52 |
 | Agave | `5Us18hLZ…` | 1.00 | 0.58 |
-| Firedancer | `9eGrDohd…` | 1.00 | 0.70 |
-| Firedancer | `JD549Hsb…` | **0.24** | 0.47 |
+| Firedancer | `9eGrDohd…` | 1.00 (two runs) | 0.70 |
+| Firedancer | `JD549Hsb…` | **0.50** (two runs) | 0.47 |
 
 The numbers are the share of pairs of my transactions in one block where the higher fee sat earlier. 0.5 is a coin
 flip. The first column has 30–36 pairs per validator, except FireBAM, which dropped most of the transactions I sent it
@@ -55,7 +55,7 @@ directly (6 and 12 pairs). Intervals and the rest are in the full report.
 
 ## How I got there
 
-I did it in three steps. Each step changed what I believed.
+I did it in four steps. Most of them changed what I believed.
 
 **Step 1, through the public RPC (3 November, 554 bursts, 4 432 transactions).** I waited for each validator's leader
 window and sent a burst of 8 identical small transactions. They differed only in fee and in the order I sent them,
@@ -98,6 +98,17 @@ mostly from the RPC path, not from the validators.
 One of my two predictions here failed. I had expected the direct path to keep my send order better. Instead the
 transactions met in the scheduler, and the fee decided.
 
+**Step 4, the two Firedancer nodes (4 November, 30 bursts).** In step 3, `JD549Hsb…` put the cheaper transaction first
+(0.24 over 33 pairs), while its twin `9eGrDohd…` put the dearer one first every time. That rested on 6 bursts each,
+so I wrote two more predictions and repeated it: 15 direct bursts per node, all 120 transactions landed.
+
+- `9eGrDohd…`: 90 of 90 pairs had the dearer one first. That prediction held.
+- `JD549Hsb…`: 0.59 [0.39, 0.79]. I had predicted it would put the dearer one first less than half the time, and
+  it did not. The "cheaper first" from step 3 was most likely chance.
+
+The difference between the twins stays, but it is simpler than I thought. One sorts by fee every time, the other
+hardly sorts at all.
+
 ## Why it works like this
 
 The public documents of these systems fit what I measured. I cannot see any validator's settings, so this is an
@@ -115,12 +126,12 @@ explanation, not proof.
   transactions all used one fee payer, so they conflicted.
 - **Firedancer.** Its config has a "perf" mode that fills the block as fast as possible and a "balanced" mode that
   paces it ([default.toml](https://github.com/firedancer-io/firedancer/blob/main/src/app/firedancer/config/default.toml)).
-  That could explain why two Firedancer nodes behave differently. It does not explain `JD549…` putting the cheaper
-  transaction first.
+  A node that paces its block lets transactions wait and get sorted. One that packs as fast as possible takes them
+  as they come. That could be why `9eGr…` always sorted and `JD549…` did not. I cannot see their settings.
 
 ## How sure I am
 
-- 6 of 8 predictions written in advance held. The 2 that failed are described above, not hidden.
+- 7 of 10 predictions written in advance held. The 3 that failed are described above, not hidden.
 - Intervals are computed by resampling whole bursts, so pairs from one burst are not counted as independent
   evidence.
 - I checked 60 random transactions against the chain with a fresh RPC call: 60 of 60 matched in slot, position and
@@ -166,6 +177,7 @@ All runs were after the Alpenglow upgrade of 21 October. Times are UTC.
 | `20261103T193631Z_live` | 3 Nov 19:36–20:53 | step 2, split test | 122 |
 | `20261104T062417Z_live` | 4 Nov 06:24 | test of the direct sender, not used | 2 |
 | `20261104T122307Z_live` | 4 Nov 12:23–14:16 | step 3, direct against RPC | 183 |
+| `20261104T200138Z_live` | 4 Nov 20:01–20:24 | step 4, Firedancer repeat | 30 |
 
-The whole project cost 0.048 SOL (0.047954, read from the wallet balances), under the 0.05 SOL limit. The spend
+The whole project cost 0.049 SOL (0.048754, read from the wallet balances), under the 0.05 SOL limit. The spend
 ledger is `data/budget.json`.
