@@ -1,5 +1,7 @@
 # Inside the Block: how Solana leaders order transactions
 
+**Video walkthrough (5 min, English subtitles): https://youtu.be/VPbiNEYRYlM**
+
 I ran every measurement in this repo on 3 and 4 November 2026 from my laptop in Ukraine, paying the fees from my own
 wallet [`2Kqf4idi…Hfw8`](https://solscan.io/account/2Kqf4idiM5GJaXbhhcYppZ1cCoRFDsCutS81ntmkHfw8). The question is
 the one the bounty asks: for each validator, what decides which of my transactions lands earlier in its block, how
